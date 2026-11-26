@@ -31,6 +31,29 @@ final class Markdown
         return new HtmlString($html);
     }
 
+    /**
+     * Like toHtml(), and every h2 gets the id "sec-<heading>", for jump links.
+     *
+     * @return array{html: HtmlString, sections: list<array{string, string}>}
+     */
+    public static function withSections(?string $markdown): array
+    {
+        $sections = [];
+        $html = preg_replace_callback('/<h2>(.*?)<\/h2>/s', function (array $match) use (&$sections): string {
+            $label = html_entity_decode(strip_tags($match[1]), ENT_QUOTES | ENT_HTML5);
+            $id = Str::slug($label) ?: 'section';
+            $base = $id;
+            for ($n = 2; in_array($id, array_column($sections, 0), true); $n++) {
+                $id = $base.'-'.$n;
+            }
+            $sections[] = [$id, $label];
+
+            return '<h2 id="sec-'.$id.'">'.$match[1].'</h2>';
+        }, (string) self::toHtml($markdown));
+
+        return ['html' => new HtmlString($html), 'sections' => $sections];
+    }
+
     /** True if the text embeds an image from another website. */
     public static function hasExternalImage(?string $markdown): bool
     {

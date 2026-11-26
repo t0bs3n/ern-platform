@@ -48,7 +48,7 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; Esports Research Network e.V. {{ now()->year }}</p>
-            <div class="footer-bottom-links"><a href="{{ url('/imprint') }}">Imprint</a></div>
+            <div class="footer-bottom-links"><a href="{{ url('/imprint') }}">Imprint</a><a href="{{ url('/privacy') }}">Privacy Policy</a></div>
         </div>
     </div>
 </footer>

@@ -20,6 +20,10 @@ class ContentSeeder extends Seeder
     private const PAGES = [
         'ernc27-call-for-abstracts' => ['ERNC27 Call for Abstracts', 'cfa.md'],
         'ernc26-summary' => ['ERNC26: Conference summary', 'ernc26.md'],
+        // Code of Conduct, Imprint and Privacy Policy (R1-05).
+        'code-of-conduct' => ['Code of Conduct', 'code-of-conduct.md'],
+        'imprint' => ['Imprint', 'imprint.md'],
+        'privacy' => ['Privacy Policy', 'privacy.md'],
         // Text blocks of About Us and Get Involved (R1-04).
         'about-mission' => ['About Us: Mission Statement', 'about-mission.md'],
         'about-history' => ['About Us: Our History', 'about-history.md'],

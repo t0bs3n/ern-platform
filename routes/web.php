@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LegalPageController;
 use App\Http\Controllers\NewsController as PublicNewsController;
 use App\Http\Controllers\NewsImageController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,11 @@ Route::get('/', HomeController::class)->name('home');
 // About Us and Get Involved (R1-04).
 Route::get('about', [AboutController::class, 'about'])->name('about');
 Route::get('get-involved', [AboutController::class, 'involved'])->name('involved');
+
+// Code of Conduct, Imprint and Privacy Policy (R1-05).
+Route::get('code-of-conduct', [LegalPageController::class, 'conduct'])->name('conduct');
+Route::get('imprint', [LegalPageController::class, 'imprint'])->name('imprint');
+Route::get('privacy', [LegalPageController::class, 'privacy'])->name('privacy');
 
 // News (R1-03).
 Route::get('news', [PublicNewsController::class, 'index'])->name('news.index');

@@ -86,7 +86,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Model: opus
 - Needs: R0-08, R0-09
 - Can: Tobi uploads the current main branch to staging with one button on GitHub and can go back with one button.
-- Do: Three GitHub Actions workflows that are started by hand only (`workflow_dispatch`): `deploy-staging.yml`, `deploy-live.yml`, `rollback.yml`. An upload checks out main, runs `composer check`, installs the Composer packages without development packages inside the workflow, uploads the result over SSH as a new dated folder under `releases/`, links the shared `.env` and `storage`, runs the migrations, switches the `current` link, and keeps the last five releases. The rollback switches `current` to the previous release. Host, user, path and key come from GitHub secrets, one set per environment, and never appear in the log. The live workflow asks for the word "live" as confirmation and uses a protected GitHub environment that needs Tobi's approval. The staging site sends a "noindex" header. Write `docs/DEPLOY.md` in plain words, with pictures described in words: where the button is, what green and red mean, how to go back. Never start an upload yourself.
+- Do: Three GitHub Actions workflows that are started by hand only (`workflow_dispatch`): `deploy-staging.yml`, `deploy-live.yml`, `rollback.yml`. An upload checks out main, runs `composer check`, installs the Composer packages without development packages inside the workflow, uploads the result over SSH as a new dated folder under `releases/`, links the shared `.env` and `storage`, runs the migrations, switches the `current` link, and keeps the last five releases. The rollback switches `current` to the previous release. Host, user, path and key come from GitHub secrets, one set per environment, and never appear in the log. The live workflow asks for the word "live" as confirmation and uses a protected GitHub environment that needs Tobi's approval. The staging site sends a "noindex" header. The live workflow first runs `php artisan ern:check-launch` on the server's database and stops if it fails (added by R1-05: no going live while the privacy policy is the placeholder). Write `docs/DEPLOY.md` in plain words, with pictures described in words: where the button is, what green and red mean, how to go back. Never start an upload yourself.
 - Test: The workflow files are valid. The upload steps live in one shell script in `scripts/` that has a dry-run mode, and a test runs it in dry-run mode.
 
 ### [H] R0-11 Hosting test
@@ -138,7 +138,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: The board members are content that an editor can change. No election candidates anywhere.
 - Test: Pages answer 200 with the seeded content.
 
-### [ ] R1-05 Code of Conduct, Imprint, Privacy
+### [x] R1-05 Code of Conduct, Imprint, Privacy (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/50-about.js`, `data.json` (`conduct`, `imprint`)
