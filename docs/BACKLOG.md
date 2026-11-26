@@ -239,9 +239,10 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Mockup: `js/50-about.js` (`concern`), `data.json` (`concern`)
 - Can: Anyone reports a concern. It reaches the Ombudsperson by e-mail and nobody else.
 - Do: The form sends one e-mail to the configured address and stores nothing: no database row, no log line with content, no copy to admins. Anonymous reports are possible. If sending fails, the person is told clearly and nothing is kept. Wording from the mockup.
+- Also: add `'concern' => '/report-a-concern'` to `config/redirects.php` (the old site's form address, left out by R1-18 until this page exists).
 - Test: The e-mail goes to the configured address only. The database and the log hold no content afterwards. A send failure is reported to the person.
 
-### [ ] R1-18 Old addresses
+### [x] R1-18 Old addresses (2026-11-26)
 - Model: sonnet
 - Needs: R1-08
 - Can: Every address of the old site leads to the right new page.
