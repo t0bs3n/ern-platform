@@ -53,7 +53,13 @@ final class MemberListCsv
     public static function safe(?string $value): string
     {
         $value = (string) $value;
+        if ($value === '' || in_array($value[0], ["\t", "\r"], true)) {
+            return $value === '' ? '' : "'".$value;
+        }
+        // Spreadsheet programs skip leading spaces and also read the full-width signs as formulas.
+        // A value that is not valid UTF-8 keeps its raw start, so it is still checked.
+        $first = mb_substr(preg_replace('/^[\s\x{00A0}\x{3000}]+/u', '', $value) ?? $value, 0, 1);
 
-        return $value !== '' && in_array($value[0], ['=', '+', '-', '@', "\t", "\r"], true) ? "'".$value : $value;
+        return in_array($first, ['=', '+', '-', '@', '＝', '＋', '－', '＠'], true) ? "'".$value : $value;
     }
 }

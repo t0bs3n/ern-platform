@@ -248,6 +248,22 @@ class MembersApplicationsTest extends TestCase
             ->assertSee('No applications wait for the board.');
     }
 
+    public function test_the_moment_of_agreement_survives_the_decision(): void
+    {
+        // On MySQL with explicit_defaults_for_timestamp=OFF this column used to be overwritten
+        // on every update. The GitHub run on MySQL repeats this test with that setting.
+        $agreed = '2026-11-01 09:15:00';
+        $this->application->forceFill(['agreed_at' => $agreed])->save();
+        $other = MembershipApplication::factory()->create(['agreed_at' => $agreed]);
+
+        $this->travel(1)->days();
+        $this->actingAs($this->admin)->post($this->declineUrl());
+        $this->assertSame($agreed, $this->application->fresh()->agreed_at->format('Y-m-d H:i:s'));
+
+        $this->actingAs($this->admin)->post($this->approveUrl($other));
+        $this->assertSame($agreed, MembershipDecision::where('decision', MembershipDecision::APPROVED)->sole()->agreed_at->format('Y-m-d H:i:s'));
+    }
+
     public function test_a_declined_applicant_can_apply_again(): void
     {
         $this->actingAs($this->admin)->post($this->declineUrl());

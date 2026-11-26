@@ -1,6 +1,6 @@
 # ERN Platform: start here
 
-This folder is the starting point of the code repository for the ERN platform. It holds no application code yet. It holds everything Claude Code needs to build it step by step: the rules, the technical decisions, the mockup as specification, and a backlog of tasks in the order they should be built.
+This is the code repository of the ERN platform: a Laravel application, together with everything Claude Code needs to build it step by step: the rules, the technical decisions, the mockup as specification, and a backlog of tasks in the order they should be built. Releases 0 and 1 are built, except the steps that wait for you or for the hosting (from R0-09 on). What comes next is in `docs/BACKLOG.md`, and what waits for you is in `docs/HUMAN_TODO.md`.
 
 You open the repository in Claude Code and type `/build`. Claude then works through the backlog on its own and stops only where it needs you.
 
@@ -15,15 +15,15 @@ The code lives in a private GitHub repository. You can work on it in two ways, a
 
 Start in the browser. The first tasks need nothing from your Mac.
 
-## Before the first run (once, about ten minutes)
+## Run it on your own computer
 
-1. **Create the repository.** On github.com, create a new repository called `ern-platform`. Set it to **Private**. Leave it empty: no README, no licence.
-2. **Upload this folder.** Unpack `ern-platform.zip`. On the page of the new, empty repository, choose "uploading an existing file", drag the whole content of the unpacked folder into the browser window, and press "Commit changes".
-3. **Open the repository in Claude Code** in the browser.
-4. **Say once:** "Read START.md and do what it says." Claude puts its own configuration in place and gives you a first pull request to merge.
-5. **From then on, type `/build`.**
+You need PHP 8.3 and Composer (on a Mac, Laravel Herd installs both). Then, in the repository folder:
 
-The first task checks that the environment has PHP and Composer and tells you plainly if something is missing.
+1. `composer setup` installs the packages and creates a local database.
+2. `php artisan migrate:fresh --seed` fills the database with the content and invented members.
+3. `php artisan serve` starts the site at http://localhost:8000. Sign in as `admin@example.test`. The password of all invented users is `SEED_PASSWORD` in your `.env` file. It works only on your computer: the server never creates these users.
+
+`composer check` runs the code style check and all tests. It must pass before anything is merged.
 
 ## How a run looks
 
@@ -88,5 +88,6 @@ The model choice is built into the setup, so you do not have to think about it:
 | `docs/mockup/` | The source of the clickable mockup. It is the specification for look, wording and behaviour. |
 | `docs/briefs/` | One short note per finished task: what was built, what was tested, what was not. |
 | `docs/CHANGELOG.md` | One line per finished task. |
-| `.claude/` | The commands, the reviewer, the planner and the permissions. Before the first session they sit in `claude-setup/`. |
-| `.github/workflows/` | Added by the build: the automatic test run and the upload buttons. |
+| `.claude/` | The commands, the reviewer, the planner and the permissions. |
+| `.github/workflows/` | The automatic test run (on SQLite and on MySQL). The upload buttons follow in R0-10. |
+| `docs/checks/` | The check sheet for each release, for a person who did not build it. |

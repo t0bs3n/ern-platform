@@ -237,6 +237,16 @@ class MemberListAndRightsTest extends TestCase
         $this->assertFalse(Gate::forUser($editor->fresh())->allows('edit-content'));
     }
 
+    public function test_the_formula_guard_also_catches_leading_spaces_and_full_width_signs(): void
+    {
+        foreach (['  =1+1', "\u{3000}+1", "\u{00A0}=1", '＝SUM(A1)', '＋1', '－1', '＠x', "\t=1", "\tabc", "\rabc", "=1\xff"] as $value) {
+            $this->assertSame("'".$value, MemberListCsv::safe($value), json_encode($value));
+        }
+        foreach (['Anna', 'a=b', '', 'Universität (example)', 'No. 1 - first', 'Ålesund', 'Ñandú (example)', '東京大学'] as $value) {
+            $this->assertSame($value, MemberListCsv::safe($value), $value);
+        }
+    }
+
     public function test_the_export_is_a_logged_csv_with_the_agreed_columns_and_no_e_mail(): void
     {
         $this->member->forceFill(['membership_end_requested_at' => '2026-11-20 10:00:00'])->save();

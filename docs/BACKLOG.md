@@ -88,10 +88,19 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Can: Tobi uploads the current main branch to staging with one button on GitHub and can go back with one button.
 - Do: Three GitHub Actions workflows that are started by hand only (`workflow_dispatch`): `deploy-staging.yml`, `deploy-live.yml`, `rollback.yml`. An upload checks out main, runs `composer check`, installs the Composer packages without development packages inside the workflow, uploads the result over SSH as a new dated folder under `releases/`, links the shared `.env` and `storage`, runs the migrations, switches the `current` link, and keeps the last five releases. The rollback switches `current` to the previous release. Host, user, path and key come from GitHub secrets, one set per environment, and never appear in the log. The live workflow asks for the word "live" as confirmation and uses a protected GitHub environment that needs Tobi's approval. The staging site sends a "noindex" header. The live workflow first runs `php artisan ern:check-launch` on the server's database and stops if it fails (added by R1-05: no going live while the privacy policy is the placeholder). Write `docs/DEPLOY.md` in plain words, with pictures described in words: where the button is, what green and red mean, how to go back. Never start an upload yourself.
 - Test: The workflow files are valid. The upload steps live in one shell script in `scripts/` that has a dry-run mode, and a test runs it in dry-run mode.
+- Also (full review, 2026-11-26), the script must:
+  - create `APP_KEY` in `shared/.env` on the server when it is empty, without printing it
+  - create the shared storage folders (`app/private`, `framework/cache`, `framework/sessions`, `framework/views`, `logs`)
+  - replace `current` when the customer area left it behind as a real, empty folder
+  - check and use the command-line PHP binary of the right version (at all-inkl it can differ from the domain's version)
+  - verify the server by the fingerprint stored as a secret
+  - run `php artisan db:seed --class=ContentSeeder --force` on the first upload only, so that the legal pages, conferences and team exist; on later uploads it would bring back what editors deleted
+  - make sure nothing under `ern-next` except `current/public` can be opened through the main domain (Tobi reports its folder in R0-09 step 1). Note that `.htaccess` files in parent folders also apply to the subdomain.
 
 ### [H] R0-11 Hosting test
 - Needs: R0-10
 - Tobi: See `docs/HUMAN_TODO.md`, R0-11. Before he tests: add an admin-only button on the "System" page that sends a test e-mail to the signed-in admin, add a workflow step that creates the first admin on staging from the test data (with the Member role as well, so that the release check in `docs/checks/release-1.md`, task 15, can use the member area and the directory), and give Tobi the one cron line to enter at the hosting. He starts the first upload with the button. This task decides whether the hosting carries the platform.
+- Also (full review, 2026-11-26): the seeders refuse to run on staging and the test addresses cannot receive e-mail. So the first admin comes from a separate command, started by a workflow button with an e-mail address Tobi types into the workflow form. It creates one approved user with the admin and member roles and no password; Tobi sets the password with "Forgot your password?". The address typed into the form must not appear in the Actions log. Find out whether all-inkl's cron runs a command or only calls a web address. If only a web address, add a token-protected address that runs the scheduler, and say how it passes the directory password.
 
 ### [ ] R0-12 Backups
 - Model: sonnet
@@ -278,6 +287,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Model: opus
 - Needs: R1-22, R1-19, R1-17, R1-05
 - Tobi: After the ERNC27 decisions are out. Claude writes `docs/CUTOVER.md` with the steps for the day, the test of every redirect, the way back, and the archive of the old site. Tobi carries it out.
+- Also (full review, 2026-11-26): `public/.htaccess` strips a trailing slash before Laravel redirects, so an old address like `/conference/` takes two redirects. Test every redirect on staging and, if needed, answer the old addresses in one step.
 
 ---
 

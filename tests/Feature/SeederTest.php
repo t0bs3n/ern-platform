@@ -3,11 +3,19 @@
 namespace Tests\Feature;
 
 use App\Enums\Role;
+use App\Models\Conference;
+use App\Models\News;
+use App\Models\Page;
 use App\Models\User;
+use Database\Seeders\ApplicationSeeder;
+use Database\Seeders\ContentSeeder;
 use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\EventSeeder;
 use Database\Seeders\MemberSeeder;
+use Database\Seeders\NoticeSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Gate;
+use PHPUnit\Framework\Attributes\DataProvider;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -128,6 +136,42 @@ class SeederTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('never in production or on staging');
         $this->app->make(MemberSeeder::class)->setContainer($this->app)->__invoke();
+    }
+
+    /** @return array<string, array{class-string}> */
+    public static function inventedDataSeeders(): array
+    {
+        return ['applications' => [ApplicationSeeder::class], 'events' => [EventSeeder::class], 'notices' => [NoticeSeeder::class]];
+    }
+
+    #[DataProvider('inventedDataSeeders')]
+    public function test_each_seeder_with_invented_data_refuses_on_staging_and_live(string $seeder): void
+    {
+        foreach (['staging', 'production'] as $environment) {
+            $this->app['env'] = $environment;
+            try {
+                $this->app->make($seeder)->setContainer($this->app)->__invoke();
+                $this->fail($seeder.' ran on '.$environment);
+            } catch (RuntimeException $e) {
+                $this->assertStringContainsString('never in production or on staging', $e->getMessage());
+            }
+        }
+
+        foreach (['membership_applications', 'events', 'notices'] as $table) {
+            $this->assertDatabaseCount($table, 0);
+        }
+    }
+
+    public function test_the_real_site_content_may_be_loaded_on_the_server_and_twice(): void
+    {
+        $this->app['env'] = 'production';
+
+        $this->app->make(ContentSeeder::class)->setContainer($this->app)->__invoke();
+        $counts = [Page::count(), News::count(), Conference::count()];
+        $this->app->make(ContentSeeder::class)->setContainer($this->app)->__invoke();
+
+        $this->assertGreaterThan(0, $counts[0]);
+        $this->assertSame($counts, [Page::count(), News::count(), Conference::count()]);
     }
 
     public function test_the_seeder_refuses_on_staging(): void

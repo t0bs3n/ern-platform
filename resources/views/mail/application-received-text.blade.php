@@ -1,7 +1,7 @@
 @php $a = $application; @endphp
 Hello {!! $a->first_name !!},
 
-thank you. Your application is received. The board confirms every application. You do not need to do anything.
+Thank you. Your application is received. The board confirms every application. You do not need to do anything.
 
 Once the board has confirmed it, you receive a welcome e-mail. It holds the link to set your password for the member area.
 

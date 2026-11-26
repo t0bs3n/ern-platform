@@ -46,7 +46,9 @@ class FortifyServiceProvider extends ServiceProvider
         // answer as for a wrong password, so the form does not reveal who is a member.
         Fortify::authenticateUsing(function (Request $request): ?User {
             // No "remember me": only the session cookie may be set (docs/DECISIONS.md).
+            // Fortify reads it from the form (or JSON body) and the address alike, so it goes from both.
             $request->request->remove('remember');
+            $request->query->remove('remember');
 
             $user = User::where('email', Str::lower((string) $request->input('email')))->first();
 

@@ -63,6 +63,16 @@ class PublicPagesTest extends TestCase
         }
     }
 
+    public function test_no_public_page_names_the_person_behind_the_ombudsperson_role(): void
+    {
+        foreach ($this->addresses() as $address) {
+            $text = strip_tags((string) $this->get($address)->getContent());
+
+            // The role may be mentioned ("The ERN Ombudsperson reads every report"), never next to a name.
+            $this->assertDoesNotMatchRegularExpression('/[A-Z][a-z]+\s*\((?:ERN )?Ombudsperson\)|Ombudsperson[:,]?\s+[A-Z][a-z]+ [A-Z][a-z]+/', $text, $address);
+        }
+    }
+
     public function test_page_titles_differ_between_pages(): void
     {
         $titles = [];

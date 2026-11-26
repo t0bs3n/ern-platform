@@ -112,7 +112,7 @@ Registration is handled by NC State University. Fees, including a reduced studen
 
 **Organizing Committee:** Marc Hoit, Nathan Williams, David Goldsmith, Ben Watson, Robin Kelly, and Cody Elsen (NC State University); Ed Tomasi and Loren Gold (Visit Raleigh)
 
-**Scientific Committee:** Nicolas Besombes, Tom Brock, Amanda C. Cote, Joanne Donoghue, Seth E. Jenny, Yaewon Jin, Brian McCauley, and Tobias M. Scholz (ERN Board); Oliver Leis (ERN Ombudsperson); Nathan Williams and Ben Watson (NC State University)
+**Scientific Committee:** Nicolas Besombes, Tom Brock, Amanda C. Cote, Joanne Donoghue, Seth E. Jenny, Yaewon Jin, Brian McCauley, and Tobias M. Scholz (ERN Board); Oliver Leis (ERN); Nathan Williams and Ben Watson (NC State University)
 
 ## Contact
 

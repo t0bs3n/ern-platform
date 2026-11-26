@@ -14,27 +14,36 @@ Claude tells you the three clicks in the hand-over note. Afterwards nothing can 
 
 ## R0-09 Prepare the hosting (about 45 minutes)
 
-In the all-inkl.com customer area:
+Before you start, type `/next` in Claude Code. Claude then walks you through these steps one at a time and waits for you after each one. You never type a password into the chat.
 
-1. Create the subdomain `next.esportsresearch.net`. Set its folder to `ern-next/current/public`.
-2. Switch on SSL for the subdomain, and set its PHP version to 8.3 or newer. Tell Claude which version you set.
-3. Create a new MySQL database. Note its name, user and password for step 6.
-4. Create a mailbox for outgoing mail, for example `platform@esportsresearch.net`. Note the password for step 6.
-5. Create an SSH key pair for uploads and store the public key at the hosting. Claude explains the steps when you reach this task. You carry them out yourself.
-6. On the server, create the file `ern-next/shared/.env` from the template `.env.staging.example` in the repository, and fill in the database and mailbox details there. You can do this with the hosting's file manager or any file transfer program.
-7. Protect the subdomain with a directory password, so that the staging site is not public.
+In the all-inkl.com customer area (KAS):
 
-On GitHub, in the repository's settings under "Secrets and variables":
+1. **Look before you build.** Note which folder the main domain `esportsresearch.net` points to, for example `/` or `/wordpress/`. Tell Claude the folder name (it is not a secret). Claude needs it to make sure that the new site's private files can never be opened through the main domain.
+2. **Create the subdomain** `next.esportsresearch.net`. Set its folder to `ern-next/current/public`. If the customer area creates these folders by itself, leave them: the first upload replaces them.
+3. **Switch on SSL** for the subdomain (Let's Encrypt), and tick "force HTTPS" (SSL erzwingen), so that every visit is encrypted. Set the PHP version of the subdomain to 8.3 or newer. Tell Claude which version you set.
+4. **Create a new MySQL database.** Note its name, user and password for step 8. Tell Claude the MySQL version that the customer area shows (not a secret).
+5. **Create a mailbox for outgoing mail**, for example `platform@esportsresearch.net`. Note its password, the mail server name the customer area shows for it (something like `w0123456.kasserver.com`), and the login name it shows for the mailbox (something like `m0123456`, or the address itself), for step 8.
+6. **Check SSH access** in the customer area: your Premium package includes it. Note the SSH host name and user name. Claude explains how to make the key pair for uploads when you reach this step, and how to store its public half at the hosting. You carry it out yourself. The private half goes nowhere except into GitHub's secrets in R0-10.
+7. **Protect the whole `ern-next` folder** (create it first, if step 2 did not) with a directory password (Verzeichnisschutz), not only the subdomain's folder. Then the staging site is not public, and the protection survives every upload. Give the user name and password to the people who test, never to Claude.
+8. **Create the settings file**, only after step 7, so that it is protected from the first moment. On the server, create the folder `ern-next/shared` and in it the file `.env`, as a copy of `.env.staging.example` from the repository. Fill in only these lines, with the hosting's file manager or a file transfer program:
+   - `APP_URL=https://next.esportsresearch.net`
+   - `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` from step 4
+   - `MAIL_HOST` (the mail server name), `MAIL_USERNAME` (the login name of the mailbox), `MAIL_PASSWORD`, and `MAIL_FROM_ADDRESS` (the mailbox address) from step 5
 
-8. Store the host name, the user name, the path and the private key as secrets, under the names Claude gives you in `docs/DEPLOY.md`. This is the only place they are typed in. Never into a chat.
+   Leave `APP_KEY` empty: the first upload creates it on the server by itself.
+
+   A Mac does not let you save a file whose name starts with a dot. Create the file directly in the hosting's file manager (WebFTP), or upload it as `env.txt` and rename it there to `.env`.
+
+When you are done, type `/done R0-09`. The secrets for GitHub follow in R0-10, once Claude has written `docs/DEPLOY.md` with their names.
 
 ## R0-10 First upload to staging
 
-On GitHub, open "Actions", choose "Deploy to staging", press "Run workflow". Green means it worked. If it is red, copy the last lines of the log to Claude. The log contains no passwords.
+1. On GitHub, in the repository's settings under "Secrets and variables", store the host name, the user name, the path, the private key and the server's fingerprint as secrets, under the names Claude gives you in `docs/DEPLOY.md`. This is the only place they are typed in. Never into a chat.
+2. On GitHub, open "Actions", choose "Deploy to staging", press "Run workflow". Green means it worked. If it is red, copy the last lines of the log to Claude. The log contains no passwords.
 
 ## R0-11 Hosting test
 
-Open the staging site. Sign in with the test admin. Check that the test e-mail arrived and that the page "System" in the admin area shows a scheduled job that ran in the last hour. If one of these fails, tell Claude what you saw. If it cannot be fixed, the production plan names the alternative.
+Claude gives you the one line for the scheduled job (cron) at the hosting, and a button on GitHub that creates the first admin with an e-mail address you type into its form. Then open the staging site, set the admin's password with "Forgot your password?", and sign in. On the page "System" in the admin area, send yourself the test e-mail. Check that it arrived and that the page "System" in the admin area shows a scheduled job that ran in the last hour. If one of these fails, tell Claude what you saw. If it cannot be fixed, the production plan names the alternative.
 
 ## R0-13 Architecture review (optional, 20 minutes)
 
