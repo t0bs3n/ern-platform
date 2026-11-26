@@ -2,18 +2,29 @@
 
 namespace App\Actions\Fortify;
 
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 trait PasswordValidationRules
 {
     /**
-     * Get the validation rules used to validate passwords.
+     * At least eight characters, as the mockup says. No check against outside services.
      *
-     * @return array<int, Rule|array<mixed>|string>
+     * @return array<int, mixed>
      */
     protected function passwordRules(): array
     {
-        return ['required', 'string', Password::default(), 'confirmed'];
+        return ['required', 'string', Password::min(8), 'confirmed'];
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function passwordMessages(): array
+    {
+        return [
+            'password.required' => 'Choose a password of at least eight characters.',
+            'password.min' => 'Choose a password of at least eight characters.',
+            'password.confirmed' => 'The two passwords differ.',
+        ];
     }
 }

@@ -46,7 +46,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Build `public/css/ern.css` from `theme.css` followed by `app.css`. Copy the images to `public/img/`. Build the layout template: skip link, sticky header with logo, navigation (News, Conferences, Database, Live, Teaching, Podcast, About Us, Get Involved), the saved-library icon, the member button, the mobile menu, the footer with its three columns and social links. Leave out the mock bar and the Ernie button. The mobile menu must open without JavaScript too. Add a placeholder start page and a 404 page in the same frame. Mark the current navigation item.
 - Test: The start page answers 200 and contains every navigation label. An unknown address answers 404 inside the frame.
 
-### [ ] R0-05 Sign-in
+### [x] R0-05 Sign-in (2026-11-26)
 - Model: opus
 - Needs: R0-04
 - Can: A member signs in, signs out, and resets a forgotten password by e-mail.

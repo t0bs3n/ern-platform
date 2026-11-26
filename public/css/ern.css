@@ -2540,3 +2540,6 @@ a.x-skip:hover { color: #fff; opacity: 1; }
 @media (min-width: 1100px) { .mobile-menu:target { display: none; } }
 /* Footer headings are h2 for a correct heading order, styled like the theme's footer h4. */
 .footer-section .x-footer-h { font-size: .875rem; font-weight: 600; margin-bottom: 1rem; }
+/* Card headings are h2 for a correct heading order, styled like the mockup's card h3. */
+.x-card .x-card-h { font-size: 1.125rem; margin-bottom: .75rem; }
+.x-login .x-err[role="alert"] { margin: 0 0 1rem; }

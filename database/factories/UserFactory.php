@@ -8,38 +8,51 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
+ * Invented members only. Institutions always carry "(example)".
+ *
  * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
     protected static ?string $password;
 
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
+        $first = fake()->firstName();
+        $last = fake()->lastName();
+
         return [
-            'name' => fake()->name(),
+            'first_name' => $first,
+            'last_name' => $last,
+            'slug' => Str::slug($first.' '.$last).'-'.Str::lower(Str::random(6)),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'institution' => fake()->city().' University (example)',
+            'country' => fake()->country(),
+            'career_stage' => fake()->randomElement(User::CAREER_STAGES),
+            'listed_in_directory' => false,
+            'approved_at' => now(),
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
+    /** An applicant who has not been approved yet. */
+    public function unapproved(): static
+    {
+        return $this->state(fn () => ['approved_at' => null]);
+    }
+
+    /** A member who has not set a password yet. */
+    public function withoutPassword(): static
+    {
+        return $this->state(fn () => ['password' => null]);
+    }
+
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->state(fn () => ['email_verified_at' => null]);
     }
 }
