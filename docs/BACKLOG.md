@@ -186,7 +186,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Approval creates the user with the role member and sends a welcome e-mail with a signed, expiring link to set a password. Declining sends the mockup's wording and keeps only what the privacy policy allows: delete the application's personal data after 30 days by a scheduled job. Every decision is logged with who and when.
 - Test: Approve, decline, expiry of the link, the deletion job, refusal for a user without the right.
 
-### [ ] R1-11 Activation
+### [x] R1-11 Activation (2026-11-26)
 - Model: opus
 - Needs: R1-10
 - Mockup: `js/60-members.js` (activate mode)

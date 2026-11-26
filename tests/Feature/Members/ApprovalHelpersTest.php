@@ -32,13 +32,14 @@ class ApprovalHelpersTest extends TestCase
         $other = User::factory()->withoutPassword()->create();
         $link = ActivationLink::for($member);
 
+        // Since R1-11 the refusals are friendly pages: 403 for a broken link, 410 for an expired one.
         $this->get($link)->assertOk()->assertSee('Welcome to ERN');
         $this->get(str_replace('/activate/'.$member->id, '/activate/'.$other->id, $link))->assertForbidden();
         $this->get($link.'x')->assertForbidden();
 
         $this->travel(7)->days();
         $this->travel(1)->minutes();
-        $this->get($link)->assertForbidden();
+        $this->get($link)->assertStatus(410)->assertSee('This link has expired');
     }
 
     public function test_the_deletion_job_deletes_declined_applications_after_30_days_only(): void

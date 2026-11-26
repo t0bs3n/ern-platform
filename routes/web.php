@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ActivationController;
 use App\Http\Controllers\Admin\AdminAreaController;
 use App\Http\Controllers\Admin\ConferenceAdminController;
 use App\Http\Controllers\Admin\ContentController;
@@ -70,9 +71,13 @@ Route::prefix('members')->group(function () {
         Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
     });
 
-    // The link in the welcome e-mail (R1-10). R1-11 builds the page behind it.
-    Route::get('activate/{user}', fn () => view('members.activate-placeholder'))
-        ->middleware(['guest', 'signed'])->whereNumber('user')->name('members.activate');
+    // The link in the welcome e-mail (R1-10, R1-11). The controller checks the signature itself,
+    // so that an expired, used or broken link gets a friendly page.
+    Route::middleware(['guest', 'throttle:activation'])->whereNumber('user')->group(function () {
+        Route::get('activate/{user}', [ActivationController::class, 'show'])->name('members.activate');
+        Route::post('activate/{user}', [ActivationController::class, 'store'])->name('members.activate.store');
+        Route::post('activate/{user}/new-link', [ActivationController::class, 'resend'])->name('members.activate.resend');
+    });
 
     Route::post('sign-out', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('logout');
 

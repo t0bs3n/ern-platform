@@ -37,5 +37,8 @@ class AppServiceProvider extends ServiceProvider
             Limit::perHour(5)->by('join-ip|'.$request->ip()),
             Limit::perDay(3)->by('join-mail|'.sha1(Str::lower(trim((string) $request->input('email'))))),
         ]);
+
+        // The activation link (R1-11): ten requests a minute from one internet address.
+        RateLimiter::for('activation', fn (Request $request) => Limit::perMinute(10)->by('activation|'.$request->ip()));
     }
 }
