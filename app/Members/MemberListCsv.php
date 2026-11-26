@@ -57,7 +57,8 @@ final class MemberListCsv
             return $value === '' ? '' : "'".$value;
         }
         // Spreadsheet programs skip leading spaces and also read the full-width signs as formulas.
-        $first = mb_substr((string) preg_replace('/^[\s\x{00A0}\x{3000}]+/u', '', $value), 0, 1);
+        // A value that is not valid UTF-8 keeps its raw start, so it is still checked.
+        $first = mb_substr(preg_replace('/^[\s\x{00A0}\x{3000}]+/u', '', $value) ?? $value, 0, 1);
 
         return in_array($first, ['=', '+', '-', '@', '＝', '＋', '－', '＠'], true) ? "'".$value : $value;
     }
