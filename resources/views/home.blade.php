@@ -8,7 +8,9 @@
                 <p class="x-herolead">Esports Research Network is an international network of researchers advancing interdisciplinary esports studies. We connect scholars and industry to explore esports’ global, digital, and innovative impact.</p>
                 <div class="hero-buttons">
                     <a href="{{ url('/join') }}" class="btn btn-primary btn-lg">Join ERN</a>
-                    <a href="{{ url('/conferences') }}" class="btn btn-outline btn-lg">{{ $event['name'] }} Details</a>
+                    @if ($event)
+                        <a href="{{ route('conferences.index') }}" class="btn btn-outline btn-lg">{{ $event->name }} Details</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -19,7 +21,7 @@
             <h2 class="x-vh" id="routes-h">Where to start</h2>
             <div class="x-three">
                 @foreach ([
-                    ['search', 'Find research', 'Publications, conference abstracts and recorded talks in one search.', [['Search the database', '/database'], ['ERNC26 abstracts and talks', '/conferences/ernc26/book'], ['Reading lists', '/database/lists']]],
+                    ['search', 'Find research', 'Publications, conference abstracts and recorded talks in one search.', [['Search the database', '/database'], ['ERNC26 abstracts and talks', '/conferences/ernc26'], ['Reading lists', '/database/lists']]],
                     ['cap', 'Teach with ERN', 'Lectures prepared for the classroom, free to use.', [['Teaching units for one class', '/teaching#sec-units'], ['The autumn lecture series', '/teaching#sec-autumn'], ['Run it as a course', '/teaching/guide']]],
                     ['users', 'Join and contribute', 'Become a member, present your work, help the network.', [['Become a member', '/join'], ['Propose a lecture', '/teaching/propose'], ['Ways to get involved', '/get-involved']]],
                 ] as [$icon, $heading, $text, $links])
@@ -38,29 +40,27 @@
         </div>
     </section>
 
+    @if ($event)
     <section class="section-spacing bg-background">
         <div class="container-ern">
             <div class="conference-card">
                 <div style="display:flex;flex-direction:column;gap:2rem">
                     <div style="flex:1">
                         <div class="conference-badge"><span></span> Featured Event</div>
-                        <h2>{{ $event['name'] }}: {{ $event['theme'] }}</h2>
-                        <div class="conference-info">
-                            <div class="conference-info-item"><x-icon name="cal" /><span>{{ $event['dates'] }}</span></div>
-                            <div class="conference-info-item"><x-icon name="clock" /><span>{{ $event['mode'] }}</span></div>
-                            <div class="conference-info-item"><x-icon name="globe" /><span>{{ $event['place'] }}</span></div>
-                        </div>
+                        <h2>{{ $event->name }}: {{ $event->theme }}</h2>
+                        @include('conferences._info', ['conference' => $event])
                         <div class="conference-tags" style="margin-bottom:0">
-                            <a href="{{ url('/conferences/'.strtolower($event['name']).'/call') }}" class="badge-circle">Call for Abstracts</a>
-                            <a href="{{ url('/conferences/'.strtolower($event['name']).'/submit') }}" class="badge-circle">Submit</a>
+                            <a href="{{ route('conferences.show', [$event, 'call']) }}" class="badge-circle">Call for Abstracts</a>
+                            <a href="{{ route('conferences.submit', $event) }}" class="badge-circle">Submit</a>
                             <a href="{{ url('/code-of-conduct') }}" class="badge-circle">Code of Conduct</a>
                         </div>
                     </div>
-                    <div style="flex-shrink:0"><a href="{{ url('/conferences') }}" class="btn btn-primary btn-lg">Learn More</a></div>
+                    <div style="flex-shrink:0"><a href="{{ route('conferences.index') }}" class="btn btn-primary btn-lg">Learn More</a></div>
                 </div>
             </div>
         </div>
     </section>
+    @endif
 
     @if ($comingUp->isNotEmpty())
         <section class="x-sponsorband" aria-labelledby="coming-up-h">
@@ -71,7 +71,7 @@
                 </div>
                 <ul class="x-upnext">
                     @foreach ($comingUp as $date)
-                        <li><a href="{{ url('/conferences/'.strtolower($event['name'])) }}"><span class="x-item-meta">{{ $date['date']->format('l j F Y') }}</span><strong>{{ $event['name'] }}: {{ $date['label'] }}</strong></a></li>
+                        <li><a href="{{ route('conferences.show', [$event, 'call']) }}"><span class="x-item-meta">{{ $date['date']->format('l j F Y') }}</span><strong>{{ $event->name }}: {{ $date['label'] }}</strong></a></li>
                     @endforeach
                 </ul>
             </div>

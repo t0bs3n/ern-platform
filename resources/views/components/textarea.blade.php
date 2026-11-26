@@ -2,11 +2,13 @@
 @php
     $id = $id ?? 'f-'.$name;
     $error = $errors->first($name);
+    // "key_dates.0.label" (for errors) is sent as "key_dates[0][label]".
+    $htmlName = str_contains($name, '.') ? preg_replace('/\.([^.]+)/', '[$1]', $name) : $name;
     $describedBy = trim(($help ? $id.'-help ' : '').($error ? $id.'-err' : ''));
 @endphp
 <label class="x-field" for="{{ $id }}">
     <span>{{ $label }}</span>
-    <textarea class="x-input" id="{{ $id }}" name="{{ $name }}" rows="{{ $rows }}"
+    <textarea class="x-input" id="{{ $id }}" name="{{ $htmlName }}" rows="{{ $rows }}"
         @if ($describedBy !== '') aria-describedby="{{ $describedBy }}" @endif
         @if ($error) aria-invalid="true" @endif
         {{ $attributes }}>{{ $value }}</textarea>

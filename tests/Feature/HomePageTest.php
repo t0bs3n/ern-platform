@@ -3,12 +3,19 @@
 namespace Tests\Feature;
 
 use App\Models\News;
+use Database\Seeders\ContentSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class HomePageTest extends TestCase
 {
     use RefreshDatabase;
+
+    private function seedConferences(): void
+    {
+        $this->seed(ContentSeeder::class);
+        News::query()->delete();
+    }
 
     private function makePost(string $title, string $status, ?string $date): News
     {
@@ -21,6 +28,7 @@ class HomePageTest extends TestCase
 
     public function test_the_start_page_shows_every_block_of_the_mockup(): void
     {
+        $this->seedConferences();
         $this->makePost('A post', News::PUBLISHED, '2026-10-01');
 
         $this->get('/')
@@ -74,6 +82,7 @@ class HomePageTest extends TestCase
 
     public function test_coming_up_lists_the_next_key_dates_only(): void
     {
+        $this->seedConferences();
         $this->travelTo('2026-12-01 12:00');
 
         $this->get('/')
@@ -89,6 +98,11 @@ class HomePageTest extends TestCase
 
         $this->travelTo('2027-05-01 12:00');
         $this->get('/')->assertDontSee('Coming up');
+    }
+
+    public function test_without_an_upcoming_conference_the_featured_block_is_left_out(): void
+    {
+        $this->get('/')->assertOk()->assertDontSee('Featured Event')->assertDontSee('Coming up');
     }
 
     public function test_the_start_page_has_one_h1_and_loads_nothing_from_other_sites(): void

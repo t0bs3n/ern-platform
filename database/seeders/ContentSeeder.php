@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Conference;
 use App\Models\News;
 use App\Models\Page;
 use App\Models\TeamMember;
@@ -19,7 +20,6 @@ class ContentSeeder extends Seeder
     /** @var array<string, array{string, string}> slug => [title, file] */
     private const PAGES = [
         'ernc27-call-for-abstracts' => ['ERNC27 Call for Abstracts', 'cfa.md'],
-        'ernc26-summary' => ['ERNC26: Conference summary', 'ernc26.md'],
         // Code of Conduct, Imprint and Privacy Policy (R1-05).
         'code-of-conduct' => ['Code of Conduct', 'code-of-conduct.md'],
         'imprint' => ['Imprint', 'imprint.md'],
@@ -42,6 +42,17 @@ class ContentSeeder extends Seeder
             $page = new Page(['title' => $title, 'body' => file_get_contents(__DIR__.'/content/'.$file)]);
             $page->slug = $slug;
             $page->save();
+        }
+
+        $conferences = json_decode(file_get_contents(__DIR__.'/content/conferences.json'), true, flags: JSON_THROW_ON_ERROR);
+
+        foreach ($conferences as $data) {
+            if (Conference::where('slug', $data['slug'])->exists()) {
+                continue;
+            }
+
+            $conference = new Conference;
+            $conference->forceFill($data)->save();
         }
 
         if (! TeamMember::exists()) {

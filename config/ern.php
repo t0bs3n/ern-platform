@@ -33,21 +33,9 @@ return [
         ],
     ],
 
-    // The featured event on the start page and its key dates for "Coming up".
-    // Until the conference pages (R1-06) and events (R1-08) are built, it lives here.
-    'featured_event' => [
-        'name' => 'ERNC27',
-        'theme' => 'Think & Do: Where Research, Competition & Community Converge',
-        'dates' => '9 to 11 November 2027',
-        'mode' => 'In person',
-        'place' => 'NC State University, Raleigh, USA',
-        'key_dates' => [
-            ['Submissions open', '2026-11-02'],
-            ['Abstract deadline', '2027-01-04'],
-            ['Decisions', '2027-03-15'],
-            ['Registration opens', '2027-04-03'],
-        ],
-    ],
+    // Where "Submit an abstract" for the upcoming conference leads, until our own
+    // submission form exists (release 5): the form on the current website.
+    'submission_url' => env('ERN_SUBMISSION_URL', 'https://esportsresearch.net/submission/'),
 
     // The member figures on About Us, from the mockup. Once the member list is in the
     // platform (R1-19), they can be counted from it instead.

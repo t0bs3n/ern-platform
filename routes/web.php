@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AdminAreaController;
+use App\Http\Controllers\Admin\ConferenceAdminController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\TeamMemberController;
+use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LegalPageController;
 use App\Http\Controllers\NewsController as PublicNewsController;
@@ -20,6 +22,11 @@ Route::get('/', HomeController::class)->name('home');
 // About Us and Get Involved (R1-04).
 Route::get('about', [AboutController::class, 'about'])->name('about');
 Route::get('get-involved', [AboutController::class, 'involved'])->name('involved');
+
+// Conferences (R1-06).
+Route::get('conferences', [ConferenceController::class, 'index'])->name('conferences.index');
+Route::get('conferences/{conference}/submit', [ConferenceController::class, 'submit'])->name('conferences.submit');
+Route::get('conferences/{conference}/{tab?}', [ConferenceController::class, 'show'])->where('tab', '[a-z]+')->name('conferences.show');
 
 // Code of Conduct, Imprint and Privacy Policy (R1-05).
 Route::get('code-of-conduct', [LegalPageController::class, 'conduct'])->name('conduct');
@@ -54,6 +61,13 @@ Route::prefix('members')->group(function () {
 // The admin area: signed in and a role beyond member (the `admin` group); each tab checks its own gates.
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', [AdminAreaController::class, 'overview'])->name('admin');
+
+    // Conference tab (R1-06): the list for the tab's roles, editing for the conference team.
+    Route::get('conference', [ConferenceAdminController::class, 'index'])->name('admin.conference.index');
+    Route::middleware('can:manage-conference')->group(function () {
+        Route::get('conference/{conference}', [ConferenceAdminController::class, 'edit'])->name('admin.conference.edit');
+        Route::put('conference/{conference}', [ConferenceAdminController::class, 'update'])->name('admin.conference.update');
+    });
 
     // Content tab (R1-01): news and pages, for editors.
     Route::middleware('can:edit-content')->prefix('content')->name('admin.content.')->group(function () {

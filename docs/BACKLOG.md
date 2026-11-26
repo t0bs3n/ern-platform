@@ -146,7 +146,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Three editable pages. The privacy page carries a clear placeholder until Tobi delivers the text (see `docs/HUMAN_TODO.md`). Add a check to the live upload that refuses while the placeholder is in place.
 - Test: Pages answer. The live upload check refuses with the placeholder.
 
-### [ ] R1-06 Conferences overview
+### [x] R1-06 Conferences overview (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/20-conf.js` (overview, summaries of past conferences, ERNC27 Call tab), `data.json` (`confs`, `ernc27`)
