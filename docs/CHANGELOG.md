@@ -7,3 +7,4 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R0-04: Every page shows the ERN header, navigation, mobile menu and footer in the ERN look, and unknown addresses get a "Page not found" page in the same frame.
 - 2026-11-26 R0-05: A member signs in and out at /members/sign-in, and resets a forgotten password by e-mail. Unapproved people cannot sign in.
 - 2026-11-26 R0-06: The platform knows eight roles and checks on the server who may open each area; people without the right see "No access".
+- 2026-11-26 R0-07: `php artisan migrate:fresh --seed` fills a local database with one test user per role and twenty invented members.

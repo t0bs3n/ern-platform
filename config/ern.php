@@ -33,4 +33,7 @@ return [
         ],
     ],
 
+    // Password of the invented test users (database/seeders). Local only: empty on the server.
+    'seed_password' => env('SEED_PASSWORD'),
+
 ];

@@ -62,7 +62,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Roles as in `docs/DECISIONS.md`, many per user, in a pivot table. One gate per area: manage members, manage conference, review submissions, decide submissions, manage database, manage teaching, edit content, administer. Admin passes every gate. A middleware for the admin area. A helper for templates.
 - Test: For every gate: a user with the role passes, a member without it is refused with 403, a guest is sent to sign-in.
 
-### [ ] R0-07 Test data
+### [x] R0-07 Test data (2026-11-26)
 - Model: sonnet
 - Needs: R0-06
 - Can: A developer gets a filled application with one command.

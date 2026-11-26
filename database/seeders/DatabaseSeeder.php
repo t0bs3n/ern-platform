@@ -2,24 +2,24 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use RuntimeException;
 
+/**
+ * Fills a local or test database with invented content: `php artisan migrate:fresh --seed`.
+ * Runs only locally and in tests: never in production or on staging.
+ */
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        if (! app()->environment(['local', 'testing'])) {
+            throw new RuntimeException('The seeders make invented test data. They run only locally and in tests, never in production or on staging.');
+        }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            TestUserSeeder::class,
+            MemberSeeder::class,
         ]);
     }
 }
