@@ -33,6 +33,22 @@ return [
         ],
     ],
 
+    // The featured event on the start page and its key dates for "Coming up".
+    // Until the conference pages (R1-06) and events (R1-08) are built, it lives here.
+    'featured_event' => [
+        'name' => 'ERNC27',
+        'theme' => 'Think & Do: Where Research, Competition & Community Converge',
+        'dates' => '9 to 11 November 2027',
+        'mode' => 'In person',
+        'place' => 'NC State University, Raleigh, USA',
+        'key_dates' => [
+            ['Submissions open', '2026-11-02'],
+            ['Abstract deadline', '2027-01-04'],
+            ['Decisions', '2027-03-15'],
+            ['Registration opens', '2027-04-03'],
+        ],
+    ],
+
     // The version shown on the admin System page. The upload workflow (R0-10) sets it.
     'version' => env('APP_VERSION', 'development'),
 

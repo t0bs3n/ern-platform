@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PageFrameTest extends TestCase
 {
+    use RefreshDatabase;
+
     private const NAVIGATION = ['News', 'Conferences', 'Database', 'Live', 'Teaching', 'Podcast', 'About Us', 'Get Involved'];
 
     public function test_the_start_page_shows_the_frame_with_every_navigation_label(): void

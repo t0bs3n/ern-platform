@@ -10,3 +10,4 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R0-07: `php artisan migrate:fresh --seed` fills a local database with one test user per role and twenty invented members.
 - 2026-11-26 R0-08: People with an admin role open /admin and see only the tabs their roles allow; admins see a System page with the version, the environment and the last scheduled run.
 - 2026-11-26 R1-01: Editors write and change news posts and pages in the admin area (Content tab), with a preview, drafts and images, without code.
+- 2026-11-26 R1-02: Visitors see the full start page: hero, three starting points, the featured event, "Coming up", the latest news, the mission and the ways to get involved.

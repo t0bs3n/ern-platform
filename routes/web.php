@@ -4,13 +4,14 @@ use App\Http\Controllers\Admin\AdminAreaController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsImageController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
 use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 
-Route::view('/', 'home')->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 // News images live in private storage (docs/DECISIONS.md); the controller checks who may see them.
 Route::get('news/{news:slug}/image', NewsImageController::class)->name('news.image');

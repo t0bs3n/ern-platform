@@ -116,7 +116,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Models for pages (slug, title, body in Markdown) and news (title, slug, summary, body, image, published_at, draft or published). Editor screens in the Content tab with preview. Seed the content from `data.json`.
 - Test: An editor creates, changes and publishes. A member is refused. Drafts are invisible to the public. Raw HTML in the body is not rendered.
 
-### [ ] R1-02 Start page
+### [x] R1-02 Start page (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/10-home.js`, `data.json` (`home`)
