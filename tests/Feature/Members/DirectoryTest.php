@@ -24,7 +24,8 @@ class DirectoryTest extends TestCase
     {
         parent::setUp();
         Mail::fake();
-        $this->me = User::factory()->create(['first_name' => 'Ada', 'last_name' => 'Viewer', 'slug' => 'ada-viewer', 'listed_in_directory' => true]);
+        // Fixed countries and interests: random ones could match the hidden member's and make the tests flaky.
+        $this->me = User::factory()->create(['first_name' => 'Ada', 'last_name' => 'Viewer', 'slug' => 'ada-viewer', 'country' => 'Norway', 'interests' => 'Game studies', 'listed_in_directory' => true]);
         $this->listed = User::factory()->create([
             'first_name' => 'Rafael', 'last_name' => 'Monteiro', 'slug' => 'rafael-monteiro', 'email' => 'rafael@example.test',
             'country' => 'Brazil', 'career_stage' => 'Researcher with a PhD', 'institution' => 'Universidade do Sul (example)',

@@ -225,7 +225,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Only admins change roles. Nobody removes their own admin role, and the last admin cannot be removed. Every role change is logged. Export of the member list as a spreadsheet file for people who manage members, logged as well.
 - Test: Role change by admin, refusal for others, the two safeguards, the log entries.
 
-### [ ] R1-16 Admin overview
+### [x] R1-16 Admin overview (2026-11-26)
 - Model: sonnet
 - Needs: R1-15
 - Mockup: `js/65-admin.js` (Overview, "Needs attention")
