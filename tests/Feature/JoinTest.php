@@ -50,7 +50,7 @@ class JoinTest extends TestCase
             ->assertSee('<h1>Become a member</h1>', false)
             ->assertSee('Apply online. The board confirms every application.')
             ->assertSee('Fields marked with')
-            ->assertSee('University or organisation')
+            ->assertSee('University or organization')
             ->assertSee('Please choose')
             ->assertSee('A few keywords are enough. Other members find you by them.')
             ->assertSee('Optional. With it you get the member role on the ERN Discord.')

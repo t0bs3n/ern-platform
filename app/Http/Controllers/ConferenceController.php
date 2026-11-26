@@ -22,7 +22,7 @@ class ConferenceController extends Controller
     public function show(Conference $conference, ?string $tab = null): View
     {
         if ($conference->status === Conference::UPCOMING) {
-            // Only the call exists for now; programme, registration and sponsors come in release 4.
+            // Only the call exists for now; program, registration and sponsors come in release 4.
             abort_unless(in_array($tab, [null, 'call'], true), 404);
             $call = Page::where('slug', $conference->slug.'-call-for-abstracts')->first();
 

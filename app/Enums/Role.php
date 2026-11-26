@@ -37,10 +37,10 @@ enum Role: string
             self::Member => 'Sees the member area',
             self::Reviewer => 'Reviews the abstracts assigned to them',
             self::FinalEditor => 'Gives the final result on every submission. One person holds this role.',
-            self::ConferenceTeam => 'Manages conferences, submissions, programme and sponsors',
+            self::ConferenceTeam => 'Manages conferences, submissions, program and sponsors',
             self::DatabaseLead => 'Checks new articles and edits the reading lists',
             // Not in the rights editor; from the mockup's "Who sees what".
-            self::LectureTeam => 'Proposals, the autumn programme and the teaching units',
+            self::LectureTeam => 'Proposals, the autumn program and the teaching units',
             self::Editor => 'Writes news, lectures and notices',
             self::Admin => 'Everything, including the rights of other members',
         };

@@ -30,3 +30,4 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R1-21: A check sheet with twenty plain tasks lets a person who did not build release 1 check it on staging.
 - 2026-11-26 Full review: one sign-in cookie rule, one MySQL date problem, the Ombudsperson's name and the R0-09 steps fixed; only the session cookie, protective headers, a reset limit and tests on MySQL added.
 - 2026-11-26 Decisions after the review: members keep their city (only they and the admins see it); the board's texts stay in US spelling.
+- 2026-11-26 The whole site uses US spelling now (organization, program); a test checks every public page.

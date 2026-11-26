@@ -47,12 +47,12 @@
                 <dl class="x-facts x-small">
                     @foreach ([
                         ['Board', 'Everything in this area'],
-                        ['Conference team', 'Submissions, reviewers, programme and sponsors'],
+                        ['Conference team', 'Submissions, reviewers, program and sponsors'],
                         ['Reviewers', 'Their assigned abstracts, with comments and a recommendation'],
                         ['Final editor', 'One person for all submissions. Gives the final result and the feedback to the authors'],
                         ['Admin', 'Also sets the rights of the other members'],
                         ['Database Lead', 'The database queue and the reading lists'],
-                        ['Lecture team', 'Proposals, the autumn programme and the teaching units'],
+                        ['Lecture team', 'Proposals, the autumn program and the teaching units'],
                         ['Editors', 'News and notices'],
                         ['Ombudsperson', 'Concerns only. They never appear in this area.'],
                     ] as [$who, $what])
