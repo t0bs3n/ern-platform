@@ -30,13 +30,21 @@ class CookiesAndHeadersTest extends TestCase
         $this->post('/members/sign-in', ['email' => 'a@example.test', 'password' => 'x'])->assertStatus(419);
     }
 
+    public function test_the_live_site_over_https_tells_browsers_to_keep_using_https(): void
+    {
+        $this->app->instance('env', 'production');
+
+        $this->get('https://localhost/')->assertHeader('Strict-Transport-Security', 'max-age=31536000');
+        $this->get('http://localhost/')->assertHeaderMissing('Strict-Transport-Security');
+    }
+
     public function test_every_answer_has_the_protective_headers(): void
     {
         foreach (['/', '/members/sign-in', '/no-such-page'] as $address) {
             $this->get($address)
                 ->assertHeader('X-Frame-Options', 'DENY')
                 ->assertHeader('X-Content-Type-Options', 'nosniff')
-                ->assertHeader('Referrer-Policy', 'same-origin')
+                ->assertHeader('Referrer-Policy', 'strict-origin-when-cross-origin')
                 ->assertHeaderMissing('Strict-Transport-Security');
         }
     }

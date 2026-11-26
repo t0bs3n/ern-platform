@@ -239,10 +239,10 @@ class MemberListAndRightsTest extends TestCase
 
     public function test_the_formula_guard_also_catches_leading_spaces_and_full_width_signs(): void
     {
-        foreach (['  =1+1', "\u{3000}+1", '＝SUM(A1)', '＋1', '－1', '＠x', "\t=1"] as $value) {
+        foreach (['  =1+1', "\u{3000}+1", "\u{00A0}=1", '＝SUM(A1)', '＋1', '－1', '＠x', "\t=1", "\tabc", "\rabc"] as $value) {
             $this->assertSame("'".$value, MemberListCsv::safe($value), json_encode($value));
         }
-        foreach (['Anna', 'a=b', '', 'Universität (example)', 'No. 1 - first'] as $value) {
+        foreach (['Anna', 'a=b', '', 'Universität (example)', 'No. 1 - first', 'Ålesund', 'Ñandú (example)', '東京大学'] as $value) {
             $this->assertSame($value, MemberListCsv::safe($value), $value);
         }
     }

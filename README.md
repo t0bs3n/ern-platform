@@ -1,6 +1,6 @@
 # ERN Platform: start here
 
-This is the code repository of the ERN platform: a Laravel application, together with everything Claude Code needs to build it step by step: the rules, the technical decisions, the mockup as specification, and a backlog of tasks in the order they should be built. Releases 0 and 1 are built. What comes next is in `docs/BACKLOG.md`, and what waits for you is in `docs/HUMAN_TODO.md`.
+This is the code repository of the ERN platform: a Laravel application, together with everything Claude Code needs to build it step by step: the rules, the technical decisions, the mockup as specification, and a backlog of tasks in the order they should be built. Releases 0 and 1 are built, except the steps that wait for you or for the hosting (from R0-09 on). What comes next is in `docs/BACKLOG.md`, and what waits for you is in `docs/HUMAN_TODO.md`.
 
 You open the repository in Claude Code and type `/build`. Claude then works through the backlog on its own and stops only where it needs you.
 

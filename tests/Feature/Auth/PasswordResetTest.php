@@ -167,16 +167,21 @@ class PasswordResetTest extends TestCase
         Mail::fake();
         User::factory()->create(['email' => 'member@example.test']);
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $this->travel(2)->minutes();
             $this->post('/members/forgot-password', ['email' => 'member@example.test'])->assertRedirect();
         }
         $this->travel(2)->minutes();
         $this->post('/members/forgot-password', ['email' => 'member@example.test'])->assertTooManyRequests();
-        Mail::assertSentCount(5);
+        Mail::assertSentCount(3);
+
+        // The block on one address lasts an hour, not a day.
+        $this->travel(1)->hours();
+        $this->post('/members/forgot-password', ['email' => 'member@example.test'])->assertRedirect();
+        Mail::assertSentCount(4);
 
         // Ten requests an hour from one internet address, whatever addresses they name.
-        $this->travel(1)->days();
+        $this->travel(2)->hours();
         for ($i = 0; $i < 10; $i++) {
             $this->post('/members/forgot-password', ['email' => 'other'.$i.'@example.test'])->assertRedirect();
         }

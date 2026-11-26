@@ -21,17 +21,19 @@ In the all-inkl.com customer area (KAS):
 1. **Look before you build.** Note which folder the main domain `esportsresearch.net` points to, for example `/` or `/wordpress/`. Tell Claude the folder name (it is not a secret). Claude needs it to make sure that the new site's private files can never be opened through the main domain.
 2. **Create the subdomain** `next.esportsresearch.net`. Set its folder to `ern-next/current/public`. If the customer area creates these folders by itself, leave them: the first upload replaces them.
 3. **Switch on SSL** for the subdomain (Let's Encrypt), and tick "force HTTPS" (SSL erzwingen), so that every visit is encrypted. Set the PHP version of the subdomain to 8.3 or newer. Tell Claude which version you set.
-4. **Create a new MySQL database.** Note its name, user and password for step 7. Tell Claude the MySQL version that the customer area shows (not a secret).
-5. **Create a mailbox for outgoing mail**, for example `platform@esportsresearch.net`. Note its password, and the mail server name the customer area shows for it (something like `w0123456.kasserver.com`), for step 7.
-6. **Check SSH access** in the customer area: your Premium package includes it. Note the SSH host name and user name. Claude explains how to make the key pair for uploads when you reach this step. You carry it out yourself, and the private key goes nowhere except into GitHub's secrets in R0-10.
-7. **Create the settings file.** On the server, create the folder `ern-next/shared` and in it the file `.env`, as a copy of `.env.staging.example` from the repository. Fill in only these lines, with the hosting's file manager or a file transfer program:
+4. **Create a new MySQL database.** Note its name, user and password for step 8. Tell Claude the MySQL version that the customer area shows (not a secret).
+5. **Create a mailbox for outgoing mail**, for example `platform@esportsresearch.net`. Note its password, the mail server name the customer area shows for it (something like `w0123456.kasserver.com`), and the login name it shows for the mailbox (something like `m0123456`, or the address itself), for step 8.
+6. **Check SSH access** in the customer area: your Premium package includes it. Note the SSH host name and user name. Claude explains how to make the key pair for uploads when you reach this step, and how to store its public half at the hosting. You carry it out yourself. The private half goes nowhere except into GitHub's secrets in R0-10.
+7. **Protect the whole `ern-next` folder** (create it first, if step 2 did not) with a directory password (Verzeichnisschutz), not only the subdomain's folder. Then the staging site is not public, and the protection survives every upload. Give the user name and password to the people who test, never to Claude.
+
+8. **Create the settings file**, only after step 7, so that it is protected from the first moment. On the server, create the folder `ern-next/shared` and in it the file `.env`, as a copy of `.env.staging.example` from the repository. Fill in only these lines, with the hosting's file manager or a file transfer program:
    - `APP_URL=https://next.esportsresearch.net`
    - `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` from step 4
-   - `MAIL_HOST` (the mail server name), `MAIL_USERNAME` (the mailbox address), `MAIL_PASSWORD`, and `MAIL_FROM_ADDRESS` (the same mailbox address) from step 5
+   - `MAIL_HOST` (the mail server name), `MAIL_USERNAME` (the login name of the mailbox), `MAIL_PASSWORD`, and `MAIL_FROM_ADDRESS` (the mailbox address) from step 5
 
    Leave `APP_KEY` empty: the first upload creates it on the server by itself.
-8. **Protect the whole `ern-next` folder** with a directory password (Verzeichnisschutz), not only the subdomain's folder. Then the staging site is not public, and the protection survives every upload. Give the user name and password to the people who test, never to Claude.
 
+   A Mac does not let you save a file whose name starts with a dot. Create the file directly in the hosting's file manager (WebFTP), or upload it as `env.txt` and rename it there to `.env`.
 When you are done, type `/done R0-09`. The secrets for GitHub follow in R0-10, once Claude has written `docs/DEPLOY.md` with their names.
 
 ## R0-10 First upload to staging
