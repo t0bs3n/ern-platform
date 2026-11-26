@@ -91,7 +91,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 
 ### [H] R0-11 Hosting test
 - Needs: R0-10
-- Tobi: See `docs/HUMAN_TODO.md`, R0-11. Before he tests: add an admin-only button on the "System" page that sends a test e-mail to the signed-in admin, add a workflow step that creates the first admin on staging from the test data, and give Tobi the one cron line to enter at the hosting. He starts the first upload with the button. This task decides whether the hosting carries the platform.
+- Tobi: See `docs/HUMAN_TODO.md`, R0-11. Before he tests: add an admin-only button on the "System" page that sends a test e-mail to the signed-in admin, add a workflow step that creates the first admin on staging from the test data (with the Member role as well, so that the release check in `docs/checks/release-1.md`, task 15, can use the member area and the directory), and give Tobi the one cron line to enter at the hosting. He starts the first upload with the button. This task decides whether the hosting carries the platform.
 
 ### [ ] R0-12 Backups
 - Model: sonnet
@@ -264,7 +264,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Go through every template of releases 0 and 1. One h1 per page, labels on every field, errors tied to their fields, visible focus, sensible page titles, no horizontal scrolling at 360 pixels width. Write what you could only check by reading the code into the hand-over note, so that the human check covers it.
 - Test: A test that every public address answers 200 and has exactly one h1 and a title.
 
-### [ ] R1-21 Release notes and check sheet
+### [x] R1-21 Release notes and check sheet (2026-11-26)
 - Model: sonnet
 - Needs: R1-20
 - Can: A person who did not build the release can check it.

@@ -27,3 +27,4 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R1-16: People with an admin role see at a glance what waits for them (applications, leaving members, drafts), with counts limited to what their roles cover.
 - 2026-11-26 R1-18: Addresses of the old website (conference, get involved, the conference summaries and every old news post) lead permanently to the right new page.
 - 2026-11-26 R1-20: Every page was checked at phone width and with the keyboard; error messages in the admin forms are now tied to their fields, and a test checks every public page for one heading and a title.
+- 2026-11-26 R1-21: A check sheet with twenty plain tasks lets a person who did not build release 1 check it on staging.
