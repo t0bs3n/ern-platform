@@ -29,6 +29,16 @@ class AdminAreaController extends Controller
         'system' => ['System', ['administer']],
     ];
 
+    /**
+     * The tabs the signed-in person may open, for the tab bar.
+     *
+     * @return array<string, array{string, list<string>}>
+     */
+    public static function visibleTabs(): array
+    {
+        return array_filter(self::TABS, fn (array $definition) => Gate::any($definition[1]));
+    }
+
     public function overview(): View
     {
         return $this->tab('overview');
@@ -45,9 +55,7 @@ class AdminAreaController extends Controller
     {
         abort_unless(Gate::any(self::TABS[$tab][1]), 403);
 
-        $tabs = array_filter(self::TABS, fn (array $definition) => Gate::any($definition[1]));
-
-        $data = ['tab' => $tab, 'label' => self::TABS[$tab][0], 'tabs' => $tabs];
+        $data = ['tab' => $tab, 'label' => self::TABS[$tab][0]];
 
         if ($tab === 'system') {
             $data['version'] = (string) config('ern.version');

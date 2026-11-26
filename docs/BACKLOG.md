@@ -108,7 +108,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 
 ## Release 1: Site and members
 
-### [ ] R1-01 Pages and news in the database
+### [x] R1-01 Pages and news in the database (2026-11-26)
 - Model: sonnet
 - Needs: R0-08
 - Can: An editor writes and changes pages and news in the admin area without code.
