@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 #[Fillable([
     'first_name', 'last_name', 'slug', 'email', 'password', 'institution', 'country',
     'career_stage', 'interests', 'orcid', 'discord_name', 'listed_in_directory',
+    'open_to_collaboration', 'show_discord_in_directory',
 ])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
@@ -61,6 +62,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'approved_at' => 'datetime',
             'listed_in_directory' => 'boolean',
+            'open_to_collaboration' => 'boolean',
+            'show_discord_in_directory' => 'boolean',
+            'pending_email_requested_at' => 'datetime',
+            'membership_end_requested_at' => 'datetime',
             'password' => 'hashed',
         ];
     }

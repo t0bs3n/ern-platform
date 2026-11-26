@@ -18,6 +18,7 @@ use App\Http\Controllers\LegalPageController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NewsController as PublicNewsController;
 use App\Http\Controllers\NewsImageController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
@@ -82,6 +83,16 @@ Route::prefix('members')->group(function () {
     Route::post('sign-out', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('logout');
 
     Route::view('/', 'members.index')->middleware('auth')->name('members');
+
+    // The member's own profile (R1-12): never another member's id in these addresses.
+    Route::middleware(['auth', 'can:use-member-area'])->prefix('profile')->name('members.profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'show']);
+        Route::put('/', [ProfileController::class, 'update'])->name('.update');
+        Route::post('email', [ProfileController::class, 'requestEmailChange'])->middleware('throttle:5,60')->name('.email');
+        Route::get('email/confirm/{user}/{hash}', [ProfileController::class, 'confirmEmailChange'])->whereNumber('user')->name('.email.confirm');
+        Route::post('end-membership', [ProfileController::class, 'requestEnd'])->name('.end');
+        Route::get('data', [ProfileController::class, 'download'])->middleware('throttle:10,1')->name('.data');
+    });
 });
 
 // The admin area: signed in and a role beyond member (the `admin` group); each tab checks its own gates.

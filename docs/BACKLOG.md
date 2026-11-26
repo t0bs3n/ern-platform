@@ -193,7 +193,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Can: A new member sets a password through the link in the welcome e-mail and lands in the member area. An expired link offers a new one.
 - Test: Valid link, expired link, used link, weak password refused.
 
-### [ ] R1-12 Profile
+### [x] R1-12 Profile (2026-11-26)
 - Model: opus
 - Needs: R1-11
 - Mockup: `js/60-members.js` (profile)

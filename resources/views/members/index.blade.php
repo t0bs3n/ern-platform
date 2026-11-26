@@ -14,6 +14,7 @@
         @if (session('status'))
             <div class="x-card" role="status"><p class="x-small" style="margin:0">{{ session('status') }}</p></div>
         @endif
+        <div><a class="btn btn-primary" href="{{ route('members.profile') }}">Update my details</a></div>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button class="btn btn-outline" type="submit">Sign out</button>

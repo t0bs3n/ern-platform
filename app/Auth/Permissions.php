@@ -21,6 +21,8 @@ final class Permissions
         'manage-teaching' => [Role::LectureTeam, Role::Admin],
         'edit-content' => [Role::Editor, Role::Admin],
         'administer' => [Role::Admin],
+        // The member area (R1-12): every approved member.
+        'use-member-area' => [Role::Member],
         // Anyone with a role beyond member: the admin area and its footer link.
         'open-admin-area' => [
             Role::Reviewer, Role::FinalEditor, Role::ConferenceTeam, Role::DatabaseLead,
