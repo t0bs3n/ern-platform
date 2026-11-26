@@ -108,6 +108,13 @@ class MemberListAndRightsTest extends TestCase
         $this->assertFalse($applicant->fresh()->roles->contains(fn ($r) => $r->role === Role::Admin));
     }
 
+    public function test_an_admin_sees_the_city_on_the_member_page(): void
+    {
+        $this->member->forceFill(['city' => 'Hamburg'])->save();
+
+        $this->actingAs($this->admin)->get('/admin/members/'.$this->member->id)->assertOk()->assertSeeInOrder(['City', 'Hamburg']);
+    }
+
     public function test_a_request_to_end_the_membership_is_shown(): void
     {
         $this->member->forceFill(['membership_end_requested_at' => '2026-11-20 10:00:00'])->save();

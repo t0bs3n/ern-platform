@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Approves an application (R1-10): creates the approved member with the member role,
  * logs the decision and deletes the application, whose details now live on the member.
- * The city is not kept: members have no city.
+ * The city is kept too, but only the member and the admins see it, never the directory.
  */
 final class ApproveApplication
 {
@@ -33,6 +33,7 @@ final class ApproveApplication
                 'email' => $application->email,
                 'institution' => $application->institution,
                 'country' => $application->country,
+                'city' => $application->city,
                 'career_stage' => $application->career_stage,
                 'interests' => $application->interests,
                 'discord_name' => $application->discord_name,

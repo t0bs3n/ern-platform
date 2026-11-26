@@ -193,6 +193,7 @@ class ProfileController extends Controller
             'page_address' => $member->slug,
             'institution' => $member->institution,
             'country' => $member->country,
+            'city' => $member->city,
             'career_stage' => $member->career_stage,
             'research_interests' => $member->interests,
             'orcid' => $member->orcid,

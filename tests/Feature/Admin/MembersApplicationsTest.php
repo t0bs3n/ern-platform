@@ -122,6 +122,7 @@ class MembersApplicationsTest extends TestCase
         $this->assertSame('tomas-herrera', $member->slug);
         $this->assertSame('Tomás', $member->first_name);
         $this->assertSame('Esports economics', $member->interests);
+        $this->assertSame('Santiago', $member->city);
         $this->assertSame('tomas.h', $member->discord_name);
         $this->assertSame('Researcher with a PhD', $member->career_stage);
         $this->assertNull($member->password);

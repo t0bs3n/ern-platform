@@ -8,6 +8,7 @@
                 <div><dt>Status</dt><dd>{{ $member->career_stage ?: 'Not given' }}</dd></div>
                 <div><dt>Institution</dt><dd>{{ $member->institution ?: 'Not given' }}</dd></div>
                 <div><dt>Country</dt><dd>{{ $member->country ?: 'Not given' }}</dd></div>
+                <div><dt>City</dt><dd>{{ $member->city ?: 'Not given' }}</dd></div>
                 <div><dt>Member since</dt><dd>{{ $member->approved_at->format('j F Y') }}</dd></div>
                 @if ($member->membership_end_requested_at)
                     <div><dt>End of membership</dt><dd>Asked to end the membership on {{ $member->membership_end_requested_at->format('j F Y') }}</dd></div>

@@ -25,6 +25,7 @@
             </div>
             <x-field name="institution" label="University or organisation" :value="old('institution', $member->institution)" autocomplete="organization" />
             <x-field name="country" label="Country" :value="old('country', $member->country)" autocomplete="country-name" />
+            <x-field name="city" label="City" :value="old('city', $member->city)" autocomplete="address-level2" help="Only you and the admins see your city." />
             <x-select name="career_stage" label="Status" :options="\App\Models\User::CAREER_STAGES" :value="old('career_stage', $member->career_stage)" />
             <x-textarea name="interests" label="Research interests" rows="3" :value="old('interests', $member->interests)" />
             <x-field name="orcid" label="ORCID iD" :value="old('orcid', $member->orcid)" placeholder="0000-0000-0000-0000" />

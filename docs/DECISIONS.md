@@ -35,6 +35,11 @@ Versions recorded by R0-01:
 - PHP on the hosting: (the Laravel release current in November 2026, version 13, needs PHP 8.3 or newer)
 - Laravel: 13.44.1 (installed 26 November 2026 by R0-02). It needs PHP 8.3 or newer.
 
+Decided by Tobi on 26 November 2026, after the full review:
+
+- **City:** members keep the city from their application. The member can change it under "My details". Only the member and the admins see it, never the directory. It is in "Download my data". The privacy policy has to mention it.
+- **Spelling of the board's texts:** the Code of Conduct, the calls for abstracts and the other texts taken over from the current site stay in US spelling ("Behavior", "program"). US readers object to UK spelling, UK readers do not mind.
+
 Composer packages and why (recorded by the full review, 26 November 2026):
 
 - `laravel/framework`, `laravel/fortify`: the framework and its login parts (see Login above).

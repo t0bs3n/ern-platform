@@ -25,6 +25,7 @@ class ProfileRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:100'],
             'institution' => ['nullable', 'string', 'max:255'],
             'country' => ['nullable', 'string', 'max:100'],
+            'city' => ['nullable', 'string', 'max:100'],
             'career_stage' => ['nullable', Rule::in(User::CAREER_STAGES)],
             'interests' => ['nullable', 'string', 'max:1000'],
             'orcid' => ['nullable', 'string', 'regex:/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/'],
@@ -38,7 +39,7 @@ class ProfileRequest extends FormRequest
     public function messages(): array
     {
         $messages = [];
-        foreach (['first_name', 'last_name', 'institution', 'country', 'interests', 'discord_name'] as $field) {
+        foreach (['first_name', 'last_name', 'institution', 'country', 'city', 'interests', 'discord_name'] as $field) {
             $messages[$field.'.required'] = 'This field is needed.';
             $messages[$field.'.string'] = 'This field is needed.';
             $messages[$field.'.max'] = 'This is too long.';

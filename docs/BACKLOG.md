@@ -259,6 +259,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Test: Each listed address redirects once to a page that answers 200.
 
 ### [H] R1-19 Member import
+- Also (decided 26 November 2026): members have a city now. Import it when the export has one.
 - Model: opus
 - Needs: R1-15
 - Tobi: See `docs/HUMAN_TODO.md`, R1-19.

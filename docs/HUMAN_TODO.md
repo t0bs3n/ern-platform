@@ -51,7 +51,7 @@ Switch the model to Fable 5.2 with `/model`, then type `/review-architecture`. R
 
 ## Release 1
 
-- **R1-05 Privacy policy.** The text has to come from the board. Until then the page says that it is being prepared, and the platform must not go live.
+- **R1-05 Privacy policy.** The text has to come from the board. It must also say that members keep the city from their application, seen only by the member and the admins. Until then the page says that it is being prepared, and the platform must not go live.
 - **R1-17 Concern form.** Get the Ombudsperson's agreement and the address the form sends to. The address goes into the server's `.env`.
 - **R1-19 Member import.** Export the current member list. Place the file on the server yourself, with the hosting's file manager. Start the import with its button on GitHub, first as a trial run. The file never touches the repository or the chat.
 - **R1-22 Release check.** You, or better someone who did not build it, click through staging next to the mockup, on a computer and on a phone.
