@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminAreaController;
 use App\Http\Controllers\Admin\ConferenceAdminController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\EventAdminController;
+use App\Http\Controllers\Admin\MembersAdminController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\TeamMemberController;
@@ -69,6 +70,10 @@ Route::prefix('members')->group(function () {
         Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
     });
 
+    // The link in the welcome e-mail (R1-10). R1-11 builds the page behind it.
+    Route::get('activate/{user}', fn () => view('members.activate-placeholder'))
+        ->middleware(['guest', 'signed'])->whereNumber('user')->name('members.activate');
+
     Route::post('sign-out', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('logout');
 
     Route::view('/', 'members.index')->middleware('auth')->name('members');
@@ -77,6 +82,13 @@ Route::prefix('members')->group(function () {
 // The admin area: signed in and a role beyond member (the `admin` group); each tab checks its own gates.
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', [AdminAreaController::class, 'overview'])->name('admin');
+
+    // Members tab (R1-10): applications, for those who manage members (admin).
+    Route::middleware('can:manage-members')->group(function () {
+        Route::get('members', [MembersAdminController::class, 'index'])->name('admin.members.index');
+        Route::post('members/applications/{application}/approve', [MembersAdminController::class, 'approve'])->name('admin.members.applications.approve');
+        Route::post('members/applications/{application}/decline', [MembersAdminController::class, 'decline'])->name('admin.members.applications.decline');
+    });
 
     // Conference tab (R1-06): the list for the tab's roles, editing for the conference team.
     Route::get('conference', [ConferenceAdminController::class, 'index'])->name('admin.conference.index');

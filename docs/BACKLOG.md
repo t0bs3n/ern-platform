@@ -178,7 +178,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Model for applications, separate from users. Fields and wording from the mockup. Agreement to the Code of Conduct and the privacy policy is required and stored with its time. An address that already belongs to a member or an open application gets the same friendly confirmation and no second application, so that nobody can test who is a member. Protection against spam without a third-party service: a hidden field and a rate limit. No approval time is promised.
 - Test: Valid application is stored and confirmed by e-mail. Every required field is enforced. A duplicate creates nothing and answers the same. The rate limit works.
 
-### [ ] R1-10 Approving members
+### [x] R1-10 Approving members (2026-11-26)
 - Model: opus
 - Needs: R1-09
 - Mockup: `js/65-admin.js` (Members tab: applications, decision, history)

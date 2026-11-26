@@ -13,3 +13,6 @@ Schedule::command('auth:clear-resets')->daily();
 
 // Proof that the hosting's cron entry runs the scheduler (shown on the admin System page).
 Schedule::command('ern:heartbeat')->everyMinute();
+
+// Delete declined membership applications 30 days after the decision (R1-10).
+Schedule::command('ern:delete-declined-applications')->daily();

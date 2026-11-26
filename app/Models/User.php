@@ -36,6 +36,22 @@ class User extends Authenticatable
         'Other',
     ];
 
+    /** Addresses under /members that a member's page (R1-13) can never use as its slug. */
+    public const RESERVED_SLUGS = ['sign-in', 'sign-out', 'forgot-password', 'reset-password', 'directory', 'profile', 'activate'];
+
+    /** A slug made from the name that is not reserved and not taken: "Tomás Herrera" becomes "tomas-herrera". */
+    public static function uniqueSlug(string $firstName, string $lastName): string
+    {
+        $base = Str::limit(Str::slug($firstName.' '.$lastName), 150, '') ?: 'member';
+        $slug = $base;
+
+        for ($n = 2; in_array($slug, self::RESERVED_SLUGS, true) || static::where('slug', $slug)->exists(); $n++) {
+            $slug = $base.'-'.$n;
+        }
+
+        return $slug;
+    }
+
     /**
      * @return array<string, string>
      */

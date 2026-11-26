@@ -23,12 +23,17 @@ class MembershipApplication extends Model
 
     public const OPEN = 'open';
 
+    public const DECLINED = 'declined';
+
+    /** Declined applications are deleted this many days after the decision (R1-10). */
+    public const KEEP_DECLINED_DAYS = 30;
+
     /**
      * @return array<string, string>
      */
     protected function casts(): array
     {
-        return ['agreed_at' => 'datetime'];
+        return ['agreed_at' => 'datetime', 'decided_at' => 'datetime'];
     }
 
     protected function email(): Attribute

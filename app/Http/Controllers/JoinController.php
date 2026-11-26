@@ -38,7 +38,7 @@ class JoinController extends Controller
                 try {
                     Mail::to($application->email)->send(new ApplicationReceived($application));
                 } catch (Throwable $e) {
-                    Log::warning('The confirmation of an application could not be sent.', ['application' => $application->id, 'error' => $e->getMessage()]);
+                    Log::warning('The confirmation of an application could not be sent.', ['application' => $application->id, 'error' => $e::class]);
                 }
             });
         }

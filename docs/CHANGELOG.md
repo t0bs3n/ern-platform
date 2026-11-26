@@ -18,3 +18,4 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R1-07: Visitors find the podcast with its episodes, and ERN Live with the Twitch channel; nothing from Twitch or YouTube loads before a click.
 - 2026-11-26 R1-08: Visitors see upcoming events and deadlines in one list and subscribe to them in their calendar through /events.ics; editors add events.
 - 2026-11-26 R1-09: A researcher applies for membership online at /join and gets a copy by e-mail; nobody can use the form to find out who is a member.
+- 2026-11-26 R1-10: Admins see open applications in the Members tab, approve them (the new member gets a welcome e-mail with a link to set a password) or decline them; declined applications are deleted after 30 days.
