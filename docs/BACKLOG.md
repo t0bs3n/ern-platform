@@ -209,7 +209,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Only for signed-in members. Only members who chose to be listed appear, and only the fields they released. E-mail addresses are never shown. Contact goes through a form that sends an e-mail and does not reveal the address.
 - Test: A guest is sent to sign-in. A hidden member appears nowhere, not in search, not by direct address. Released and withheld fields. The contact form has a rate limit.
 
-### [ ] R1-14 Member overview
+### [x] R1-14 Member overview (2026-11-26)
 - Model: sonnet
 - Needs: R1-12
 - Mockup: `js/60-members.js` (member overview)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\News;
+use App\Models\Notice;
 use App\Models\Page;
 use Illuminate\View\View;
 
@@ -15,6 +16,7 @@ class ContentController extends Controller
         return view('admin.content.index', [
             'news' => News::orderByDesc('published_at')->orderByDesc('id')->get(),
             'pages' => Page::orderBy('title')->get(),
+            'notices' => Notice::orderByDesc('id')->get(),
         ]);
     }
 }

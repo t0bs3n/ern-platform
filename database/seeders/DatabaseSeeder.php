@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ContentSeeder::class,
             EventSeeder::class,
             ApplicationSeeder::class,
+            NoticeSeeder::class,
         ]);
     }
 }

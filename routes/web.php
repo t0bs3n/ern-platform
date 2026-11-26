@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\EventAdminController;
 use App\Http\Controllers\Admin\MembersAdminController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\NoticeAdminController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\ConferenceController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JoinController;
 use App\Http\Controllers\LegalPageController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\MemberAreaController;
 use App\Http\Controllers\NewsController as PublicNewsController;
 use App\Http\Controllers\NewsImageController;
 use App\Http\Controllers\ProfileController;
@@ -84,7 +86,7 @@ Route::prefix('members')->group(function () {
 
     Route::post('sign-out', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('logout');
 
-    Route::view('/', 'members.index')->middleware('auth')->name('members');
+    Route::get('/', [MemberAreaController::class, 'index'])->middleware(['auth', 'can:use-member-area'])->name('members');
 
     // The member's own profile (R1-12): never another member's id in these addresses.
     Route::middleware(['auth', 'can:use-member-area'])->prefix('profile')->name('members.profile')->group(function () {
@@ -140,6 +142,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('people/{person}', [TeamMemberController::class, 'edit'])->name('people.edit');
         Route::put('people/{person}', [TeamMemberController::class, 'update'])->name('people.update');
         Route::delete('people/{person}', [TeamMemberController::class, 'destroy'])->name('people.destroy');
+        Route::get('notices/new', [NoticeAdminController::class, 'create'])->name('notices.create');
+        Route::post('notices', [NoticeAdminController::class, 'store'])->name('notices.store');
+        Route::get('notices/{notice}', [NoticeAdminController::class, 'edit'])->name('notices.edit');
+        Route::put('notices/{notice}', [NoticeAdminController::class, 'update'])->name('notices.update');
+        Route::delete('notices/{notice}', [NoticeAdminController::class, 'destroy'])->name('notices.destroy');
         Route::get('events/new', [EventAdminController::class, 'create'])->name('events.create');
         Route::post('events', [EventAdminController::class, 'store'])->name('events.store');
         Route::get('events/{event}', [EventAdminController::class, 'edit'])->name('events.edit');
