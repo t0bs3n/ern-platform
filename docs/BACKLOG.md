@@ -70,7 +70,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Factories and seeders. One test user per role with obvious names and the address pattern `<role>@example.test`. Twenty invented members across countries and career stages, using the mockup's example people first. All institutions of invented people carry "(example)". The passwords of test users come from a local-only value in `.env.example`. Seeders refuse to run when the environment is `production`.
 - Test: The seeder runs on an empty database. It refuses in production.
 
-### [ ] R0-08 Admin frame
+### [x] R0-08 Admin frame (2026-11-26)
 - Model: sonnet
 - Needs: R0-07
 - Can: A person with any admin role opens the admin area and sees only the tabs their roles allow.

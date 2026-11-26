@@ -10,3 +10,6 @@ Artisan::command('inspire', function () {
 
 // Remove expired password reset links (they hold the e-mail address) every day.
 Schedule::command('auth:clear-resets')->daily();
+
+// Proof that the hosting's cron entry runs the scheduler (shown on the admin System page).
+Schedule::command('ern:heartbeat')->everyMinute();

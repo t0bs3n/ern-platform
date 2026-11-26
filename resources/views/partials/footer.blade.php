@@ -23,6 +23,9 @@
                     <li><a href="{{ url('/about') }}">About Us</a></li>
                     <li><a href="{{ url('/get-involved') }}">Get Involved</a></li>
                     <li><a href="{{ url('/members') }}">Member area</a></li>
+                    @can('open-admin-area')
+                        <li><a href="{{ route('admin') }}">Admin area</a></li>
+                    @endcan
                     <li><a href="{{ url('/code-of-conduct') }}">Code of Conduct</a></li>
                     <li><a href="{{ url('/report-a-concern') }}">Report a Concern</a></li>
                 </ul>

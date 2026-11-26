@@ -8,3 +8,4 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R0-05: A member signs in and out at /members/sign-in, and resets a forgotten password by e-mail. Unapproved people cannot sign in.
 - 2026-11-26 R0-06: The platform knows eight roles and checks on the server who may open each area; people without the right see "No access".
 - 2026-11-26 R0-07: `php artisan migrate:fresh --seed` fills a local database with one test user per role and twenty invented members.
+- 2026-11-26 R0-08: People with an admin role open /admin and see only the tabs their roles allow; admins see a System page with the version, the environment and the last scheduled run.

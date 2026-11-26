@@ -2543,3 +2543,6 @@ a.x-skip:hover { color: #fff; opacity: 1; }
 /* Card headings are h2 for a correct heading order, styled like the mockup's card h3. */
 .x-card .x-card-h { font-size: 1.125rem; margin-bottom: .75rem; }
 .x-login .x-err[role="alert"] { margin: 0 0 1rem; }
+/* Admin tabs are links to their own pages here, not buttons. */
+a.x-tab { text-decoration: none; }
+a.x-tab[aria-current="page"] { color: hsl(var(--primary)); border-color: hsl(var(--primary)); font-weight: 600; }

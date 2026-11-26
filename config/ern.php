@@ -33,6 +33,9 @@ return [
         ],
     ],
 
+    // The version shown on the admin System page. The upload workflow (R0-10) sets it.
+    'version' => env('APP_VERSION', 'development'),
+
     // Password of the invented test users (database/seeders). Local only: empty on the server.
     'seed_password' => env('SEED_PASSWORD'),
 
