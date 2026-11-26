@@ -67,11 +67,11 @@
             <div class="container-ern">
                 <div class="x-row x-between" style="margin-bottom:.75rem">
                     <h2 id="coming-up-h" style="font-size:1.125rem;margin:0">Coming up</h2>
-                    <a class="x-small" href="{{ url('/events') }}">All events and deadlines</a>
+                    <a class="x-small" href="{{ route('events.index') }}">All events and deadlines</a>
                 </div>
                 <ul class="x-upnext">
-                    @foreach ($comingUp as $date)
-                        <li><a href="{{ route('conferences.show', [$event, 'call']) }}"><span class="x-item-meta">{{ $date['date']->format('l j F Y') }}</span><strong>{{ $event->name }}: {{ $date['label'] }}</strong></a></li>
+                    @foreach ($comingUp as $entry)
+                        <li><a href="{{ $entry->link ?? route('events.index') }}"><span class="x-item-meta">{{ $entry->whenText() }}</span><strong>{{ $entry->title }}</strong></a></li>
                     @endforeach
                 </ul>
             </div>

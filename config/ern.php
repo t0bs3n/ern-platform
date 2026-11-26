@@ -68,6 +68,9 @@ return [
         'recordings_url' => 'https://www.youtube.com/channel/UCy2Jz5v9oUTD7Y7glRbgBZA',
     ],
 
+    // The time zone of conference dates and the default for new events (R1-08).
+    'event_timezone' => env('ERN_EVENT_TIMEZONE', 'Europe/Berlin'),
+
     // The member figures on About Us, from the mockup. Once the member list is in the
     // platform (R1-19), they can be counted from it instead.
     'member_figures' => [

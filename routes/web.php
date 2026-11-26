@@ -4,10 +4,12 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AdminAreaController;
 use App\Http\Controllers\Admin\ConferenceAdminController;
 use App\Http\Controllers\Admin\ContentController;
+use App\Http\Controllers\Admin\EventAdminController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LegalPageController;
 use App\Http\Controllers\MediaController;
@@ -28,6 +30,10 @@ Route::get('get-involved', [AboutController::class, 'involved'])->name('involved
 Route::get('conferences', [ConferenceController::class, 'index'])->name('conferences.index');
 Route::get('conferences/{conference}/submit', [ConferenceController::class, 'submit'])->name('conferences.submit');
 Route::get('conferences/{conference}/{tab?}', [ConferenceController::class, 'show'])->where('tab', '[a-z]+')->name('conferences.show');
+
+// Events and deadlines (R1-08).
+Route::get('events', [EventController::class, 'index'])->name('events.index');
+Route::get('events.ics', [EventController::class, 'feed'])->name('events.feed');
 
 // Podcast and ERN Live (R1-07).
 Route::get('podcast', [MediaController::class, 'podcast'])->name('podcast');
@@ -90,6 +96,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('people/{person}', [TeamMemberController::class, 'edit'])->name('people.edit');
         Route::put('people/{person}', [TeamMemberController::class, 'update'])->name('people.update');
         Route::delete('people/{person}', [TeamMemberController::class, 'destroy'])->name('people.destroy');
+        Route::get('events/new', [EventAdminController::class, 'create'])->name('events.create');
+        Route::post('events', [EventAdminController::class, 'store'])->name('events.store');
+        Route::get('events/{event}', [EventAdminController::class, 'edit'])->name('events.edit');
+        Route::put('events/{event}', [EventAdminController::class, 'update'])->name('events.update');
+        Route::delete('events/{event}', [EventAdminController::class, 'destroy'])->name('events.destroy');
     });
 
     Route::get('{tab}', [AdminAreaController::class, 'show'])->whereAlpha('tab')->name('admin.tab');

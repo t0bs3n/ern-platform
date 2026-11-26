@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             TestUserSeeder::class,
             MemberSeeder::class,
             ContentSeeder::class,
+            EventSeeder::class,
         ]);
     }
 }

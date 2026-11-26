@@ -69,5 +69,23 @@
                 </ul>
             @endforeach
         </div>
+    
+        <div class="x-card">
+            <div class="x-row x-between" style="margin-bottom:.75rem">
+                <h2 class="x-card-h" style="margin:0">Events and deadlines</h2>
+                <a class="btn btn-outline x-btn-sm" href="{{ route('admin.content.events.create') }}">New event</a>
+            </div>
+            <p class="x-small x-muted">Conference days and key dates appear by themselves. Past events stay here.</p>
+            <ul class="x-admlist">
+                @forelse (\App\Models\Event::orderByDesc('date')->get() as $item)
+                    <li>
+                        <span>{{ $item->title }} <small class="x-muted">{{ $item->date->format('j M Y') }} · {{ $item->kind }}</small></span>
+                        <a class="x-link" href="{{ route('admin.content.events.edit', $item) }}">Edit<span class="x-vh"> {{ $item->title }}</span></a>
+                    </li>
+                @empty
+                    <li><span class="x-muted">No events yet.</span></li>
+                @endforelse
+            </ul>
+        </div>
     </div>
 @endsection

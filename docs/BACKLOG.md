@@ -162,7 +162,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: The stream and the videos are links or load only after a click. No external scripts on page load.
 - Test: Pages answer and contain no external script or frame in their first response.
 
-### [ ] R1-08 Events and deadlines
+### [x] R1-08 Events and deadlines (2026-11-26)
 - Model: sonnet
 - Needs: R1-06
 - Mockup: `js/45-events.js`

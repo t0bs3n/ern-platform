@@ -87,16 +87,20 @@ class HomePageTest extends TestCase
 
         $this->get('/')
             ->assertSee('Coming up')
-            ->assertSee('ERNC27: Abstract deadline')
+            ->assertSee('ERNC27: abstract deadline')
             ->assertSee('Monday 4 January 2027')
-            ->assertSee('ERNC27: Registration opens')
-            ->assertDontSee('ERNC27: Submissions open');
+            ->assertSee('ERNC27: registration opens')
+            ->assertDontSee('ERNC27: submissions open');
 
         // At most three.
         $this->travelTo('2026-10-01 12:00');
-        $this->get('/')->assertSee('ERNC27: Submissions open')->assertDontSee('ERNC27: Registration opens');
+        $this->get('/')->assertSee('ERNC27: submissions open')->assertDontSee('ERNC27: registration opens');
 
+        // After the key dates, the conference itself is still coming up.
         $this->travelTo('2027-05-01 12:00');
+        $this->get('/')->assertSee('Coming up')->assertSee('9 to 11 November 2027');
+
+        $this->travelTo('2027-11-12 12:00');
         $this->get('/')->assertDontSee('Coming up');
     }
 
