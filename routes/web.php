@@ -1,20 +1,28 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ActivationController;
 use App\Http\Controllers\Admin\AdminAreaController;
 use App\Http\Controllers\Admin\ConferenceAdminController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\EventAdminController;
+use App\Http\Controllers\Admin\MembersAdminController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\NoticeAdminController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\DirectoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JoinController;
 use App\Http\Controllers\LegalPageController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\MemberAreaController;
 use App\Http\Controllers\NewsController as PublicNewsController;
 use App\Http\Controllers\NewsImageController;
+use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
@@ -44,6 +52,10 @@ Route::get('code-of-conduct', [LegalPageController::class, 'conduct'])->name('co
 Route::get('imprint', [LegalPageController::class, 'imprint'])->name('imprint');
 Route::get('privacy', [LegalPageController::class, 'privacy'])->name('privacy');
 
+// Become a member (R1-09).
+Route::get('join', [JoinController::class, 'show'])->name('join');
+Route::post('join', [JoinController::class, 'store'])->middleware('throttle:join')->name('join.store');
+
 // News (R1-03).
 Route::get('news', [PublicNewsController::class, 'index'])->name('news.index');
 Route::get('news/{slug}', [PublicNewsController::class, 'show'])->where('slug', '[a-z0-9-]+')->name('news.show');
@@ -64,14 +76,53 @@ Route::prefix('members')->group(function () {
         Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
     });
 
+    // The link in the welcome e-mail (R1-10, R1-11). The controller checks the signature itself,
+    // so that an expired, used or broken link gets a friendly page.
+    Route::middleware(['guest', 'throttle:activation'])->whereNumber('user')->group(function () {
+        Route::get('activate/{user}', [ActivationController::class, 'show'])->name('members.activate');
+        Route::post('activate/{user}', [ActivationController::class, 'store'])->name('members.activate.store');
+        Route::post('activate/{user}/new-link', [ActivationController::class, 'resend'])->name('members.activate.resend');
+    });
+
     Route::post('sign-out', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('logout');
 
-    Route::view('/', 'members.index')->middleware('auth')->name('members');
+    Route::get('/', [MemberAreaController::class, 'index'])->middleware(['auth', 'can:use-member-area'])->name('members');
+
+    // The member's own profile (R1-12): never another member's id in these addresses.
+    Route::middleware(['auth', 'can:use-member-area'])->prefix('profile')->name('members.profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'show']);
+        Route::put('/', [ProfileController::class, 'update'])->name('.update');
+        Route::post('email', [ProfileController::class, 'requestEmailChange'])->middleware('throttle:5,60')->name('.email');
+        Route::get('email/confirm/{user}/{hash}', [ProfileController::class, 'confirmEmailChange'])->whereNumber('user')->name('.email.confirm');
+        Route::post('end-membership', [ProfileController::class, 'requestEnd'])->name('.end');
+        Route::get('data', [ProfileController::class, 'download'])->middleware('throttle:10,1')->name('.data');
+    });
+
+    // The member directory and researcher pages (R1-13). Last in this group, so the fixed addresses above win.
+    $memberSlug = '(?!(?:'.implode('|', User::RESERVED_SLUGS).')(?![a-z0-9-]))[a-z0-9-]+';
+    Route::middleware(['auth', 'can:use-member-area'])->group(function () use ($memberSlug) {
+        Route::get('directory', [DirectoryController::class, 'index'])->name('members.directory');
+        Route::get('{slug}', [DirectoryController::class, 'show'])->where('slug', $memberSlug)->name('members.show');
+        Route::post('{slug}/contact', [DirectoryController::class, 'contact'])->where('slug', $memberSlug)
+            ->middleware('throttle:member-contact')->name('members.contact');
+    });
 });
 
 // The admin area: signed in and a role beyond member (the `admin` group); each tab checks its own gates.
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', [AdminAreaController::class, 'overview'])->name('admin');
+
+    // Members tab (R1-10): applications, for those who manage members (admin).
+    Route::middleware('can:manage-members')->group(function () {
+        Route::get('members', [MembersAdminController::class, 'index'])->name('admin.members.index');
+        Route::post('members/applications/{application}/approve', [MembersAdminController::class, 'approve'])->name('admin.members.applications.approve');
+        Route::post('members/applications/{application}/decline', [MembersAdminController::class, 'decline'])->name('admin.members.applications.decline');
+        // Member list and rights editor (R1-15). Only admins change roles.
+        Route::post('members/export', [MembersAdminController::class, 'export'])->name('admin.members.export');
+        Route::get('members/{member}', [MembersAdminController::class, 'show'])->whereNumber('member')->name('admin.members.show');
+        Route::put('members/{member}/roles', [MembersAdminController::class, 'updateRoles'])->whereNumber('member')
+            ->middleware('can:administer')->name('admin.members.roles');
+    });
 
     // Conference tab (R1-06): the list for the tab's roles, editing for the conference team.
     Route::get('conference', [ConferenceAdminController::class, 'index'])->name('admin.conference.index');
@@ -96,6 +147,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('people/{person}', [TeamMemberController::class, 'edit'])->name('people.edit');
         Route::put('people/{person}', [TeamMemberController::class, 'update'])->name('people.update');
         Route::delete('people/{person}', [TeamMemberController::class, 'destroy'])->name('people.destroy');
+        Route::get('notices/new', [NoticeAdminController::class, 'create'])->name('notices.create');
+        Route::post('notices', [NoticeAdminController::class, 'store'])->name('notices.store');
+        Route::get('notices/{notice}', [NoticeAdminController::class, 'edit'])->name('notices.edit');
+        Route::put('notices/{notice}', [NoticeAdminController::class, 'update'])->name('notices.update');
+        Route::delete('notices/{notice}', [NoticeAdminController::class, 'destroy'])->name('notices.destroy');
         Route::get('events/new', [EventAdminController::class, 'create'])->name('events.create');
         Route::post('events', [EventAdminController::class, 'store'])->name('events.store');
         Route::get('events/{event}', [EventAdminController::class, 'edit'])->name('events.edit');

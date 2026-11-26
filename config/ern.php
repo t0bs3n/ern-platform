@@ -71,6 +71,9 @@ return [
     // The time zone of conference dates and the default for new events (R1-08).
     'event_timezone' => env('ERN_EVENT_TIMEZONE', 'Europe/Berlin'),
 
+    // How long the link in the welcome e-mail works (R1-10, R1-11).
+    'activation_days' => 7,
+
     // The member figures on About Us, from the mockup. Once the member list is in the
     // platform (R1-19), they can be counted from it instead.
     'member_figures' => [

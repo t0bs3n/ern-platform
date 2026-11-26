@@ -63,8 +63,14 @@ class GatesTest extends TestCase
     #[DataProvider('gates')]
     public function test_a_member_without_the_role_gets_403(string $gate): void
     {
-        $this->actingAs(User::factory()->create())
-            ->get('/_test/gate/'.$gate)->assertForbidden();
+        $user = User::factory()->create();
+        if (in_array(Role::Member, Permissions::GATES[$gate], true)) {
+            // A gate every member passes: refuse a signed-in user who holds no role at all.
+            $user->roles()->delete();
+            $user->unsetRelation('roles');
+        }
+
+        $this->actingAs($user)->get('/_test/gate/'.$gate)->assertForbidden();
     }
 
     #[DataProvider('gates')]
@@ -79,8 +85,9 @@ class GatesTest extends TestCase
             $user = User::factory()->withRoles($role)->create();
 
             foreach (Permissions::GATES as $gate => $roles) {
+                // Every user from the factory is also a member.
                 $this->assertSame(
-                    in_array($role, $roles, true),
+                    in_array($role, $roles, true) || in_array(Role::Member, $roles, true),
                     Gate::forUser($user)->allows($gate),
                     "Role {$role->value} at gate {$gate}"
                 );
@@ -100,6 +107,7 @@ class GatesTest extends TestCase
             'manage-teaching' => ['lecture_team', 'admin'],
             'edit-content' => ['editor', 'admin'],
             'administer' => ['admin'],
+            'use-member-area' => ['member'],
             'open-admin-area' => ['reviewer', 'final_editor', 'conference_team', 'database_lead', 'lecture_team', 'editor', 'admin'],
         ];
 

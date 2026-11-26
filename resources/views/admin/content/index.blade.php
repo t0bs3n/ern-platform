@@ -87,5 +87,22 @@
                 @endforelse
             </ul>
         </div>
+    
+        <div class="x-card">
+            <div class="x-row x-between" style="margin-bottom:.75rem">
+                <h2 class="x-card-h" style="margin:0">Notices for members</h2>
+                <a class="btn btn-outline x-btn-sm" href="{{ route('admin.content.notices.create') }}">New notice</a>
+            </div>
+            <ul class="x-admlist">
+                @forelse ($notices as $item)
+                    <li>
+                        <span>{{ $item->title }} <small class="x-muted">{{ $item->kind }} · {{ $item->status === \App\Models\Notice::PUBLISHED ? 'Published' : 'Draft' }}</small></span>
+                        <a class="x-link" href="{{ route('admin.content.notices.edit', $item) }}">Edit<span class="x-vh"> {{ $item->title }}</span></a>
+                    </li>
+                @empty
+                    <li><span class="x-muted">No notices yet.</span></li>
+                @endforelse
+            </ul>
+        </div>
     </div>
 @endsection

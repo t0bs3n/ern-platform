@@ -170,7 +170,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Model for events (title, kind, start, end, time zone, place, link). Conference key dates appear automatically. Editors add other events in the Content tab.
 - Test: The list is ordered and hides past entries. The .ics feed is valid and carries the time zones.
 
-### [ ] R1-09 Join ERN
+### [x] R1-09 Join ERN (2026-11-26)
 - Model: opus
 - Needs: R0-07
 - Mockup: `js/50-about.js` (`join`, the facts and the pending timeline)
@@ -178,7 +178,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Model for applications, separate from users. Fields and wording from the mockup. Agreement to the Code of Conduct and the privacy policy is required and stored with its time. An address that already belongs to a member or an open application gets the same friendly confirmation and no second application, so that nobody can test who is a member. Protection against spam without a third-party service: a hidden field and a rate limit. No approval time is promised.
 - Test: Valid application is stored and confirmed by e-mail. Every required field is enforced. A duplicate creates nothing and answers the same. The rate limit works.
 
-### [ ] R1-10 Approving members
+### [x] R1-10 Approving members (2026-11-26)
 - Model: opus
 - Needs: R1-09
 - Mockup: `js/65-admin.js` (Members tab: applications, decision, history)
@@ -186,14 +186,14 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Approval creates the user with the role member and sends a welcome e-mail with a signed, expiring link to set a password. Declining sends the mockup's wording and keeps only what the privacy policy allows: delete the application's personal data after 30 days by a scheduled job. Every decision is logged with who and when.
 - Test: Approve, decline, expiry of the link, the deletion job, refusal for a user without the right.
 
-### [ ] R1-11 Activation
+### [x] R1-11 Activation (2026-11-26)
 - Model: opus
 - Needs: R1-10
 - Mockup: `js/60-members.js` (activate mode)
 - Can: A new member sets a password through the link in the welcome e-mail and lands in the member area. An expired link offers a new one.
 - Test: Valid link, expired link, used link, weak password refused.
 
-### [ ] R1-12 Profile
+### [x] R1-12 Profile (2026-11-26)
 - Model: opus
 - Needs: R1-11
 - Mockup: `js/60-members.js` (profile)
@@ -201,7 +201,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Changing the e-mail address needs confirmation through the new address. A member can ask to end the membership: this sends a request to the people who manage members and deletes nothing by itself. A member can download their own data as a file.
 - Test: A member changes only their own profile. Another member's profile is refused. The e-mail change needs confirmation.
 
-### [ ] R1-13 Directory and researcher pages
+### [x] R1-13 Directory and researcher pages (2026-11-26)
 - Model: opus
 - Needs: R1-12
 - Mockup: `js/60-members.js` (directory filters, `researcher`)
@@ -209,7 +209,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Only for signed-in members. Only members who chose to be listed appear, and only the fields they released. E-mail addresses are never shown. Contact goes through a form that sends an e-mail and does not reveal the address.
 - Test: A guest is sent to sign-in. A hidden member appears nowhere, not in search, not by direct address. Released and withheld fields. The contact form has a rate limit.
 
-### [ ] R1-14 Member overview
+### [x] R1-14 Member overview (2026-11-26)
 - Model: sonnet
 - Needs: R1-12
 - Mockup: `js/60-members.js` (member overview)
@@ -217,7 +217,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: The blocks for saved items, new articles and press come with releases 2 and 6. Leave them out until then. Do not show empty shells.
 - Test: The page shows the member's own data and the published notices.
 
-### [ ] R1-15 Members list and rights editor
+### [x] R1-15 Members list and rights editor (2026-11-26)
 - Model: opus
 - Needs: R1-10
 - Mockup: `js/65-admin.js` (Members tab: list, rights editor)
@@ -225,7 +225,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Only admins change roles. Nobody removes their own admin role, and the last admin cannot be removed. Every role change is logged. Export of the member list as a spreadsheet file for people who manage members, logged as well.
 - Test: Role change by admin, refusal for others, the two safeguards, the log entries.
 
-### [ ] R1-16 Admin overview
+### [x] R1-16 Admin overview (2026-11-26)
 - Model: sonnet
 - Needs: R1-15
 - Mockup: `js/65-admin.js` (Overview, "Needs attention")

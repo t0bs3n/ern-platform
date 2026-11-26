@@ -17,3 +17,11 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R1-06: Visitors see all conferences, the summary of each past one and the ERNC27 call with its dates; the conference team changes dates in the admin area.
 - 2026-11-26 R1-07: Visitors find the podcast with its episodes, and ERN Live with the Twitch channel; nothing from Twitch or YouTube loads before a click.
 - 2026-11-26 R1-08: Visitors see upcoming events and deadlines in one list and subscribe to them in their calendar through /events.ics; editors add events.
+- 2026-11-26 R1-09: A researcher applies for membership online at /join and gets a copy by e-mail; nobody can use the form to find out who is a member.
+- 2026-11-26 R1-10: Admins see open applications in the Members tab, approve them (the new member gets a welcome e-mail with a link to set a password) or decline them; declined applications are deleted after 30 days.
+- 2026-11-26 R1-11: A new member opens the link in the welcome e-mail, sets a password and lands in the member area; an expired link offers a new one.
+- 2026-11-26 R1-12: A member updates their own details, chooses what the directory shows, changes their e-mail address with a confirmation, asks to end the membership and downloads their data.
+- 2026-11-26 R1-13: Signed-in members search the member directory by name, country, career stage and topic, open a researcher page and write to a member through ERN without seeing their address.
+- 2026-11-26 R1-14: A member sees a personal start page with their membership status, ERN notices, the next events, the latest news and their roles; editors write the notices.
+- 2026-11-26 R1-15: Admins search the member list, open a member, change their roles with safeguards, and export the list as a spreadsheet file; every change and export is logged.
+- 2026-11-26 R1-16: People with an admin role see at a glance what waits for them (applications, leaving members, drafts), with counts limited to what their roles cover.

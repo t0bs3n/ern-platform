@@ -2557,3 +2557,7 @@ a.x-tab[aria-current="page"] { color: hsl(var(--primary)); border-color: hsl(var
 /* Filter chips that are links (the events list): the current one is filled. */
 a.x-chip { color: inherit; text-decoration: none; }
 a.x-chip[aria-current="page"] { background: hsl(var(--primary)); border-color: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+/* The hidden field for spam robots on the application form: off screen, not announced. */
+.x-hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+/* Hidden screen-reader text inside a scrolling table must stay inside it, or the page scrolls sideways. */
+.x-table { position: relative; }

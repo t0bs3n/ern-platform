@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Attention;
+use App\Calendar\EventCalendar;
 use App\Http\Controllers\Controller;
 use App\Models\SystemValue;
 use Illuminate\Support\Facades\Gate;
@@ -56,6 +58,13 @@ class AdminAreaController extends Controller
         abort_unless(Gate::any(self::TABS[$tab][1]), 403);
 
         $data = ['tab' => $tab, 'label' => self::TABS[$tab][0]];
+
+        if ($tab === 'overview') {
+            $attention = app(Attention::class);
+            $data['attention'] = $attention->forCurrentUser();
+            $data['tiles'] = $attention->tilesForCurrentUser();
+            $data['comingUp'] = app(EventCalendar::class)->upcoming()->take(4)->values();
+        }
 
         if ($tab === 'system') {
             $data['version'] = (string) config('ern.version');
