@@ -86,7 +86,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Model: opus
 - Needs: R0-08, R0-09
 - Can: Tobi uploads the current main branch to staging with one button on GitHub and can go back with one button.
-- Do: Three GitHub Actions workflows that are started by hand only (`workflow_dispatch`): `deploy-staging.yml`, `deploy-live.yml`, `rollback.yml`. An upload checks out main, runs `composer check`, installs the Composer packages without development packages inside the workflow, uploads the result over SSH as a new dated folder under `releases/`, links the shared `.env` and `storage`, runs the migrations, switches the `current` link, and keeps the last five releases. The rollback switches `current` to the previous release. Host, user, path and key come from GitHub secrets, one set per environment, and never appear in the log. The live workflow asks for the word "live" as confirmation and uses a protected GitHub environment that needs Tobi's approval. The staging site sends a "noindex" header. Write `docs/DEPLOY.md` in plain words, with pictures described in words: where the button is, what green and red mean, how to go back. Never start an upload yourself.
+- Do: Three GitHub Actions workflows that are started by hand only (`workflow_dispatch`): `deploy-staging.yml`, `deploy-live.yml`, `rollback.yml`. An upload checks out main, runs `composer check`, installs the Composer packages without development packages inside the workflow, uploads the result over SSH as a new dated folder under `releases/`, links the shared `.env` and `storage`, runs the migrations, switches the `current` link, and keeps the last five releases. The rollback switches `current` to the previous release. Host, user, path and key come from GitHub secrets, one set per environment, and never appear in the log. The live workflow asks for the word "live" as confirmation and uses a protected GitHub environment that needs Tobi's approval. The staging site sends a "noindex" header. The live workflow first runs `php artisan ern:check-launch` on the server's database and stops if it fails (added by R1-05: no going live while the privacy policy is the placeholder). Write `docs/DEPLOY.md` in plain words, with pictures described in words: where the button is, what green and red mean, how to go back. Never start an upload yourself.
 - Test: The workflow files are valid. The upload steps live in one shell script in `scripts/` that has a dry-run mode, and a test runs it in dry-run mode.
 
 ### [H] R0-11 Hosting test
@@ -108,7 +108,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 
 ## Release 1: Site and members
 
-### [ ] R1-01 Pages and news in the database
+### [x] R1-01 Pages and news in the database (2026-11-26)
 - Model: sonnet
 - Needs: R0-08
 - Can: An editor writes and changes pages and news in the admin area without code.
@@ -116,21 +116,21 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Models for pages (slug, title, body in Markdown) and news (title, slug, summary, body, image, published_at, draft or published). Editor screens in the Content tab with preview. Seed the content from `data.json`.
 - Test: An editor creates, changes and publishes. A member is refused. Drafts are invisible to the public. Raw HTML in the body is not rendered.
 
-### [ ] R1-02 Start page
+### [x] R1-02 Start page (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/10-home.js`, `data.json` (`home`)
 - Can: A visitor sees the hero, the three starting points, the featured event, "Coming up", the latest news, the mission and the ways to get involved.
 - Test: The page shows the three latest published news items and no drafts.
 
-### [ ] R1-03 News
+### [x] R1-03 News (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/10-home.js` (news list)
 - Can: A visitor reads the news list and single news items. A feed reader subscribes to `/feed/news.xml`.
 - Test: List with pages, single item, 404 for a draft, a valid RSS feed with the ten latest items.
 
-### [ ] R1-04 About Us and Get Involved
+### [x] R1-04 About Us and Get Involved (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/50-about.js`, `data.json` (`about`, `goals`, `involved`), `img/members.svg`
@@ -138,7 +138,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: The board members are content that an editor can change. No election candidates anywhere.
 - Test: Pages answer 200 with the seeded content.
 
-### [ ] R1-05 Code of Conduct, Imprint, Privacy
+### [x] R1-05 Code of Conduct, Imprint, Privacy (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/50-about.js`, `data.json` (`conduct`, `imprint`)
@@ -146,7 +146,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Three editable pages. The privacy page carries a clear placeholder until Tobi delivers the text (see `docs/HUMAN_TODO.md`). Add a check to the live upload that refuses while the placeholder is in place.
 - Test: Pages answer. The live upload check refuses with the placeholder.
 
-### [ ] R1-06 Conferences overview
+### [x] R1-06 Conferences overview (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/20-conf.js` (overview, summaries of past conferences, ERNC27 Call tab), `data.json` (`confs`, `ernc27`)
@@ -154,7 +154,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Model for conferences (slug, name, place, dates, host, summary, status, key dates). The button "Submit an abstract" for ERNC27 links to the current submission form on the old site, through a configurable address. The full conference pages come in release 4.
 - Test: Overview and each conference page answer. A conference team member edits the dates, a member is refused.
 
-### [ ] R1-07 Podcast and Live
+### [x] R1-07 Podcast and Live (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/40-live.js`, `data.json` (`podcast`, `liveDay`)
@@ -162,7 +162,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: The stream and the videos are links or load only after a click. No external scripts on page load.
 - Test: Pages answer and contain no external script or frame in their first response.
 
-### [ ] R1-08 Events and deadlines
+### [x] R1-08 Events and deadlines (2026-11-26)
 - Model: sonnet
 - Needs: R1-06
 - Mockup: `js/45-events.js`

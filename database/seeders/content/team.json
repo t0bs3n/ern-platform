@@ -1,0 +1,66 @@
+{
+  "board": [
+    [
+      "Tobias Scholz",
+      "University of Agder, NO",
+      "Chair"
+    ],
+    [
+      "Brian McCauley",
+      "Jönköping University, SE",
+      "Vice Chair"
+    ],
+    [
+      "Seth Jenny",
+      "Slippery Rock University, US",
+      "Board Member"
+    ],
+    [
+      "Nico Besombes",
+      "University of Paris, FR",
+      "Board Member"
+    ],
+    [
+      "Julia Hiltscher",
+      "Birkenstock",
+      "Board Member"
+    ],
+    [
+      "Joanne Donoghue",
+      "New York Institute of Technology, US",
+      "Board Member"
+    ],
+    [
+      "Yaewon Jin",
+      "Ewha Womans University, KR",
+      "Board Member"
+    ],
+    [
+      "Tom Brock",
+      "Manchester Metropolitan University, UK",
+      "Board Member"
+    ],
+    [
+      "Amanda Cote",
+      "Michigan State University, US",
+      "Board Member"
+    ]
+  ],
+  "governance": [
+    [
+      "Cameron Vanloo",
+      "Staffordshire University, UK",
+      "Director of Educational Outreach"
+    ],
+    [
+      "David Micallef",
+      "RMIT University, AU",
+      "Diversity and Inclusion Officer"
+    ],
+    [
+      "Niclas Hendelkens",
+      "Westcoast University of Applied Sciences, DE",
+      "Communications Lead"
+    ]
+  ]
+}

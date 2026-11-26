@@ -12,13 +12,16 @@ trait MakesTestUsers
 {
     private static ?string $hashedPassword = null;
 
+    private static ?string $hashedFor = null;
+
     /** The local-only password of all test users, from SEED_PASSWORD, hashed once. */
     protected function testPassword(): string
     {
         $plain = $this->plainTestPassword();
 
-        if (self::$hashedPassword === null || ! Hash::check($plain, self::$hashedPassword)) {
+        if (self::$hashedFor !== $plain) {
             self::$hashedPassword = Hash::make($plain);
+            self::$hashedFor = $plain;
         }
 
         return self::$hashedPassword;

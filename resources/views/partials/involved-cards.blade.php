@@ -1,0 +1,6 @@
+{{-- The three ways to get involved (data.json `involved.actions`). Used on the start page and Get Involved. --}}
+<div class="quick-actions-grid">
+    <a href="{{ url('/join') }}" class="action-card focus-ring"><div class="action-icon"><x-icon name="users" /></div><h3>Become a Member</h3><p>Join an international research network shaping the future of esports.</p><span class="action-link">Apply online <x-icon name="arrow" class="x-ic-sm" /></span></a>
+    <a href="{{ url('/get-involved') }}#sec-ways" class="action-card focus-ring"><div class="action-icon"><x-icon name="hand" /></div><h3>Volunteer</h3><p>Contribute your skills and help advance esports research and community impact.</p><span class="action-link">Ways to participate <x-icon name="arrow" class="x-ic-sm" /></span></a>
+    <a href="https://discord.gg/N9TbYD74e8" target="_blank" rel="noopener noreferrer" class="action-card focus-ring"><div class="action-icon"><x-icon name="chat" /></div><h3>Join Discord</h3><p>Connect with researchers and practitioners, share ideas, and stay up to date.</p><span class="action-link">Open Discord <x-icon name="ext" class="x-ic-sm" /><span class="x-vh"> (opens in a new tab)</span></span></a>
+</div>

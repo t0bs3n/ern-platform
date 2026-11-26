@@ -33,6 +33,58 @@ return [
         ],
     ],
 
+    // Where "Submit an abstract" for the upcoming conference leads, until our own
+    // submission form exists (release 5): the form on the current website.
+    'submission_url' => env('ERN_SUBMISSION_URL', 'https://esportsresearch.net/submission/'),
+
+    // The podcast (R1-07). Episodes are YouTube video ids; the page only links to them.
+    'podcast' => [
+        'title' => 'Podcast: The Esports Research Report',
+        'playlist' => 'https://youtube.com/playlist?list=PLFtXu-xTaVl-MaMQdcsH0nwjMLFr3XDyp',
+        'contact' => 'brian.mccauley@ju.se',
+        'people' => [
+            ['Host', 'Dr. Brian McCauley', 'Jönköping University, Sweden'],
+            ['Producer', 'Niclas Hendelkens', 'Communications Lead, Esports Research Network (ERN)'],
+            ['Sponsor', 'Media, Management & Transformation Centre (MMTC)', 'Jönköping International Business School'],
+        ],
+        'episodes' => [
+            [1, 'Raphael Priftis', 'rZn2O_5lATI'],
+            [2, 'Elena Koung', 'dFeIwfH5HJQ'],
+            [3, 'Enrico Strock', 'Ke1Jxvc-zjw'],
+            [4, 'Eveliina Toivonen', '0nH_Do49O0M'],
+            [5, 'Dr. Kurtis Homan', 'hAOrD7B-0ho'],
+        ],
+    ],
+
+    // ERN Live (R1-07): the Twitch channel and what is on next. The player loads only after a click.
+    'live' => [
+        'channel' => 'esportsresearchnetwork',
+        'next_stream' => env('ERN_LIVE_NEXT', ''),
+        'recordings' => [
+            ['ERNC26 · Keynote 1', "Japan's Esports Industry: Its Journey So Far, Present Challenges, and the Road Ahead"],
+            ['ERNC26 · Keynote 2', 'Game Heritage is Infrastructure: Esports & the Digital Society'],
+            ['ERNC26 · Keynote 3', 'From Grassroots to the Global Stage: Keeping Community at the Heart of Esports'],
+        ],
+        'recordings_url' => 'https://www.youtube.com/channel/UCy2Jz5v9oUTD7Y7glRbgBZA',
+    ],
+
+    // The time zone of conference dates and the default for new events (R1-08).
+    'event_timezone' => env('ERN_EVENT_TIMEZONE', 'Europe/Berlin'),
+
+    // The member figures on About Us, from the mockup. Once the member list is in the
+    // platform (R1-19), they can be counted from it instead.
+    'member_figures' => [
+        'members' => 683,
+        'countries' => 70,
+        'europe' => 377,
+        'europe_countries' => 29,
+        'as_of' => '31 October 2026',
+        'largest_groups' => [
+            ['USA', 134], ['United Kingdom', 72], ['Germany', 60], ['Sweden', 30],
+            ['Turkey', 27], ['Australia', 27], ['Canada', 26], ['Finland', 24],
+        ],
+    ],
+
     // The version shown on the admin System page. The upload workflow (R0-10) sets it.
     'version' => env('APP_VERSION', 'development'),
 
