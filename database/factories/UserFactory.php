@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -37,6 +38,22 @@ class UserFactory extends Factory
             'listed_in_directory' => false,
             'approved_at' => now(),
         ];
+    }
+
+    /** Every user made by the factory is a member. */
+    public function configure(): static
+    {
+        return $this->afterCreating(fn (User $user) => $user->giveRole(Role::Member));
+    }
+
+    /** Extra roles on top of member. */
+    public function withRoles(Role ...$roles): static
+    {
+        return $this->afterCreating(function (User $user) use ($roles) {
+            foreach ($roles as $role) {
+                $user->giveRole($role);
+            }
+        });
     }
 
     /** An applicant who has not been approved yet. */

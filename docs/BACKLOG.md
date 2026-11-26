@@ -54,7 +54,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Install Laravel Fortify. Switch off public registration. Build our own views for sign-in, forgotten password, new password. Extend the users table: first name, last name, slug, institution, country, status (career stage), interests, ORCID, Discord name, directory visibility, approved_at. Limit sign-in attempts. Wording from the mockup, including the neutral answer after a reset request that does not reveal whether an address exists.
 - Test: Sign-in with right and wrong password. Lock after repeated failures. Reset e-mail is sent and the link sets a new password. A user who is not approved cannot sign in. The reset request answers the same for known and unknown addresses.
 
-### [ ] R0-06 Roles and permissions
+### [x] R0-06 Roles and permissions (2026-11-26)
 - Model: opus
 - Needs: R0-05
 - Can: The platform knows who may do what.

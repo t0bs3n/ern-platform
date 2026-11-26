@@ -15,6 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         // Guests who open a member page go to sign-in; members who open sign-in go to the member area.
         $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo('/members');
+
+        // The admin area (R0-08): signed in, and holding a role beyond member.
+        // Every tab adds its own can:<gate> on top.
+        $middleware->group('admin', ['auth', 'can:open-admin-area']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
