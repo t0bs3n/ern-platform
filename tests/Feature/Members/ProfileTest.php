@@ -353,6 +353,32 @@ class ProfileTest extends TestCase
         $this->assertNull($this->member->fresh()->membership_end_requested_at);
     }
 
+    public function test_the_city_is_saved_shown_to_the_member_and_in_the_download(): void
+    {
+        $this->actingAs($this->member)->put('/members/profile', $this->details(['city' => 'Uppsala']))->assertSessionHasNoErrors();
+        $this->assertSame('Uppsala', $this->member->fresh()->city);
+
+        $this->actingAs($this->member)->get('/members/profile')
+            ->assertSee('value="Uppsala"', false)
+            ->assertSee('Only you and the admins see your city.');
+        $this->assertSame('Uppsala', $this->actingAs($this->member)->get('/members/profile/data')->json('city'));
+
+        $this->actingAs($this->member)->put('/members/profile', $this->details(['city' => str_repeat('x', 101)]))->assertSessionHasErrors('city');
+        $this->actingAs($this->member)->put('/members/profile', $this->details(['city' => '']));
+        $this->assertNull($this->member->fresh()->city);
+    }
+
+    public function test_the_city_never_appears_in_the_directory(): void
+    {
+        $this->member->forceFill(['city' => 'Uppsala', 'listed_in_directory' => true])->save();
+        $viewer = User::factory()->create();
+
+        $this->actingAs($viewer)->get('/members/directory')->assertSee('Lindqvist')->assertDontSee('Uppsala');
+        $this->actingAs($viewer)->get('/members/directory?q=Uppsala')->assertDontSee('Lindqvist');
+        $this->actingAs($viewer)->get('/members/'.$this->member->slug)->assertOk()->assertDontSee('Uppsala');
+        $this->assertNotContains('city', User::DIRECTORY_COLUMNS);
+    }
+
     public function test_the_download_holds_the_own_data_only_as_a_json_file(): void
     {
         $other = User::factory()->create(['first_name' => 'Somebody', 'email' => 'other@example.test']);

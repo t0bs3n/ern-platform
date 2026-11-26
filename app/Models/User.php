@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 
 // approved_at is deliberately not fillable: only the approval (R1-10) and the import (R1-19) set it.
 #[Fillable([
-    'first_name', 'last_name', 'slug', 'email', 'password', 'institution', 'country',
+    'first_name', 'last_name', 'slug', 'email', 'password', 'institution', 'country', 'city',
     'career_stage', 'interests', 'orcid', 'discord_name', 'listed_in_directory',
     'open_to_collaboration', 'show_discord_in_directory',
 ])]
