@@ -117,6 +117,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('members', [MembersAdminController::class, 'index'])->name('admin.members.index');
         Route::post('members/applications/{application}/approve', [MembersAdminController::class, 'approve'])->name('admin.members.applications.approve');
         Route::post('members/applications/{application}/decline', [MembersAdminController::class, 'decline'])->name('admin.members.applications.decline');
+        // Member list and rights editor (R1-15). Only admins change roles.
+        Route::post('members/export', [MembersAdminController::class, 'export'])->name('admin.members.export');
+        Route::get('members/{member}', [MembersAdminController::class, 'show'])->whereNumber('member')->name('admin.members.show');
+        Route::put('members/{member}/roles', [MembersAdminController::class, 'updateRoles'])->whereNumber('member')
+            ->middleware('can:administer')->name('admin.members.roles');
     });
 
     // Conference tab (R1-06): the list for the tab's roles, editing for the conference team.

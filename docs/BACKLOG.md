@@ -217,7 +217,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: The blocks for saved items, new articles and press come with releases 2 and 6. Leave them out until then. Do not show empty shells.
 - Test: The page shows the member's own data and the published notices.
 
-### [ ] R1-15 Members list and rights editor
+### [x] R1-15 Members list and rights editor (2026-11-26)
 - Model: opus
 - Needs: R1-10
 - Mockup: `js/65-admin.js` (Members tab: list, rights editor)

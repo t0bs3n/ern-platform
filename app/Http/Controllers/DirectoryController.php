@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\MemberMessage;
 use App\Models\User;
+use App\Support\Like;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class DirectoryController extends Controller
         $query = User::inDirectory()->select(User::DIRECTORY_COLUMNS);
 
         foreach (preg_split('/\s+/', $filters['q'], -1, PREG_SPLIT_NO_EMPTY) as $word) {
-            $like = $this->like($word);
+            $like = Like::contains($word);
             $query->where(function (Builder $q) use ($like) {
                 foreach (['first_name', 'last_name', 'country', 'career_stage', 'interests'] as $column) {
                     $q->orWhereRaw($column." LIKE ? ESCAPE '!'", [$like]);
@@ -43,7 +44,7 @@ class DirectoryController extends Controller
             });
         }
         if ($filters['topic'] !== '') {
-            $query->whereRaw("interests LIKE ? ESCAPE '!'", [$this->like($filters['topic'])]);
+            $query->whereRaw("interests LIKE ? ESCAPE '!'", [Like::contains($filters['topic'])]);
         }
         if ($filters['country'] !== '') {
             $query->where('country', $filters['country']);
@@ -106,11 +107,5 @@ class DirectoryController extends Controller
     private function findListed(string $slug): User
     {
         return User::inDirectory()->select(User::DIRECTORY_COLUMNS)->where('slug', $slug)->firstOr(fn () => abort(404));
-    }
-
-    /** "%word%" with LIKE's special characters made harmless. */
-    private function like(string $value): string
-    {
-        return '%'.str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $value).'%';
     }
 }

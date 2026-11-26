@@ -23,3 +23,4 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R1-12: A member updates their own details, chooses what the directory shows, changes their e-mail address with a confirmation, asks to end the membership and downloads their data.
 - 2026-11-26 R1-13: Signed-in members search the member directory by name, country, career stage and topic, open a researcher page and write to a member through ERN without seeing their address.
 - 2026-11-26 R1-14: A member sees a personal start page with their membership status, ERN notices, the next events, the latest news and their roles; editors write the notices.
+- 2026-11-26 R1-15: Admins search the member list, open a member, change their roles with safeguards, and export the list as a spreadsheet file; every change and export is logged.
