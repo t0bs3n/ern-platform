@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Event;
 use Carbon\CarbonImmutable;
+use Database\Seeders\Concerns\LocalOnly;
 use Illuminate\Database\Seeder;
 
 /**
@@ -12,8 +13,12 @@ use Illuminate\Database\Seeder;
  */
 class EventSeeder extends Seeder
 {
+    use LocalOnly;
+
     public function run(): void
     {
+        $this->ensureLocal();
+
         $zone = 'Europe/Oslo';
         $events = [
             ['Call for nominations to the board closes', 'Association', '2026-11-15', null, null, 'ERN members', '/members'],

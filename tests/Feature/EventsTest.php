@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Calendar\CalendarEntry;
 use App\Enums\Role;
 use App\Models\Conference;
 use App\Models\Event;
@@ -100,8 +101,28 @@ class EventsTest extends TestCase
         }
     }
 
+    public function test_a_timed_entry_without_an_end_stays_listed_until_its_day_is_over(): void
+    {
+        $this->event('Lecture at 14', '2026-12-01', '14:00', null, 'Europe/Berlin');
+
+        $this->travelTo(CarbonImmutable::parse('2026-12-01 14:30', 'Europe/Berlin'));
+        $this->get('/events')->assertSee('Lecture at 14');
+
+        $this->travelTo(CarbonImmutable::parse('2026-12-02 00:01', 'Europe/Berlin'));
+        $this->get('/events')->assertDontSee('Lecture at 14');
+    }
+
+    public function test_dates_across_new_year_carry_both_years(): void
+    {
+        $entry = new CalendarEntry('x', 'Winter school', 'Association', true,
+            CarbonImmutable::parse('2027-12-30'), CarbonImmutable::parse('2028-01-02'), 'Europe/Berlin', null, null);
+
+        $this->assertSame('30 December 2027 to 2 January 2028', $entry->whenText());
+    }
+
     public function test_entries_are_ordered_by_when_they_begin_across_time_zones(): void
     {
+        $this->travelTo('2026-12-01 12:00');
         $this->event('Berlin at 11', '2027-03-20', '11:00', null, 'Europe/Berlin');
         $this->event('New York at 10', '2027-03-20', '10:00', null, 'America/New_York');
         $this->event('Berlin at 9', '2027-03-20', '09:00', null, 'Europe/Berlin');

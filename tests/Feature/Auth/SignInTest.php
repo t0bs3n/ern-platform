@@ -125,6 +125,21 @@ class SignInTest extends TestCase
         $this->assertNull(User::first()->remember_token);
     }
 
+    public function test_remember_me_in_the_address_or_as_json_sets_no_cookie_either(): void
+    {
+        User::factory()->create(['email' => 'member@example.test']);
+
+        $this->post('/members/sign-in?remember=1', ['email' => 'member@example.test', 'password' => 'password'])
+            ->assertRedirect('/members')
+            ->assertCookieMissing(Auth::guard()->getRecallerName());
+        $this->assertNull(User::first()->remember_token);
+
+        $this->post('/members/sign-out');
+        $this->postJson('/members/sign-in', ['email' => 'member@example.test', 'password' => 'password', 'remember' => true])
+            ->assertCookieMissing(Auth::guard()->getRecallerName());
+        $this->assertNull(User::first()->remember_token);
+    }
+
     public function test_the_email_address_is_matched_without_regard_to_capitals(): void
     {
         $user = User::factory()->create(['email' => 'Member@Example.test']);

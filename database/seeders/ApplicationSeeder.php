@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\MembershipApplication;
+use Database\Seeders\Concerns\LocalOnly;
 use Illuminate\Database\Seeder;
 
 /**
@@ -11,8 +12,12 @@ use Illuminate\Database\Seeder;
  */
 class ApplicationSeeder extends Seeder
 {
+    use LocalOnly;
+
     public function run(): void
     {
+        $this->ensureLocal();
+
         foreach ([
             ['Noor', 'Haddad', 'Example University (example)', 'Jordan', 'PhD student', '2026-11-09'],
             ['Tomás', 'Herrera', 'Example Institute of Technology (example)', 'Chile', 'Researcher with a PhD', '2026-11-08'],

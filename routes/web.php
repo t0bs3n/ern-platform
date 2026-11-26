@@ -72,7 +72,7 @@ Route::prefix('members')->group(function () {
         Route::get('sign-in', [AuthenticatedSessionController::class, 'create'])->name('login');
         Route::post('sign-in', [AuthenticatedSessionController::class, 'store'])->name('login.store');
         Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-        Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+        Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->middleware('throttle:password-reset')->name('password.email');
         Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
         Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
     });

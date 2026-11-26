@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Notice;
+use Database\Seeders\Concerns\LocalOnly;
 use Illuminate\Database\Seeder;
 
 /**
@@ -11,8 +12,12 @@ use Illuminate\Database\Seeder;
  */
 class NoticeSeeder extends Seeder
 {
+    use LocalOnly;
+
     public function run(): void
     {
+        $this->ensureLocal();
+
         foreach ([
             ['General Assembly', 'General Assembly 2026', 'Wednesday, 16 December 2026, 14:00 (Oslo time), on Zoom. Motions are due by 9 December.'],
             ['Board election', 'Board election 2026', 'The call for nominations runs until 15 November. The election takes place at the General Assembly in December.'],

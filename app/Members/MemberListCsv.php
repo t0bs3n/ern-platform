@@ -53,7 +53,9 @@ final class MemberListCsv
     public static function safe(?string $value): string
     {
         $value = (string) $value;
+        // Spreadsheet programs skip leading spaces and also read the full-width signs as formulas.
+        $first = mb_substr(ltrim($value, " \t\r\n\u{00A0}\u{3000}"), 0, 1);
 
-        return $value !== '' && in_array($value[0], ['=', '+', '-', '@', "\t", "\r"], true) ? "'".$value : $value;
+        return $value !== '' && in_array($first, ['=', '+', '-', '@', '＝', '＋', '－', '＠', "\t", "\r"], true) ? "'".$value : $value;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\PreventRequestForgery;
+use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -19,6 +21,12 @@ return Application::configure(basePath: dirname(__DIR__))
         // The admin area (R0-08): signed in, and holding a role beyond member.
         // Every tab adds its own can:<gate> on top.
         $middleware->group('admin', ['auth', 'can:open-admin-area']);
+
+        // Only the session cookie: CSRF protection stays on, without the XSRF-TOKEN cookie.
+        $middleware->web(replace: [
+            Illuminate\Foundation\Http\Middleware\PreventRequestForgery::class => PreventRequestForgery::class,
+        ]);
+        $middleware->append(SecurityHeaders::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // A message between members is never kept in the session (R1-13).

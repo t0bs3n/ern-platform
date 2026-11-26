@@ -53,5 +53,12 @@ class AppServiceProvider extends ServiceProvider
 
         // The activation link (R1-11): ten requests a minute from one internet address.
         RateLimiter::for('activation', fn (Request $request) => Limit::perMinute(10)->by('activation|'.$request->ip()));
+
+        // "Forgot your password?": per internet address, and per address asked for, so that
+        // nobody can fill a member's inbox with reset e-mails.
+        RateLimiter::for('password-reset', fn (Request $request) => [
+            Limit::perHour(10)->by('reset-ip|'.$request->ip()),
+            Limit::perDay(5)->by('reset-mail|'.sha1(Str::lower(trim((string) $request->input('email'))))),
+        ]);
     }
 }

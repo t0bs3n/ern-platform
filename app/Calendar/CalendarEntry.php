@@ -31,7 +31,8 @@ final class CalendarEntry
             return ($this->end ?? $this->start)->setTimezone($this->timezone)->endOfDay();
         }
 
-        return $this->end ?? $this->start;
+        // A timed entry without an end stays listed until its day is over, not only until it starts.
+        return $this->end ?? $this->startLocal()->endOfDay();
     }
 
     public function startLocal(): CarbonImmutable
@@ -51,8 +52,11 @@ final class CalendarEntry
             if ($first->isSameMonth($last)) {
                 return $first->format('j').' to '.$last->format('j F Y');
             }
+            if ($first->isSameYear($last)) {
+                return $first->format('j F').' to '.$last->format('j F Y');
+            }
 
-            return $first->format('j F').' to '.$last->format('j F Y');
+            return $first->format('j F Y').' to '.$last->format('j F Y');
         }
 
         $start = $this->startLocal();

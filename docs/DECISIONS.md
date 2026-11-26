@@ -35,6 +35,13 @@ Versions recorded by R0-01:
 - PHP on the hosting: (the Laravel release current in November 2026, version 13, needs PHP 8.3 or newer)
 - Laravel: 13.44.1 (installed 26 November 2026 by R0-02). It needs PHP 8.3 or newer.
 
+Composer packages and why (recorded by the full review, 26 November 2026):
+
+- `laravel/framework`, `laravel/fortify`: the framework and its login parts (see Login above).
+- `laravel/tinker`: the framework's console, shipped with it. Kept for looking into a problem on the server by hand.
+- Development only, never uploaded: `phpunit/phpunit`, `mockery/mockery`, `fakerphp/faker` (tests and invented test data), `laravel/pint` (code style), `nunomaduro/collision` and `laravel/pao` (readable test output), `laravel/pail` (reading the log while developing). All came with the framework's starter.
+- Tests run on SQLite and, on GitHub, also on MySQL 8 with `explicit_defaults_for_timestamp` switched off, as on older servers.
+
 ## 2. Address plan
 
 The mockup uses `#` addresses. The platform uses these:

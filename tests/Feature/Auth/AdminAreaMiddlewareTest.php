@@ -46,7 +46,7 @@ class AdminAreaMiddlewareTest extends TestCase
             ->assertSee('No access')
             ->assertSee('Your account does not have the right to open this page.')
             ->assertSee('class="site-header"', false)
-            ->assertDontSee('admin area');
+            ->assertDontSee('Admin area');
     }
 
     #[DataProvider('rolesBeyondMember')]
