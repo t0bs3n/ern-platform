@@ -18,27 +18,27 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 
 ## Release 0: Foundations
 
-### [ ] R0-01 Check the environment
+### [x] R0-01 Check the environment (2026-11-26)
 - Model: sonnet
 - Can: Tobi knows that the environment is ready.
 - Do: Check that `php`, `composer` and `git` are available and note their versions. Check that Composer can reach the package registry (`composer show laravel/laravel --available` or similar). If something is missing or blocked, stop and tell Tobi in plain words what to change in the environment's settings, or that this session should move to the desktop app. If PHP and Composer have to be installed at the start of every session, add a setup script and a session-start hook in `.claude/settings.json` that install them and run `composer install`. Record the PHP version in `docs/DECISIONS.md`.
 - Test: none. The commands answer.
 
-### [ ] R0-02 Create the application
+### [x] R0-02 Create the application (2026-11-26)
 - Model: sonnet
 - Needs: R0-01
 - Can: A developer opens the start page of an empty application on the Mac.
 - Do: Create the Laravel application in this folder without overwriting `CLAUDE.md`, `README.md`, `docs/` or `.claude/` (create it in a temporary folder and move the files in). Use SQLite locally. Remove all Node scaffolding: `package.json`, Vite configuration, the Vite directive in templates. Set the application name to "Esports Research Network". Add `.env.example` for local use and `.env.staging.example` with empty values for the server. Record the Laravel version in `docs/DECISIONS.md`. Make sure `.gitignore` covers `.env`, `vendor/` and the SQLite file.
 - Test: The shipped example tests pass. `php artisan serve` shows a page.
 
-### [ ] R0-03 Quality gate
+### [x] R0-03 Quality gate (2026-11-26)
 - Model: sonnet
 - Needs: R0-02
 - Can: One command says whether the code is fit to commit.
 - Do: Add the Composer script `check` that runs Pint in test mode and then all tests. Add the script `fix` that runs Pint. Make the tests use an in-memory SQLite database. Add the GitHub Actions workflow `.github/workflows/check.yml` that runs `composer check` on every pull request, on the PHP version recorded in `docs/DECISIONS.md`. In the hand-over note, tell Tobi in three plain steps how to protect the main branch on GitHub so that a pull request needs a green check.
 - Test: `composer check` passes. The workflow file is valid.
 
-### [ ] R0-04 Styles and page frame
+### [x] R0-04 Styles and page frame (2026-11-26)
 - Model: sonnet
 - Needs: R0-03
 - Can: A visitor sees the ERN header, navigation, mobile menu and footer on every page, in the ERN look.
@@ -46,7 +46,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Build `public/css/ern.css` from `theme.css` followed by `app.css`. Copy the images to `public/img/`. Build the layout template: skip link, sticky header with logo, navigation (News, Conferences, Database, Live, Teaching, Podcast, About Us, Get Involved), the saved-library icon, the member button, the mobile menu, the footer with its three columns and social links. Leave out the mock bar and the Ernie button. The mobile menu must open without JavaScript too. Add a placeholder start page and a 404 page in the same frame. Mark the current navigation item.
 - Test: The start page answers 200 and contains every navigation label. An unknown address answers 404 inside the frame.
 
-### [ ] R0-05 Sign-in
+### [x] R0-05 Sign-in (2026-11-26)
 - Model: opus
 - Needs: R0-04
 - Can: A member signs in, signs out, and resets a forgotten password by e-mail.
@@ -54,7 +54,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Install Laravel Fortify. Switch off public registration. Build our own views for sign-in, forgotten password, new password. Extend the users table: first name, last name, slug, institution, country, status (career stage), interests, ORCID, Discord name, directory visibility, approved_at. Limit sign-in attempts. Wording from the mockup, including the neutral answer after a reset request that does not reveal whether an address exists.
 - Test: Sign-in with right and wrong password. Lock after repeated failures. Reset e-mail is sent and the link sets a new password. A user who is not approved cannot sign in. The reset request answers the same for known and unknown addresses.
 
-### [ ] R0-06 Roles and permissions
+### [x] R0-06 Roles and permissions (2026-11-26)
 - Model: opus
 - Needs: R0-05
 - Can: The platform knows who may do what.
@@ -62,7 +62,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Roles as in `docs/DECISIONS.md`, many per user, in a pivot table. One gate per area: manage members, manage conference, review submissions, decide submissions, manage database, manage teaching, edit content, administer. Admin passes every gate. A middleware for the admin area. A helper for templates.
 - Test: For every gate: a user with the role passes, a member without it is refused with 403, a guest is sent to sign-in.
 
-### [ ] R0-07 Test data
+### [x] R0-07 Test data (2026-11-26)
 - Model: sonnet
 - Needs: R0-06
 - Can: A developer gets a filled application with one command.
@@ -70,7 +70,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Factories and seeders. One test user per role with obvious names and the address pattern `<role>@example.test`. Twenty invented members across countries and career stages, using the mockup's example people first. All institutions of invented people carry "(example)". The passwords of test users come from a local-only value in `.env.example`. Seeders refuse to run when the environment is `production`.
 - Test: The seeder runs on an empty database. It refuses in production.
 
-### [ ] R0-08 Admin frame
+### [x] R0-08 Admin frame (2026-11-26)
 - Model: sonnet
 - Needs: R0-07
 - Can: A person with any admin role opens the admin area and sees only the tabs their roles allow.

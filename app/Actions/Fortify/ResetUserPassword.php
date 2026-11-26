@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Actions\Fortify;
+
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use Laravel\Fortify\Contracts\ResetsUserPasswords;
+
+class ResetUserPassword implements ResetsUserPasswords
+{
+    use PasswordValidationRules;
+
+    /**
+     * @param  array<string, mixed>  $input
+     *
+     * @throws ValidationException
+     */
+    public function reset(User $user, array $input): void
+    {
+        Validator::make($input, ['password' => $this->passwordRules()], $this->passwordMessages())->validate();
+
+        // The model casts the password to a hash.
+        $user->forceFill(['password' => $input['password']])->save();
+    }
+}
