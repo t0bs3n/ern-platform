@@ -42,7 +42,13 @@ class AdminAreaTest extends TestCase
         $this->actingAs(User::factory()->withRoles($refused)->create())->get($url)->assertForbidden();
     }
 
-    #[DataProvider('tabs')]
+    /** @return array<string, array{string}> */
+    public static function addresses(): array
+    {
+        return array_map(fn (array $case) => [$case[0]], self::tabs());
+    }
+
+    #[DataProvider('addresses')]
     public function test_a_guest_is_sent_to_sign_in(string $url): void
     {
         $this->get($url)->assertRedirect('/members/sign-in');
@@ -93,7 +99,7 @@ class AdminAreaTest extends TestCase
 
         $this->actingAs($admin)->get('/admin/system')
             ->assertSee('2026.11.26-test')
-            ->assertSee('testing')
+            ->assertSee('<dd>testing</dd>', false)
             ->assertSee('Not yet. The scheduler has not run.');
 
         $this->travelTo(now()->setDate(2026, 11, 26)->setTime(9, 15));
@@ -136,5 +142,6 @@ class AdminAreaTest extends TestCase
         $admin->forceFill(['approved_at' => null])->save();
 
         $this->actingAs($admin)->get('/admin')->assertForbidden();
+        $this->actingAs($admin)->get('/admin/system')->assertForbidden();
     }
 }
