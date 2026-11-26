@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('css/ern.css') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <script src="{{ asset('js/ern.js') }}" defer></script>
+    @stack('head')
 </head>
 <body>
 <a class="x-skip" href="#main">Skip to content</a>

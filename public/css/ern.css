@@ -2546,3 +2546,7 @@ a.x-skip:hover { color: #fff; opacity: 1; }
 /* Admin tabs are links to their own pages here, not buttons. */
 a.x-tab { text-decoration: none; }
 a.x-tab[aria-current="page"] { color: hsl(var(--primary)); border-color: hsl(var(--primary)); font-weight: 600; }
+/* News cards on the news page use h2 (one level below the page's h1), styled like the theme's card h3. */
+.news-card .x-news-h { font-size: 1.125rem; font-weight: 600; margin-bottom: .5rem; transition: color .2s; }
+.news-card:hover .x-news-h { color: hsl(var(--primary)); }
+.post-header .news-category-tag { margin-left: .5rem; }

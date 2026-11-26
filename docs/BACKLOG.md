@@ -123,7 +123,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Can: A visitor sees the hero, the three starting points, the featured event, "Coming up", the latest news, the mission and the ways to get involved.
 - Test: The page shows the three latest published news items and no drafts.
 
-### [ ] R1-03 News
+### [x] R1-03 News (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/10-home.js` (news list)
