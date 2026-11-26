@@ -24,6 +24,8 @@ class ContentSeeder extends Seeder
         'code-of-conduct' => ['Code of Conduct', 'code-of-conduct.md'],
         'imprint' => ['Imprint', 'imprint.md'],
         'privacy' => ['Privacy Policy', 'privacy.md'],
+        // Podcast introduction (R1-07).
+        'podcast-intro' => ['Podcast: introduction', 'podcast.md'],
         // Text blocks of About Us and Get Involved (R1-04).
         'about-mission' => ['About Us: Mission Statement', 'about-mission.md'],
         'about-history' => ['About Us: Our History', 'about-history.md'],

@@ -377,7 +377,7 @@ class ContentEditingTest extends TestCase
         $this->seed(ContentSeeder::class);
 
         $this->assertSame(10, News::published()->count());
-        $this->assertSame(9, Page::count());
+        $this->assertSame(10, Page::count());
         $this->assertTrue(News::where('slug', 'get-involved-with-the-esports-research-network-ern-board')->exists());
         $this->assertStringContainsString('## Contribution formats', Page::where('slug', 'ernc27-call-for-abstracts')->value('body'));
         $this->assertStringContainsString('| Format | What it is | Submit |', Page::where('slug', 'ernc27-call-for-abstracts')->value('body'));

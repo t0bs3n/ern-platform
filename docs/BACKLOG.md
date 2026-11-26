@@ -154,7 +154,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Model for conferences (slug, name, place, dates, host, summary, status, key dates). The button "Submit an abstract" for ERNC27 links to the current submission form on the old site, through a configurable address. The full conference pages come in release 4.
 - Test: Overview and each conference page answer. A conference team member edits the dates, a member is refused.
 
-### [ ] R1-07 Podcast and Live
+### [x] R1-07 Podcast and Live (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/40-live.js`, `data.json` (`podcast`, `liveDay`)

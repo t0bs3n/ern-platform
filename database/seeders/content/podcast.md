@@ -1,0 +1,3 @@
+The Esports Research Report is a podcast dedicated to showcasing the work of researchers exploring gaming and esports. It aims to connect academics, industry practitioners, and the wider research community to collaboratively address key challenges facing esports and the broader digital society.
+
+Hosted by Dr. Brian McCauley and produced by Niclas Hendelkens, the podcast features insights from both leading and emerging voices at the intersection of research, industry, and innovation. Regardless of where you are in your professional journey, we welcome contributions that help platform new ideas and perspectives, in line with the Esports Research Network’s (ERN) mission to support emerging scholars and practitioners.

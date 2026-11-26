@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LegalPageController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NewsController as PublicNewsController;
 use App\Http\Controllers\NewsImageController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,10 @@ Route::get('get-involved', [AboutController::class, 'involved'])->name('involved
 Route::get('conferences', [ConferenceController::class, 'index'])->name('conferences.index');
 Route::get('conferences/{conference}/submit', [ConferenceController::class, 'submit'])->name('conferences.submit');
 Route::get('conferences/{conference}/{tab?}', [ConferenceController::class, 'show'])->where('tab', '[a-z]+')->name('conferences.show');
+
+// Podcast and ERN Live (R1-07).
+Route::get('podcast', [MediaController::class, 'podcast'])->name('podcast');
+Route::get('live', [MediaController::class, 'live'])->name('live');
 
 // Code of Conduct, Imprint and Privacy Policy (R1-05).
 Route::get('code-of-conduct', [LegalPageController::class, 'conduct'])->name('conduct');
