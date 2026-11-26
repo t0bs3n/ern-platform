@@ -201,7 +201,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Changing the e-mail address needs confirmation through the new address. A member can ask to end the membership: this sends a request to the people who manage members and deletes nothing by itself. A member can download their own data as a file.
 - Test: A member changes only their own profile. Another member's profile is refused. The e-mail change needs confirmation.
 
-### [ ] R1-13 Directory and researcher pages
+### [x] R1-13 Directory and researcher pages (2026-11-26)
 - Model: opus
 - Needs: R1-12
 - Mockup: `js/60-members.js` (directory filters, `researcher`)

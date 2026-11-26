@@ -50,7 +50,9 @@ class MemberSeeder extends Seeder
                 'country' => $country,
                 'career_stage' => $stage,
                 'interests' => $interests,
-                'discord_name' => $first === 'Maja' ? 'maja.lindqvist' : null,
+                'discord_name' => in_array($first, ['Maja', 'Rafael', 'Ji-ho'], true) ? strtolower($first).'.example' : null,
+                'show_discord_in_directory' => in_array($first, ['Maja', 'Rafael'], true),
+                'open_to_collaboration' => in_array($first, ['Maja', 'Rafael', 'Priya', 'Aiko', 'Mateo', 'Mei'], true),
                 'listed_in_directory' => $listed,
             ], $roles);
         }

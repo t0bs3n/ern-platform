@@ -21,3 +21,4 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R1-10: Admins see open applications in the Members tab, approve them (the new member gets a welcome e-mail with a link to set a password) or decline them; declined applications are deleted after 30 days.
 - 2026-11-26 R1-11: A new member opens the link in the welcome e-mail, sets a password and lands in the member area; an expired link offers a new one.
 - 2026-11-26 R1-12: A member updates their own details, chooses what the directory shows, changes their e-mail address with a confirmation, asks to end the membership and downloads their data.
+- 2026-11-26 R1-13: Signed-in members search the member directory by name, country, career stage and topic, open a researcher page and write to a member through ERN without seeing their address.

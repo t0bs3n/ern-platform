@@ -21,6 +21,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->group('admin', ['auth', 'can:open-admin-area']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        // A message between members is never kept in the session (R1-13).
+        $exceptions->dontFlash(['contact_message']);
+
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );

@@ -7,6 +7,7 @@ use App\Mail\PasswordResetLink;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -105,6 +106,39 @@ class User extends Authenticatable
         }
 
         return $this->roles->contains(fn (UserRole $held) => in_array($held->role, $roles, true));
+    }
+
+    /** Columns a directory page may read. Never the e-mail address. */
+    public const DIRECTORY_COLUMNS = [
+        'id', 'slug', 'first_name', 'last_name', 'institution', 'country', 'career_stage',
+        'interests', 'orcid', 'discord_name', 'show_discord_in_directory', 'open_to_collaboration',
+    ];
+
+    /**
+     * Approved members who chose to be listed (R1-13). Every directory query starts here.
+     *
+     * @param  Builder<User>  $query
+     */
+    public function scopeInDirectory(Builder $query): void
+    {
+        $query->whereNotNull('approved_at')->where('listed_in_directory', true);
+    }
+
+    /** The Discord name, only if the member released it for the directory. */
+    public function directoryDiscord(): ?string
+    {
+        return $this->show_discord_in_directory && filled($this->discord_name) ? $this->discord_name : null;
+    }
+
+    /** @return list<string> the research interests as tags */
+    public function interestTags(): array
+    {
+        return array_values(array_filter(array_map('trim', explode(',', (string) $this->interests)), fn ($tag) => $tag !== ''));
+    }
+
+    public function initials(): string
+    {
+        return Str::upper(Str::substr($this->first_name, 0, 1).Str::substr($this->last_name, 0, 1));
     }
 
     /** Give the user a role. Does nothing if they hold it already. */

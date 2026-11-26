@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\DirectoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JoinController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NewsController as PublicNewsController;
 use App\Http\Controllers\NewsImageController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
@@ -92,6 +94,15 @@ Route::prefix('members')->group(function () {
         Route::get('email/confirm/{user}/{hash}', [ProfileController::class, 'confirmEmailChange'])->whereNumber('user')->name('.email.confirm');
         Route::post('end-membership', [ProfileController::class, 'requestEnd'])->name('.end');
         Route::get('data', [ProfileController::class, 'download'])->middleware('throttle:10,1')->name('.data');
+    });
+
+    // The member directory and researcher pages (R1-13). Last in this group, so the fixed addresses above win.
+    $memberSlug = '(?!(?:'.implode('|', User::RESERVED_SLUGS).')(?![a-z0-9-]))[a-z0-9-]+';
+    Route::middleware(['auth', 'can:use-member-area'])->group(function () use ($memberSlug) {
+        Route::get('directory', [DirectoryController::class, 'index'])->name('members.directory');
+        Route::get('{slug}', [DirectoryController::class, 'show'])->where('slug', $memberSlug)->name('members.show');
+        Route::post('{slug}/contact', [DirectoryController::class, 'contact'])->where('slug', $memberSlug)
+            ->middleware('throttle:member-contact')->name('members.contact');
     });
 });
 
