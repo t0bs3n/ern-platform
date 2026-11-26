@@ -24,7 +24,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Check that `php`, `composer` and `git` are available and note their versions. Check that Composer can reach the package registry (`composer show laravel/laravel --available` or similar). If something is missing or blocked, stop and tell Tobi in plain words what to change in the environment's settings, or that this session should move to the desktop app. If PHP and Composer have to be installed at the start of every session, add a setup script and a session-start hook in `.claude/settings.json` that install them and run `composer install`. Record the PHP version in `docs/DECISIONS.md`.
 - Test: none. The commands answer.
 
-### [ ] R0-02 Create the application
+### [x] R0-02 Create the application (2026-11-26)
 - Model: sonnet
 - Needs: R0-01
 - Can: A developer opens the start page of an empty application on the Mac.
