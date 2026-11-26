@@ -17,14 +17,15 @@
             <x-field name="start_date" label="First day" type="date" :value="old('start_date', $conference->start_date?->format('Y-m-d'))" required />
             <x-field name="end_date" label="Last day" type="date" :value="old('end_date', $conference->end_date?->format('Y-m-d'))" required />
         </div>
-        <fieldset class="x-fieldset">
+        <fieldset class="x-fieldset" @error('status') aria-describedby="f-status-err" @enderror>
             <legend>Status</legend>
             @foreach ([\App\Models\Conference::UPCOMING => 'Upcoming: shown as the next conference', \App\Models\Conference::PAST => 'Past: shown in the archive'] as $value => $text)
                 <label class="x-check" for="f-status-{{ $value }}"><input type="radio" id="f-status-{{ $value }}" name="status" value="{{ $value }}" @checked(old('status', $conference->status) === $value)><span>{{ $text }}</span></label>
             @endforeach
+            @error('status') <span class="x-err" id="f-status-err">{{ $message }}</span> @enderror
         </fieldset>
 
-        <fieldset class="x-fieldset">
+        <fieldset class="x-fieldset" @error('key_dates') aria-describedby="f-kd-err" @enderror>
             <legend>Key dates <small>Shown on the conference page, the start page and under "Coming up". Leave a row empty to drop it.</small></legend>
             @php $rows = old('key_dates', collect($conference->key_dates ?? [])->values()->all()); @endphp
             @for ($i = 0; $i < max(6, count($rows) + 2); $i++)
@@ -33,6 +34,7 @@
                     <x-field :name="'key_dates.'.$i.'.date'" :id="'f-kd-'.$i.'-date'" label="Date {{ $i + 1 }}: day" type="date" :value="$rows[$i]['date'] ?? ''" />
                 </div>
             @endfor
+            @error('key_dates') <span class="x-err" id="f-kd-err">{{ $message }}</span> @enderror
         </fieldset>
 
         <div class="x-row"><button class="btn btn-primary" type="submit">Save</button></div>

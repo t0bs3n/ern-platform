@@ -18,12 +18,12 @@
             <p class="x-small x-muted" style="margin:0">Conference days and their key dates appear by themselves. Add everything else here.</p>
 
             <x-field name="title" label="Title" :value="old('title', $event->title)" required />
-            <fieldset class="x-fieldset">
+            <fieldset class="x-fieldset" @error('kind') aria-describedby="f-kind-err" @enderror>
                 <legend>Kind</legend>
                 @foreach (\App\Models\Event::KINDS as $value)
                     <label class="x-check" for="f-kind-{{ $value }}"><input type="radio" id="f-kind-{{ $value }}" name="kind" value="{{ $value }}" @checked(old('kind', $event->kind) === $value)><span>{{ $value }}</span></label>
                 @endforeach
-                @error('kind') <span class="x-err">{{ $message }}</span> @enderror
+                @error('kind') <span class="x-err" id="f-kind-err">{{ $message }}</span> @enderror
             </fieldset>
             <x-field name="date" label="Date" type="date" :value="old('date', $event->date?->format('Y-m-d'))" required />
             <div class="x-two">
@@ -32,12 +32,12 @@
             </div>
             <label class="x-field" for="f-timezone">
                 <span>Time zone</span>
-                <select class="x-input" id="f-timezone" name="timezone" @error('timezone') aria-invalid="true" aria-describedby="f-timezone-err" @enderror>
+                <select class="x-input" id="f-timezone" name="timezone" aria-describedby="f-timezone-help @error('timezone') f-timezone-err @enderror" @error('timezone') aria-invalid="true" @enderror>
                     @foreach (DateTimeZone::listIdentifiers() as $identifier)
                         <option value="{{ $identifier }}" @selected($zone === $identifier)>{{ str_replace('_', ' ', $identifier) }}</option>
                     @endforeach
                 </select>
-                <small>The time is shown in this zone, with its name.</small>
+                <small id="f-timezone-help">The time is shown in this zone, with its name.</small>
                 @error('timezone') <span class="x-err" id="f-timezone-err">{{ $message }}</span> @enderror
             </label>
             <x-field name="place" label="Place" :value="old('place', $event->place)" help="For example: On Zoom, or NC State University, Raleigh, USA" />

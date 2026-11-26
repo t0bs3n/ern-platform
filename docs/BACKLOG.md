@@ -91,7 +91,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 
 ### [H] R0-11 Hosting test
 - Needs: R0-10
-- Tobi: See `docs/HUMAN_TODO.md`, R0-11. Before he tests: add an admin-only button on the "System" page that sends a test e-mail to the signed-in admin, add a workflow step that creates the first admin on staging from the test data, and give Tobi the one cron line to enter at the hosting. He starts the first upload with the button. This task decides whether the hosting carries the platform.
+- Tobi: See `docs/HUMAN_TODO.md`, R0-11. Before he tests: add an admin-only button on the "System" page that sends a test e-mail to the signed-in admin, add a workflow step that creates the first admin on staging from the test data (with the Member role as well, so that the release check in `docs/checks/release-1.md`, task 15, can use the member area and the directory), and give Tobi the one cron line to enter at the hosting. He starts the first upload with the button. This task decides whether the hosting carries the platform.
 
 ### [ ] R0-12 Backups
 - Model: sonnet
@@ -239,9 +239,10 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Mockup: `js/50-about.js` (`concern`), `data.json` (`concern`)
 - Can: Anyone reports a concern. It reaches the Ombudsperson by e-mail and nobody else.
 - Do: The form sends one e-mail to the configured address and stores nothing: no database row, no log line with content, no copy to admins. Anonymous reports are possible. If sending fails, the person is told clearly and nothing is kept. Wording from the mockup.
+- Also: add `'concern' => '/report-a-concern'` to `config/redirects.php` (the old site's form address, left out by R1-18 until this page exists).
 - Test: The e-mail goes to the configured address only. The database and the log hold no content afterwards. A send failure is reported to the person.
 
-### [ ] R1-18 Old addresses
+### [x] R1-18 Old addresses (2026-11-26)
 - Model: sonnet
 - Needs: R1-08
 - Can: Every address of the old site leads to the right new page.
@@ -256,14 +257,14 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: A command that reads a spreadsheet export (CSV) with a documented column layout, creates approved members without passwords, reports duplicates and unreadable rows by row number only, without any personal data in its output, and has a dry-run option. A workflow started by hand runs the command on the server against a file that Tobi has placed there himself, first as a dry run. The file never passes through GitHub and is deleted from the server after a successful import. Members then set a password through "Forgotten password" or through an invitation e-mail that a second command sends in batches. Build and test it with an invented file only. The real file is handled by Tobi on the server.
 - Test: Import of an invented file, duplicates, broken rows, dry run, the invitation batches.
 
-### [ ] R1-20 Accessibility and phone pass
+### [x] R1-20 Accessibility and phone pass (2026-11-26)
 - Model: sonnet
 - Needs: R1-16
 - Can: Every page of release 1 works on a phone, with the keyboard only, at 200% zoom, and with JavaScript switched off.
 - Do: Go through every template of releases 0 and 1. One h1 per page, labels on every field, errors tied to their fields, visible focus, sensible page titles, no horizontal scrolling at 360 pixels width. Write what you could only check by reading the code into the hand-over note, so that the human check covers it.
 - Test: A test that every public address answers 200 and has exactly one h1 and a title.
 
-### [ ] R1-21 Release notes and check sheet
+### [x] R1-21 Release notes and check sheet (2026-11-26)
 - Model: sonnet
 - Needs: R1-20
 - Can: A person who did not build the release can check it.

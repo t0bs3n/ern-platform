@@ -22,6 +22,7 @@ use App\Http\Controllers\MemberAreaController;
 use App\Http\Controllers\NewsController as PublicNewsController;
 use App\Http\Controllers\NewsImageController;
 use App\Http\Controllers\ProfileController;
+use App\Models\News;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -161,3 +162,12 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get('{tab}', [AdminAreaController::class, 'show'])->whereAlpha('tab')->name('admin.tab');
 });
+
+// Addresses of the old website (R1-18): permanent redirects from config/redirects.php.
+foreach (config('redirects', []) as $old => $new) {
+    Route::permanentRedirect(trim($old, '/'), $new);
+}
+
+// Old news addresses such as /2026/08/10/post-name/ lead to the post of the same name.
+Route::get('{year}/{month}/{day}/{slug}', [PublicNewsController::class, 'oldAddress'])
+    ->where(['year' => '\\d{4}', 'month' => '\\d{2}', 'day' => '\\d{2}', 'slug' => '[a-z0-9-]+'])->name('old.news');

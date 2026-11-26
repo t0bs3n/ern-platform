@@ -21,18 +21,19 @@
                 <legend>Image <small>Optional. JPG, PNG or WebP, at most 2 MB.</small></legend>
                 @if ($editing && $news->image_path)
                     <img src="{{ route('news.image', $news) }}" alt="{{ $news->image_alt }}" style="max-width:16rem;border-radius:.5rem">
-                    <label class="x-check" for="f-remove_image"><input type="checkbox" id="f-remove_image" name="remove_image" value="1" @checked(old('remove_image'))><span>Remove the image</span></label>
+                    <label class="x-check" for="f-remove_image"><input type="checkbox" id="f-remove_image" name="remove_image" value="1" @checked(old('remove_image')) @error('remove_image') aria-invalid="true" aria-describedby="f-remove_image-err" @enderror><span>Remove the image</span></label>
+                    @error('remove_image') <span class="x-err" id="f-remove_image-err">{{ $message }}</span> @enderror
                 @endif
                 <x-field name="image" label="{{ $editing && $news->image_path ? 'Replace the image' : 'Choose an image' }}" type="file" accept="image/jpeg,image/png,image/webp" />
                 <x-field name="image_alt" label="Image description" :value="old('image_alt', $news->image_alt)" help="What the image shows, for people who cannot see it." />
             </fieldset>
 
-            <fieldset class="x-fieldset">
+            <fieldset class="x-fieldset" @error('status') aria-describedby="f-status-err" @enderror>
                 <legend>Status</legend>
                 @foreach ([\App\Models\News::DRAFT => 'Draft: only editors see it', \App\Models\News::PUBLISHED => 'Published: everyone sees it from the date below'] as $value => $text)
                     <label class="x-check" for="f-status-{{ $value }}"><input type="radio" id="f-status-{{ $value }}" name="status" value="{{ $value }}" @checked(old('status', $news->status ?? \App\Models\News::DRAFT) === $value)><span>{{ $text }}</span></label>
                 @endforeach
-                @error('status') <span class="x-err">{{ $message }}</span> @enderror
+                @error('status') <span class="x-err" id="f-status-err">{{ $message }}</span> @enderror
             </fieldset>
             <x-field name="published_at" label="Date" type="date" :value="old('published_at', $news->published_at?->format('Y-m-d'))" help="Leave empty to use today when publishing." />
 

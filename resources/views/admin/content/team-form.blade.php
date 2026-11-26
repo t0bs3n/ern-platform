@@ -13,12 +13,12 @@
             </div>
             <p class="x-small x-muted" style="margin:0">Shown on About Us. Only people who hold the role: never candidates of an election.</p>
 
-            <fieldset class="x-fieldset">
+            <fieldset class="x-fieldset" @error('group') aria-describedby="f-group-err" @enderror>
                 <legend>Shown under</legend>
                 @foreach (\App\Models\TeamMember::GROUPS as $value => $label)
                     <label class="x-check" for="f-group-{{ $value }}"><input type="radio" id="f-group-{{ $value }}" name="group" value="{{ $value }}" @checked(old('group', $person->group) === $value)><span>{{ $label }}</span></label>
                 @endforeach
-                @error('group') <span class="x-err">{{ $message }}</span> @enderror
+                @error('group') <span class="x-err" id="f-group-err">{{ $message }}</span> @enderror
             </fieldset>
             <x-field name="name" label="Name" :value="old('name', $person->name)" required />
             <x-field name="affiliation" label="Institution or organisation" :value="old('affiliation', $person->affiliation)" help="For example: University of Agder, NO" />

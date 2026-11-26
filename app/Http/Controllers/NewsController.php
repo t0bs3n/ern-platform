@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
@@ -32,5 +33,13 @@ class NewsController extends Controller
         return response()
             ->view('news.feed', ['news' => $news], 200)
             ->header('Content-Type', 'application/rss+xml; charset=UTF-8');
+    }
+
+    /** An old news address such as /2026/08/10/post-name/ (R1-18): the post of the same name, permanently. */
+    public function oldAddress(string $year, string $month, string $day, string $slug): RedirectResponse
+    {
+        abort_unless(News::published()->where('slug', $slug)->exists(), 404);
+
+        return redirect()->route('news.show', $slug, 301);
     }
 }

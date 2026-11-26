@@ -25,3 +25,6 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R1-14: A member sees a personal start page with their membership status, ERN notices, the next events, the latest news and their roles; editors write the notices.
 - 2026-11-26 R1-15: Admins search the member list, open a member, change their roles with safeguards, and export the list as a spreadsheet file; every change and export is logged.
 - 2026-11-26 R1-16: People with an admin role see at a glance what waits for them (applications, leaving members, drafts), with counts limited to what their roles cover.
+- 2026-11-26 R1-18: Addresses of the old website (conference, get involved, the conference summaries and every old news post) lead permanently to the right new page.
+- 2026-11-26 R1-20: Every page was checked at phone width and with the keyboard; error messages in the admin forms are now tied to their fields, and a test checks every public page for one heading and a title.
+- 2026-11-26 R1-21: A check sheet with twenty plain tasks lets a person who did not build release 1 check it on staging.
