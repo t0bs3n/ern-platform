@@ -38,7 +38,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Add the Composer script `check` that runs Pint in test mode and then all tests. Add the script `fix` that runs Pint. Make the tests use an in-memory SQLite database. Add the GitHub Actions workflow `.github/workflows/check.yml` that runs `composer check` on every pull request, on the PHP version recorded in `docs/DECISIONS.md`. In the hand-over note, tell Tobi in three plain steps how to protect the main branch on GitHub so that a pull request needs a green check.
 - Test: `composer check` passes. The workflow file is valid.
 
-### [ ] R0-04 Styles and page frame
+### [x] R0-04 Styles and page frame (2026-11-26)
 - Model: sonnet
 - Needs: R0-03
 - Can: A visitor sees the ERN header, navigation, mobile menu and footer on every page, in the ERN look.
