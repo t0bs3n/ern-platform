@@ -27,7 +27,7 @@ class MemberSeeder extends Seeder
         ['Elif', 'Demir', 'Bosphorus Social Research Centre (example)', 'Turkey', 'PhD student', 'Fandom, streaming', true, []],
         ['Noah', 'Fischer', 'Alpine University (example)', 'Austria', 'Student', 'Esports law, player contracts', false, []],
         ['Chloé', 'Martin', 'Université de la Loire (example)', 'France', 'PhD student', 'Esports broadcasting, media studies', true, []],
-        ['Mateo', 'Ruiz', 'Universidad de los Andes Australes (example)', 'Chile', 'Researcher with a PhD', 'Esports economics, labour markets', true, []],
+        ['Mateo', 'Ruiz', 'Universidad de los Andes Australes (example)', 'Chile', 'Researcher with a PhD', 'Esports economics, labor markets', true, []],
         ['Hannah', 'Kowalski', 'Vistula Valley University (example)', 'Poland', 'Professor', 'Sport science, cognitive load', true, [Role::Editor]],
         ['Oliver', 'Bennett', 'Harbour City College (example)', 'Australia', 'Student', 'Women in esports, community building', false, []],
         ['Sofia', 'Rossi', 'Università del Lago (example)', 'Italy', 'Researcher with a PhD', 'Game studies, competitive design', true, [Role::LectureTeam]],

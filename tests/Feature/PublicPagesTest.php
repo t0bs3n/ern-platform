@@ -63,6 +63,18 @@ class PublicPagesTest extends TestCase
         }
     }
 
+    public function test_public_pages_use_us_spelling(): void
+    {
+        // docs/DECISIONS.md: US spelling everywhere. Proper names such as "... Centre (MMTC)" are allowed.
+        $uk = '/\b(organis(e|ed|es|ing|ation|ations|er|ers)|programmes?|behaviours?|colours?|favour(ite)?s?|honour|labour|licence|defence|recognis(e|ed|es|ing)|catalogue|travell(ed|ing)|cancell(ed|ing)|enrolment|analys(e|ed|es|ing)|whilst|amongst)\b/i';
+
+        foreach ($this->addresses() as $address) {
+            $text = strip_tags((string) $this->get($address)->getContent());
+
+            $this->assertDoesNotMatchRegularExpression($uk, $text, $address);
+        }
+    }
+
     public function test_no_public_page_names_the_person_behind_the_ombudsperson_role(): void
     {
         foreach ($this->addresses() as $address) {

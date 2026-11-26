@@ -45,7 +45,7 @@
                             <x-field name="last_name" label="Last name" mark="required" :value="old('last_name')" autocomplete="family-name" />
                         </div>
                         <x-field name="email" label="E-mail address" mark="required" type="email" :value="old('email')" placeholder="you@university.edu" autocomplete="email" />
-                        <x-field name="institution" label="University or organisation" mark="required" :value="old('institution')" autocomplete="organization" />
+                        <x-field name="institution" label="University or organization" mark="required" :value="old('institution')" autocomplete="organization" />
                         <div class="x-two">
                             <x-field name="country" label="Country" mark="required" :value="old('country')" autocomplete="country-name" />
                             <x-field name="city" label="City" mark="optional" :value="old('city')" autocomplete="address-level2" />

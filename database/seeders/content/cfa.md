@@ -100,7 +100,7 @@ Every abstract is peer-reviewed by the ERNC27 Scientific Committee. The outcome 
 
 ERNC27 takes place in the Hunt Library on NC State University’s Centennial Campus in Raleigh, North Carolina, USA. Raleigh-Durham International Airport (RDU) is the nearest airport. Hotels with conference rates will be announced with the opening of registration.
 
-Participants who need a U.S. visa should plan early, as visa appointments can take several months. Accepted authors can request a letter of invitation from the conference team as soon as they receive their decision. Should you need assistance with the visa process, please write to the organising team as soon as possible at ernc@esportsresearch.net so we can coordinate support with our partners at Visit Raleigh.
+Participants who need a U.S. visa should plan early, as visa appointments can take several months. Accepted authors can request a letter of invitation from the conference team as soon as they receive their decision. Should you need assistance with the visa process, please write to the organizing team as soon as possible at ernc@esportsresearch.net so we can coordinate support with our partners at Visit Raleigh.
 
 ## Registration and fees
 

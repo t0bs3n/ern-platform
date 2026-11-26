@@ -10,7 +10,7 @@ This is a copy of what you sent:
 @foreach ([
     'Name' => $a->first_name.' '.$a->last_name,
     'E-mail address' => $a->email,
-    'University or organisation' => $a->institution,
+    'University or organization' => $a->institution,
     'Country' => $a->country,
     'City' => $a->city,
     'I am a' => $a->career_stage,

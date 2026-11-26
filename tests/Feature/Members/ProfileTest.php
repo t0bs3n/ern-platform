@@ -84,7 +84,7 @@ class ProfileTest extends TestCase
         $this->actingAs($this->member)->get('/members/profile')->assertOk()
             ->assertSee('My details')
             ->assertSee('Keep your entry in the member list up to date yourself. No new application is needed.')
-            ->assertSee('University or organisation')
+            ->assertSee('University or organization')
             ->assertSee('ORCID iD')
             ->assertSee('Discord name')
             ->assertSee('Visibility')

@@ -21,7 +21,7 @@
                 @error('group') <span class="x-err" id="f-group-err">{{ $message }}</span> @enderror
             </fieldset>
             <x-field name="name" label="Name" :value="old('name', $person->name)" required />
-            <x-field name="affiliation" label="Institution or organisation" :value="old('affiliation', $person->affiliation)" help="For example: University of Agder, NO" />
+            <x-field name="affiliation" label="Institution or organization" :value="old('affiliation', $person->affiliation)" help="For example: University of Agder, NO" />
             <x-field name="role_title" label="Role" :value="old('role_title', $person->role_title)" help="For example: Chair, Board Member, Ombudsperson" required />
             <x-field name="position" label="Order" type="number" :value="old('position', $person->position)" help="Smaller numbers come first. Leave empty to add at the end." min="0" />
 

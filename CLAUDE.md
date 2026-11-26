@@ -32,7 +32,7 @@ The owner of the project is Tobi. He is not a developer. Write to him in plain w
 ## Text on the site
 
 - Take wording from the mockup. Do not rewrite labels or page texts without a reason.
-- UK spelling.
+- US spelling ("organization", "program", "behavior"), also where the mockup uses UK spelling. Proper names keep their own spelling.
 - No em dashes. Use a colon, a comma or a full stop.
 - Plain words. A label says what happens when you click it.
 - "Ombudsperson" is the role. Do not name the person.
