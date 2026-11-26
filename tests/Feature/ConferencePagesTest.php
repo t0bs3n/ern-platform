@@ -130,10 +130,12 @@ class ConferencePagesTest extends TestCase
 
         $conference->refresh();
         $this->assertSame('10 to 12 November 2027', $conference->datesText());
-        $this->assertSame([
-            ['label' => 'Submissions open', 'date' => '2026-11-02'],
-            ['label' => 'Abstract deadline', 'date' => '2027-01-11'],
-        ], $conference->key_dates);
+        // The order of the dates counts. The order of the fields inside one date does not:
+        // MySQL 8 stores JSON with its keys sorted.
+        $this->assertSame([['Submissions open', '2026-11-02'], ['Abstract deadline', '2027-01-11']],
+            array_map(fn (array $d) => [$d['label'], $d['date']], $conference->key_dates));
+        $this->assertSame([['date', 'label'], ['date', 'label']],
+            array_map(fn (array $d) => collect(array_keys($d))->sort()->values()->all(), $conference->key_dates));
 
         $this->get('/conferences')->assertSee('10 to 12 November 2027')->assertSee('Monday 11 January 2027');
     }
