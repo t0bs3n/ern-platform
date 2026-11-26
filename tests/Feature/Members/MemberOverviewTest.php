@@ -154,6 +154,7 @@ class MemberOverviewTest extends TestCase
         $this->actingAs($editor)->put('/admin/content/notices/'.$notice->id, ['kind' => 'x', 'title' => 'Back to draft', 'body' => 'x', 'status' => 'draft']);
 
         $this->assertNull($notice->fresh()->published_at);
+        $this->flushSession(); // the editor's "Saved: …" message is not part of this check
         $this->actingAs(User::factory()->create())->get('/members')->assertDontSee('Back to draft');
     }
 
