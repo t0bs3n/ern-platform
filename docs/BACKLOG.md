@@ -31,7 +31,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Create the Laravel application in this folder without overwriting `CLAUDE.md`, `README.md`, `docs/` or `.claude/` (create it in a temporary folder and move the files in). Use SQLite locally. Remove all Node scaffolding: `package.json`, Vite configuration, the Vite directive in templates. Set the application name to "Esports Research Network". Add `.env.example` for local use and `.env.staging.example` with empty values for the server. Record the Laravel version in `docs/DECISIONS.md`. Make sure `.gitignore` covers `.env`, `vendor/` and the SQLite file.
 - Test: The shipped example tests pass. `php artisan serve` shows a page.
 
-### [ ] R0-03 Quality gate
+### [x] R0-03 Quality gate (2026-11-26)
 - Model: sonnet
 - Needs: R0-02
 - Can: One command says whether the code is fit to commit.
