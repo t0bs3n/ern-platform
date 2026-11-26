@@ -130,7 +130,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Can: A visitor reads the news list and single news items. A feed reader subscribes to `/feed/news.xml`.
 - Test: List with pages, single item, 404 for a draft, a valid RSS feed with the ten latest items.
 
-### [ ] R1-04 About Us and Get Involved
+### [x] R1-04 About Us and Get Involved (2026-11-26)
 - Model: sonnet
 - Needs: R1-01
 - Mockup: `js/50-about.js`, `data.json` (`about`, `goals`, `involved`), `img/members.svg`

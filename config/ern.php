@@ -49,6 +49,20 @@ return [
         ],
     ],
 
+    // The member figures on About Us, from the mockup. Once the member list is in the
+    // platform (R1-19), they can be counted from it instead.
+    'member_figures' => [
+        'members' => 683,
+        'countries' => 70,
+        'europe' => 377,
+        'europe_countries' => 29,
+        'as_of' => '31 October 2026',
+        'largest_groups' => [
+            ['USA', 134], ['United Kingdom', 72], ['Germany', 60], ['Sweden', 30],
+            ['Turkey', 27], ['Australia', 27], ['Canada', 26], ['Finland', 24],
+        ],
+    ],
+
     // The version shown on the admin System page. The upload workflow (R0-10) sets it.
     'version' => env('APP_VERSION', 'development'),
 

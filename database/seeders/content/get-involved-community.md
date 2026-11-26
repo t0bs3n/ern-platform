@@ -1,0 +1,3 @@
+What defines this network is not a central organisation, but the people involved. It operates as an open, community-driven ecosystem in which activities are initiated, sustained, and developed by researchers, students, and practitioners. Participation is flexible and evolves with the interests and capacities of the community, whether through leading initiatives, supporting projects, mentoring others, or contributing behind the scenes. The network exists because people choose to make it happen.
+
+This openness allows the network to adapt over time, respond to emerging questions, and grow across disciplines and regions. Rather than fixed structures, shared responsibility and mutual trust form the foundation of collaboration.

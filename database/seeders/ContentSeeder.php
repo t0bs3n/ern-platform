@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\News;
 use App\Models\Page;
+use App\Models\TeamMember;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 
@@ -19,6 +20,12 @@ class ContentSeeder extends Seeder
     private const PAGES = [
         'ernc27-call-for-abstracts' => ['ERNC27 Call for Abstracts', 'cfa.md'],
         'ernc26-summary' => ['ERNC26: Conference summary', 'ernc26.md'],
+        // Text blocks of About Us and Get Involved (R1-04).
+        'about-mission' => ['About Us: Mission Statement', 'about-mission.md'],
+        'about-history' => ['About Us: Our History', 'about-history.md'],
+        'about-former-board' => ['About Us: Former ERN Board Members', 'about-former-board.md'],
+        'get-involved-community' => ['Get Involved: A Community-Led Network', 'get-involved-community.md'],
+        'get-involved-start' => ['Get Involved: How to Get Started', 'get-involved-start.md'],
     ];
 
     public function run(): void
@@ -31,6 +38,16 @@ class ContentSeeder extends Seeder
             $page = new Page(['title' => $title, 'body' => file_get_contents(__DIR__.'/content/'.$file)]);
             $page->slug = $slug;
             $page->save();
+        }
+
+        if (! TeamMember::exists()) {
+            $team = json_decode(file_get_contents(__DIR__.'/content/team.json'), true, flags: JSON_THROW_ON_ERROR);
+
+            foreach ($team as $group => $people) {
+                foreach ($people as $position => [$name, $affiliation, $role]) {
+                    TeamMember::create(['group' => $group, 'name' => $name, 'affiliation' => $affiliation, 'role_title' => $role, 'position' => ($position + 1) * 10]);
+                }
+            }
         }
 
         $posts = json_decode(file_get_contents(__DIR__.'/content/news.json'), true, flags: JSON_THROW_ON_ERROR);

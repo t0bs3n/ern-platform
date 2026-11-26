@@ -12,3 +12,4 @@ One line per finished task, newest at the bottom: date, task id, what someone ca
 - 2026-11-26 R1-01: Editors write and change news posts and pages in the admin area (Content tab), with a preview, drafts and images, without code.
 - 2026-11-26 R1-02: Visitors see the full start page: hero, three starting points, the featured event, "Coming up", the latest news, the mission and the ways to get involved.
 - 2026-11-26 R1-03: Visitors read the news list (with pages) and single posts, and feed readers subscribe to /feed/news.xml.
+- 2026-11-26 R1-04: Visitors read About Us (goals, members, mission, board, volunteers, history) and Get Involved; editors change the board, the volunteers and the texts.

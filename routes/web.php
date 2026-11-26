@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AdminAreaController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController as PublicNewsController;
 use App\Http\Controllers\NewsImageController;
@@ -13,6 +15,10 @@ use Laravel\Fortify\Http\Controllers\NewPasswordController;
 use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 
 Route::get('/', HomeController::class)->name('home');
+
+// About Us and Get Involved (R1-04).
+Route::get('about', [AboutController::class, 'about'])->name('about');
+Route::get('get-involved', [AboutController::class, 'involved'])->name('involved');
 
 // News (R1-03).
 Route::get('news', [PublicNewsController::class, 'index'])->name('news.index');
@@ -54,6 +60,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::post('pages', [PageController::class, 'store'])->name('pages.store');
         Route::get('pages/{page}', [PageController::class, 'edit'])->name('pages.edit');
         Route::put('pages/{page}', [PageController::class, 'update'])->name('pages.update');
+        Route::get('people/new', [TeamMemberController::class, 'create'])->name('people.create');
+        Route::post('people', [TeamMemberController::class, 'store'])->name('people.store');
+        Route::get('people/{person}', [TeamMemberController::class, 'edit'])->name('people.edit');
+        Route::put('people/{person}', [TeamMemberController::class, 'update'])->name('people.update');
+        Route::delete('people/{person}', [TeamMemberController::class, 'destroy'])->name('people.destroy');
     });
 
     Route::get('{tab}', [AdminAreaController::class, 'show'])->whereAlpha('tab')->name('admin.tab');

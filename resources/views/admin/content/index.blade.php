@@ -42,12 +42,32 @@
                 <ul class="x-admlist">
                     @foreach ($pages as $page)
                         <li>
-                            <span>{{ $page->title }} <small class="x-muted">/{{ $page->slug }}</small></span>
+                            <span>{{ $page->title }} <small class="x-muted">{{ $page->slug }}</small></span>
                             <a class="x-link" href="{{ route('admin.content.pages.edit', $page) }}">Edit<span class="x-vh"> {{ $page->title }}</span></a>
                         </li>
                     @endforeach
                 </ul>
             @endif
+        </div>
+    
+        <div class="x-card">
+            <div class="x-row x-between" style="margin-bottom:.75rem">
+                <h2 class="x-card-h" style="margin:0">Board and volunteers</h2>
+                <a class="btn btn-outline x-btn-sm" href="{{ route('admin.content.people.create') }}">Add a person</a>
+            </div>
+            @foreach (\App\Models\TeamMember::GROUPS as $group => $groupLabel)
+                <h3 class="x-h4">{{ $groupLabel }}</h3>
+                <ul class="x-admlist">
+                    @forelse (\App\Models\TeamMember::inGroup($group)->get() as $person)
+                        <li>
+                            <span>{{ $person->name }} <small class="x-muted">{{ $person->role_title }}</small></span>
+                            <a class="x-link" href="{{ route('admin.content.people.edit', $person) }}">Edit<span class="x-vh"> {{ $person->name }}</span></a>
+                        </li>
+                    @empty
+                        <li><span class="x-muted">Nobody yet.</span></li>
+                    @endforelse
+                </ul>
+            @endforeach
         </div>
     </div>
 @endsection
