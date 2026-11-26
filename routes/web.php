@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JoinController;
 use App\Http\Controllers\LegalPageController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NewsController as PublicNewsController;
@@ -43,6 +44,10 @@ Route::get('live', [MediaController::class, 'live'])->name('live');
 Route::get('code-of-conduct', [LegalPageController::class, 'conduct'])->name('conduct');
 Route::get('imprint', [LegalPageController::class, 'imprint'])->name('imprint');
 Route::get('privacy', [LegalPageController::class, 'privacy'])->name('privacy');
+
+// Become a member (R1-09).
+Route::get('join', [JoinController::class, 'show'])->name('join');
+Route::post('join', [JoinController::class, 'store'])->middleware('throttle:join')->name('join.store');
 
 // News (R1-03).
 Route::get('news', [PublicNewsController::class, 'index'])->name('news.index');

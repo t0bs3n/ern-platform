@@ -170,7 +170,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: Model for events (title, kind, start, end, time zone, place, link). Conference key dates appear automatically. Editors add other events in the Content tab.
 - Test: The list is ordered and hides past entries. The .ics feed is valid and carries the time zones.
 
-### [ ] R1-09 Join ERN
+### [x] R1-09 Join ERN (2026-11-26)
 - Model: opus
 - Needs: R0-07
 - Mockup: `js/50-about.js` (`join`, the facts and the pending timeline)
