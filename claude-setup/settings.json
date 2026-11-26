@@ -1,0 +1,40 @@
+{
+  "model": "sonnet",
+  "permissions": {
+    "allow": [
+      "Bash(php artisan:*)",
+      "Bash(php -v)",
+      "Bash(composer:*)",
+      "Bash(vendor/bin/pint:*)",
+      "Bash(vendor/bin/phpunit:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git switch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git branch:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr:*)"
+    ],
+    "ask": [
+      "Bash(gh workflow run:*)",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(rsync:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.staging)",
+      "Read(./.env.production)",
+      "Bash(git push --force:*)",
+      "Bash(git push origin main:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh secret:*)",
+      "Bash(rm -rf:*)"
+    ]
+  }
+}

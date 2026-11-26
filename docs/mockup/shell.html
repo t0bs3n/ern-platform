@@ -1,0 +1,149 @@
+<title>ERN Platform Mockup</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: the live esportsresearch.net theme, unchanged (white ground, one purple accent, Outfit headings over Inter text).
+   The existing pages keep their sections; the new parts sit inside the same sections, cards, badges and buttons.
+   One light look, as on the live site. Everything that belongs to the mockup itself wears the dark "Mockup" tag. */
+/*THEME_CSS*/
+/*APP_CSS*/
+</style>
+
+<button type="button" class="x-skip" data-act="skip">Skip to content</button>
+
+<div class="x-mockbar" id="mockbar">
+  <div class="container-ern">
+    <span class="x-demo-tag">Mockup</span>
+    <span class="x-mockbar-text">Sample data. Nothing is saved or sent.</span>
+    <span class="x-mockbar-legend" id="mock-legend" hidden><span class="x-mark">New</span>new on the platform<span class="x-mark x-idea">Idea</span>an optional extra</span>
+    <span class="x-mockbar-end">
+      <button type="button" class="x-switch" id="mark-toggle" data-act="mark" role="switch" aria-checked="false"><span class="x-switch-track" aria-hidden="true"><span></span></span><span>Mark <span class="x-wide">what is </span>new</span></button>
+      <a href="#guide">About this mockup</a>
+    </span>
+  </div>
+</div>
+
+<header class="site-header" id="site-header">
+  <div class="container-ern">
+    <nav class="site-navigation" aria-label="Main">
+      <a href="#home" class="site-logo focus-ring"><img src="img/logo.png" alt="Esports Research Network, home"></a>
+      <div class="main-navigation">
+        <ul>
+          <li data-nav="news"><a href="#news">News</a></li>
+          <li data-nav="conferences"><a href="#conferences">Conferences</a></li>
+          <li data-nav="database"><a href="#database">Database<span class="x-mark" data-mark hidden>New</span></a></li>
+          <li data-nav="live"><a href="#live">Live<span class="x-dot" data-livedot hidden></span><span class="x-mark" data-mark hidden>New</span></a></li>
+          <li data-nav="lectures"><a href="#lectures">Teaching<span class="x-mark" data-mark hidden>New</span></a></li>
+          <li data-nav="podcast"><a href="#podcast">Podcast</a></li>
+          <li data-nav="about"><a href="#about">About Us</a></li>
+          <li data-nav="involved"><a href="#involved">Get Involved</a></li>
+        </ul>
+      </div>
+      <div class="x-nav-right"><a href="#saved" class="x-savedlink" data-savedlink></a><a href="#members" class="btn btn-primary x-btn-sm" data-memberbtn>Member area</a></div>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" data-act="menu" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <ul>
+        <li data-nav="news"><a href="#news">News</a></li>
+        <li data-nav="conferences"><a href="#conferences">Conferences</a></li>
+        <li data-nav="database"><a href="#database">Database<span class="x-mark" data-mark hidden>New</span></a></li>
+        <li data-nav="live"><a href="#live">Live<span class="x-dot" data-livedot hidden></span><span class="x-mark" data-mark hidden>New</span></a></li>
+        <li data-nav="lectures"><a href="#lectures">Teaching library<span class="x-mark" data-mark hidden>New</span></a></li>
+        <li data-nav="podcast"><a href="#podcast">Podcast</a></li>
+        <li data-nav="about"><a href="#about">About Us</a></li>
+        <li data-nav="involved"><a href="#involved">Get Involved</a></li>
+        <li data-nav="saved"><a href="#saved" data-savedtext>Saved library</a></li>
+        <li data-nav="members"><a href="#members" data-memberbtn>Member area</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main class="site-main" id="view" tabindex="-1"></main>
+
+<footer class="site-footer">
+  <div class="container-ern">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="img/logo.png" alt="Esports Research Network"></div>
+        <p class="footer-description">An international network of researchers advancing interdisciplinary esports studies. We connect scholars and industry to explore esports’ global, digital, and innovative impact.</p>
+      </div>
+      <nav class="footer-section" aria-label="Explore">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="#news">News</a></li>
+          <li><a href="#conferences">Conferences</a></li>
+          <li><a href="#database">Database</a></li>
+          <li><a href="#events">Events and deadlines</a></li>
+          <li><a href="#live">ERN Live</a></li>
+          <li><a href="#lectures">Teaching library</a></li>
+          <li><a href="#podcast">Podcast</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-section" aria-label="Network">
+        <h4>Network</h4>
+        <ul class="footer-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#involved">Get Involved</a></li>
+          <li><a href="#members">Member area</a></li>
+          <li><a href="#admin">Admin area</a></li>
+          <li><a href="#conduct">Code of Conduct</a></li>
+          <li><a href="#concern">Report a Concern</a></li>
+        </ul>
+      </nav>
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul class="footer-links x-contact">
+          <li><span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>board@esportsresearch.net</span></li>
+          <li><span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>ombudsperson@esportsresearch.net</span></li>
+        </ul>
+        <div style="margin-top:1rem">
+          <h4 style="margin-bottom:.75rem">Follow Us</h4>
+          <div class="x-social"><!--SOCIAL--></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; Esports Research Network e.V. 2026</p>
+      <div class="footer-bottom-links"><a href="#imprint">Imprint</a><a href="#guide">About this mockup</a></div>
+    </div>
+  </div>
+</footer>
+
+<button type="button" class="x-ask-btn" id="ask-btn" data-act="askopen" aria-haspopup="dialog">
+  <!--OWL-->
+  <span class="x-ask-label">Ask Ernie</span><span class="x-mark x-onprimary" data-mark hidden>New</span>
+</button>
+<aside class="x-ask" id="ask" hidden role="dialog" aria-label="Ernie, the AI assistant of the ERN">
+  <div class="x-ask-head">
+    <span class="x-ask-av"><!--OWL--></span>
+    <div class="x-ask-title"><strong>Ernie</strong><span>AI assistant for the database, the abstracts and the talks</span></div>
+    <button type="button" class="x-ask-close" data-act="askclose" aria-label="Close Ernie"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" style="width:1.125rem;height:1.125rem"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+  </div>
+  <div class="x-ask-log" id="ask-log" aria-live="polite"></div>
+  <div class="x-ask-sugg">
+    <button type="button" class="x-chip" data-act="asksugg" data-arg="What do we know about mental health in esports?">Mental health in esports</button>
+    <button type="button" class="x-chip" data-act="asksugg" data-arg="Which talks at ERNC26 were about integrity?">Talks on integrity</button>
+    <button type="button" class="x-chip" data-act="asksugg" data-arg="What does research say about physical exercise for players?">Exercise for players</button>
+    <button type="button" class="x-chip" data-act="asksugg" data-arg="Who presented on university esports?">University esports</button>
+    <button type="button" class="x-chip" data-act="asksugg" data-arg="Does esports cause burnout?">A hard question</button>
+    <button type="button" class="x-chip" data-act="asksugg" data-arg="Who will win the next world championship?">A question Ernie cannot answer</button>
+  </div>
+  <form class="x-ask-form" data-form="ask">
+    <label class="x-vh" for="ask-in">Your question</label>
+    <input class="x-input" id="ask-in" type="text" placeholder="Ask a question" autocomplete="off">
+    <button class="btn btn-primary" type="submit" aria-label="Send the question"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" style="width:1.125rem;height:1.125rem;transform:rotate(90deg)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg></button>
+  </form>
+  <p class="x-ask-note"><span class="x-demo-tag">Mockup</span>Prepared answers on the sample data. Every answer names its sources.</p>
+</aside>
+<div class="x-toast" id="toast" role="status" hidden></div>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script type="application/json" id="ern-data">/*DATA*/</script>
+<script>
+/*APP_JS*/
+</script>
