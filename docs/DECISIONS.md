@@ -31,7 +31,7 @@ These decisions are binding for every task. Change one only with Tobi's agreemen
 
 Versions recorded by R0-01:
 
-- PHP in the development environment:
+- PHP in the development environment: 8.3.6 (Claude Code in the browser, 26 November 2026). Composer 2.8.12, git 2.43.0. PHP, Composer and git come pre-installed there, with the extensions Laravel needs (including pdo_sqlite and pdo_mysql).
 - PHP on the hosting: (the Laravel release current in November 2026, version 13, needs PHP 8.3 or newer)
 - Laravel:
 
