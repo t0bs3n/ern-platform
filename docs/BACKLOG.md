@@ -257,7 +257,7 @@ Releases 0 and 1 are detailed. Releases 2 to 7 are outlines. Before a release st
 - Do: A command that reads a spreadsheet export (CSV) with a documented column layout, creates approved members without passwords, reports duplicates and unreadable rows by row number only, without any personal data in its output, and has a dry-run option. A workflow started by hand runs the command on the server against a file that Tobi has placed there himself, first as a dry run. The file never passes through GitHub and is deleted from the server after a successful import. Members then set a password through "Forgotten password" or through an invitation e-mail that a second command sends in batches. Build and test it with an invented file only. The real file is handled by Tobi on the server.
 - Test: Import of an invented file, duplicates, broken rows, dry run, the invitation batches.
 
-### [ ] R1-20 Accessibility and phone pass
+### [x] R1-20 Accessibility and phone pass (2026-11-26)
 - Model: sonnet
 - Needs: R1-16
 - Can: Every page of release 1 works on a phone, with the keyboard only, at 200% zoom, and with JavaScript switched off.

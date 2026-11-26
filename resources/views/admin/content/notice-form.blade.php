@@ -15,11 +15,12 @@
             <x-field name="kind" label="Label" :value="old('kind', $notice->kind)" help="For example: General Assembly, Board election, Association" />
             <x-field name="title" label="Title" :value="old('title', $notice->title)" />
             <x-textarea name="body" label="Text" rows="6" :value="old('body', $notice->body)" help="Markdown: **bold**, - for a list, [text](address) for a link." />
-            <fieldset class="x-fieldset">
+            <fieldset class="x-fieldset" @error('status') aria-describedby="f-status-err" @enderror>
                 <legend>Status</legend>
                 @foreach ([\App\Models\Notice::DRAFT => 'Draft: only editors see it', \App\Models\Notice::PUBLISHED => 'Published: members see it'] as $value => $text)
                     <label class="x-check" for="f-status-{{ $value }}"><input type="radio" id="f-status-{{ $value }}" name="status" value="{{ $value }}" @checked(old('status', $notice->status) === $value)><span>{{ $text }}</span></label>
                 @endforeach
+                @error('status') <span class="x-err" id="f-status-err">{{ $message }}</span> @enderror
             </fieldset>
             <div class="x-row"><button class="btn btn-primary" type="submit">Save</button></div>
         </form>

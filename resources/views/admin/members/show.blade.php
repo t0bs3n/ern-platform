@@ -23,14 +23,11 @@
                     <h2 class="x-card-h" style="margin:0">Rights of {{ $member->full_name }}</h2>
                     <a class="x-link" href="{{ route('admin.members.index') }}">Close</a>
                 </div>
-                @error('roles')
-                    <p class="x-err" role="alert">{{ $message }}</p>
-                @enderror
-                @error('roles.*')
-                    <p class="x-err" role="alert">{{ $message }}</p>
-                @enderror
-                @php $held = $member->roles->map(fn ($r) => $r->role)->all(); @endphp
-                <fieldset class="x-fieldset">
+                @php
+                    $held = $member->roles->map(fn ($r) => $r->role)->all();
+                    $rolesError = $errors->first('roles') ?: $errors->first('roles.*');
+                @endphp
+                <fieldset class="x-fieldset" @if ($rolesError) aria-describedby="f-roles-err" @endif>
                     <legend class="x-vh">Roles</legend>
                     @foreach (\App\Enums\Role::cases() as $role)
                         <label class="x-check" for="role-{{ $role->value }}">
@@ -39,6 +36,9 @@
                             <span><strong>{{ $role->label() }}</strong><br><small class="x-muted">{{ $role->description() }}</small></span>
                         </label>
                     @endforeach
+                    @if ($rolesError)
+                        <p class="x-err" id="f-roles-err" role="alert">{{ $rolesError }}</p>
+                    @endif
                 </fieldset>
                 <button class="btn btn-primary" type="submit" style="margin-top:1rem">Save the rights</button>
             </form>
